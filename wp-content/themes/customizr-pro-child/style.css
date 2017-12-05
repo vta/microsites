@@ -1,0 +1,69 @@
+/*
+Theme Name: SCVTA Copy Center
+Theme URI: http://presscustomizr.com/extension/customizr-pro/
+Template: customizr-pro
+Author: Gordon Hackett
+Author URI: http://linuxwebexpert.com
+Description: A customized theme for the SCVTA Copy Center online form pages
+Tags: one-column,two-columns,three-columns,left-sidebar,right-sidebar,custom-menu,custom-colors,featured-images,full-width-template,theme-options,threaded-comments,translation-ready,sticky-post,post-formats,rtl-language-support,editor-style
+Version: 2.0.5.1502999199
+Updated: 2017-08-17 19:46:39
+
+*/
+.woocommerce-product-gallery--without-images,
+.woocommerce-product-gallery--with-images {
+    display: none;
+}
+
+.woocommerce #content div.product div.summary,
+.woocommerce div.product div.summary,
+.woocommerce-page #content div.product div.summary,
+.woocommerce-page div.product div.summary {
+    display: inline-block;
+    text-align: left;
+    position: relative;
+    float: none;
+    width: auto;
+}
+.woocommerce div.product .woocommerce-tabs ul.tabs {
+    display: none;
+}
+.woocommerce-Tabs-panel--description h2 {
+    display: none;
+}
+.woocommerce ul.products li.product .button {
+    display: none;
+}
+h2.woocommerce-loop-product__title {
+    text-align: center;
+    font-size: 24pt !important;
+}
+.ginput_container input,
+.ginput_container_text input,
+.ginput_container_number input,
+.ginput_container_radio input,
+.ginput_container_textarea textarea {
+    height: 24pt;
+    font-size: 14pt !important;
+}
+.ginput_container_radio label {
+    font-size: 14pt !important;
+}
+.woocommerce-product-details__short-description p {
+    font-size: 18pt;
+}
+.page-description p {
+    font-size: 14pt;
+}
+.woocommerce-ordering,
+.woocommerce-result-count {
+    display: none;
+}
+.woocommerce-MyAccount-navigation,
+.woocommerce-MyAccount-content {
+    font-size: 14pt;
+}
+.gfield_description {
+    font-size: 12pt !important;
+	color: red;
+}

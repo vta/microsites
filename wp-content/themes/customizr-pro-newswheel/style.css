@@ -1,0 +1,85 @@
+/*
+Theme Name: SCVTA News Wheel
+Theme URI: http://presscustomizr.com/extension/customizr-pro/
+Template: customizr-pro
+Author: Gordon Hackett
+Author URI: http://linuxwebexpert.com
+Description: The pro version of the popular Customizr WordPress theme.
+Tags: one-column,two-columns,three-columns,left-sidebar,right-sidebar,custom-menu,custom-colors,featured-images,full-width-template,theme-options,threaded-comments,translation-ready,sticky-post,post-formats,rtl-language-support,editor-style
+Version: 2.0.10.1508718012
+Updated: 2017-10-23 00:20:12
+
+*/
+.tc-header {
+    background-color: #C4C4C4;
+    max-height: 48px !important;
+    line-height: 32px !important;
+}
+.sticky-enabled .tc-header {
+    background: rgba(180,180,180,.8);
+}
+.site-logo img {
+    max-height: 32px !important;
+    max-width: 184px !important;
+    margin: 0px 5px;
+    padding: 0px;
+}
+.posts_catlist {
+    margin: 10px auto;
+    width: 100%;
+}
+.lcp_item {
+    display: block;
+    margin: 25px 0px;
+}
+.lcp_modified {
+    display: inline-block;
+    width: 100%;
+}
+.lcp_thumb {
+    display: inline-block;
+    width: 30%;
+    margin: 0px 10px;
+    vertical-align: top;
+}
+.lcp_excerpt {
+    display: inline-block;
+    width: 60%;
+    margin: 5px 15px;
+}
+.lcp_post {
+    width: 100%;
+    display: block;
+    clear: both;
+    font-size: 14pt;
+    font-weight: bold;
+}
+.lcp_morelink {
+    display: block;
+    clear: top;
+    margin-top: 0px;
+    margin-left: 33%;
+    margin-bottom: 15px;
+}
+.newswheel_front_page {
+    text-align: center;
+}
+.newswheel_front_page h1, .newswheel_front_page h3, .newswheel_front_pagep, .newswheel_front_page a {
+    line-height: 14pt !important;
+}
+.newswheel_front_page h1 {
+    font-size: 24pt;
+    font-weight: 900;
+    color: #29588C
+}
+.newswheel_front_page h3 {
+    font-size: 14pt;
+    font-weight: 700;
+    color: #4CB4E7
+}
+.newswheel_front_page p {
+    color: #666
+}
+.newswheel_front_page a {
+    color: #29588C
+}
