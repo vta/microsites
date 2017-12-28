@@ -50,30 +50,44 @@ add_image_size( 'slider' , 640, $slider_size['height'], $slider_size['crop'] );
  *
  **/
 
-remove_filter('tc_slider_full_size', CZR___::$instance -> slider_full_size);
-add_filter( 'tc_slider_full_size', 'my_slider_full_size');
-function my_slider_full_size() {
-  $sizeinfo = array( 'width' => 640 , 'height' => 480, 'crop' => false );
+function child_thumb_size() {
+  $sizeinfo = array( 'width' => 240, 'height' => 180, 'crop' => false );
   return $sizeinfo;
 }
-
-remove_filter('tc_slider_size', array( 'width' => CZR_IS_MODERN_STYLE ? 1110 : 1170 , 'height' => 500, 'crop' => true ));
-add_filter( 'tc_slider_size', 'my_slider_size');
-function my_slider_size() {
-  //The actual bootstrap4 container width is 1110, while it was 1170 in bootstrap2
-//  $this -> slider_size        = array( 'width' => CZR_IS_MODERN_STYLE ? 1110 : 1170 , 'height' => 500, 'crop' => true ); //size name : slider
-  $slider_size = array( 'width' => 640 , 'height' => 480, 'crop' => false );
-  return $slider_size;
-}
-
+add_filter( 'tc_thumb_size', 'child_thumb_size');
+add_filter( 'tc_thumb_fpc_size', 'child_thumb_size');
 function child_theme_setup() {
-//  add_image_size('tc_rectangular_size', 640, 480, true);
-//  remove_image_size('slider_full_size');
-  remove_image_size('slider_size');
-//  add_image_size('slider_full_size', 640, 480, false);
-  add_image_size('slider_size', 640, 480, false);
+  add_image_size('tc-thumb', 240, 180, false);
 }
-add_action( 'after_setup_theme', 'child_theme_setup', 11 );
+add_action( 'after_setup_theme', 'child_theme_setup', 10, 2);
+update_option( 'thumbnail_size_w', 240 );
+update_option( 'thumbnail_size_h', 180 );
+//update_option( 'thumbnail_crop', 0 );
+
+add_filter('tc_fp_link_url' , 'my_custom_fp_links', 10 ,2);
+//If you are using the featured pages Unlimited Plugin or the Customizr Pro theme, uncomment this line :
+add_filter('fpc_link_url' , 'my_custom_fp_links', 10 ,2);
+
+function my_custom_fp_links( $original_link , $fp_id ) {
+
+  //assigns a custom link by page id
+  $custom_link = array(
+    //page id => 'Custom link'
+    59 => 'https://newswheel.vta.org/category/headways/',
+    29 => 'https://newswheel.vta.org/category/from-the-hub/',
+    129 => 'https://newswheel.vta.org/category/announcements/',
+    25 => 'https://newswheel.vta.org/category/safety/'
+  );
+
+  foreach ($custom_link as $page_id => $link) {
+    if ( get_permalink($page_id) == $original_link )
+      return $link;
+  }
+
+  //if no custom title is defined for the current page id, return original
+  return $original_link;
+}
+
 
 
 

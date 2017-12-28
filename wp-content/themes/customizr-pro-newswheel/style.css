@@ -10,19 +10,96 @@ Version: 2.0.10.1508718012
 Updated: 2017-10-23 00:20:12
 
 */
+section a:link, a:visited {
+    font-weight: bold;
+    color: #111199;
+}
+section a:hover, a:focus {
+    font-weight: bolder;
+    color: #1111FF;
+}
 .tc-header {
     background-color: #C4C4C4;
-    max-height: 48px !important;
-    line-height: 32px !important;
+}
+.navbar-wrapper {
+    max-width: 51px !important;
+    float: right !important;
+    vertical-align: middle;
 }
 .sticky-enabled .tc-header {
     background: rgba(180,180,180,.8);
 }
+.sticky-disabled .navbar-wrapper {
+    clear: none !important;
+}
+.master-slider {
+    background: #FFFFFF !important;
+}
+/*
+.ms-nav-next, .ms-nav-prev {
+    background: transparent !important;
+    max-width: 48px;
+    max-height: 48px;
+}
+*/
+
+/**
+ * Fix for thumbnail proportial scaling
+ */
+img.attachment-tc-thumb.tc-thumb-type-thumb.wp-post-image.wp-post-image.h-centered {
+    height: unset !important;
+    left: unset !important;
+}
+.thumb-wrapper .round-div {
+    width: 270px;
+    height: 180px;
+}
+.tc-rectangular-thumb img {
+    height: unset !important;
+    width: unset !important;
+    top: 0px !important;
+}
+
+@media (max-width: 479px) {
+    .ms-slide-info {
+        position: relative !important;
+        clear: both !important;
+        text-align: left !important;
+    }
+}
+@media (min-width: 480px) {
+   .site-logo img {
+        max-width: 360px;
+    }
+    .tc-header .brand {
+        max-width: 360px;
+    }
+}
+@media (min-width: 370px) and (max-width: 479px) {
+    .site-logo img {
+        max-width: 250px;
+    }
+    .tc-header .brand {
+        max-width: 250px;
+    }
+}
+@media (max-width: 369px) {
+    .site-logo img {
+        max-width: 150px !important;
+    }
+    .tc-header .brand {
+        max-width: 150px !important;
+    }
+}
 .site-logo img {
-    max-height: 32px !important;
-    max-width: 184px !important;
-    margin: 0px 5px;
-    padding: 0px;
+    transform: scale(0.7);
+}
+.tc-header .brand {
+    text-align: left;
+    vertical-align: middle;
+}
+.navbar .navbar-inner {
+    margin: 0 !important;
 }
 .posts_catlist {
     margin: 10px auto;
@@ -61,21 +138,34 @@ Updated: 2017-10-23 00:20:12
     margin-left: 33%;
     margin-bottom: 15px;
 }
-.newswheel_front_page {
+.newswheel_main {
     text-align: center;
 }
+.newswheel_front_page {
+    text-align: center;
+    clear: none;
+    display: inline-block;
+}
+.newswheel_logo {
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    margin: 10px;
+}
 .newswheel_front_page h1, .newswheel_front_page h3, .newswheel_front_pagep, .newswheel_front_page a {
-    line-height: 14pt !important;
+    line-height: 36pt;
 }
 .newswheel_front_page h1 {
-    font-size: 24pt;
+    font-size: 36pt;
     font-weight: 900;
-    color: #29588C
+    color: #29588C;
 }
 .newswheel_front_page h3 {
-    font-size: 14pt;
+    font-size: 18pt;
     font-weight: 700;
-    color: #4CB4E7
+    font-style: italic;
+    color: #4CB4E7;
+    margin: 10px 0px;
 }
 .newswheel_front_page p {
     color: #666
