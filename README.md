@@ -1,5 +1,5 @@
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/vta/microsites.svg?columns=all)](https://waffle.io/vta/microsites)
-[![BrowserStack](assets/images/application/browserstack.png)](https://www.browserstack.com)
+[![BrowserStack](wp-content/themes/customizr-pro-newswheel/browserstack.png)](https://www.browserstack.com)
 
 # VTA micro-sites
 A collection of files need to support the VTA's usage of micro-sites for both internal and external consumption by employees, vendors and the general public.
