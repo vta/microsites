@@ -19,7 +19,7 @@ section a:hover, a:focus {
     color: #1111FF;
 }
 .tc-header {
-    background-color: #C4C4C4;
+    background-color: #ffffff;
 }
 .navbar-wrapper {
     max-width: 51px !important;
@@ -27,7 +27,7 @@ section a:hover, a:focus {
     vertical-align: middle;
 }
 .sticky-enabled .tc-header {
-    background: rgba(180,180,180,.8);
+    background: rgba(255,255,255,.8);
 }
 .sticky-disabled .navbar-wrapper {
     clear: none !important;
@@ -151,17 +151,18 @@ img.attachment-tc-thumb.tc-thumb-type-thumb.wp-post-image.wp-post-image.h-center
     vertical-align: middle;
     display: inline-block;
     margin: 10px;
+    max-width: 100px;
 }
 .newswheel_front_page h1, .newswheel_front_page h3, .newswheel_front_pagep, .newswheel_front_page a {
-    line-height: 36pt;
+    line-height: 18pt;
 }
 .newswheel_front_page h1 {
-    font-size: 36pt;
+    font-size: 28pt;
     font-weight: 900;
     color: #29588C;
 }
 .newswheel_front_page h3 {
-    font-size: 18pt;
+    font-size: 16pt;
     font-weight: 700;
     font-style: italic;
     color: #4CB4E7;

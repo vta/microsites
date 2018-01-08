@@ -62,7 +62,7 @@ function child_theme_setup() {
 add_action( 'after_setup_theme', 'child_theme_setup', 10, 2);
 update_option( 'thumbnail_size_w', 240 );
 update_option( 'thumbnail_size_h', 180 );
-//update_option( 'thumbnail_crop', 0 );
+update_option( 'thumbnail_crop', 0 );
 
 add_filter('tc_fp_link_url' , 'my_custom_fp_links', 10 ,2);
 //If you are using the featured pages Unlimited Plugin or the Customizr Pro theme, uncomment this line :
