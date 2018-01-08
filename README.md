@@ -1,6 +1,4 @@
-[![Ready](https://badge.waffle.io/vta/microsites.png?label=ready&title=Ready)](https://waffle.io/vta/microsites)
-[![In Progress](https://badge.waffle.io/vta/microsites.png?label=in%20progress&title=In%20Progress)](https://waffle.io/vta/microsites)
-[![Testing](https://badge.waffle.io/vta/microsites.png?label=tests%20passed&title=Testing)](https://waffle.io/vta/microsites)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/vta/microsites.svg?columns=all)](https://waffle.io/vta/microsites)
 [![BrowserStack](assets/images/application/browserstack.png)](https://www.browserstack.com)
 
 # VTA micro-sites
