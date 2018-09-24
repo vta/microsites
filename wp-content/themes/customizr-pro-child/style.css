@@ -67,3 +67,10 @@ h2.woocommerce-loop-product__title {
     font-size: 12pt !important;
 	color: red;
 }
+
+/**
+ * Fix post thumbnails scaling issue
+ */
+figure.tc-grid-figure.has-thumb.effect-4 {
+    height: unset !important;
+}
