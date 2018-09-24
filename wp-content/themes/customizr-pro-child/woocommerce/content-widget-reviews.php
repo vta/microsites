@@ -2,7 +2,8 @@
 /**
  * The template for displaying product widget entries.
  *
- * This template can be overridden by copying it to yourtheme/woocommerce/content-widget-product.php.
+ * This template can be overridden by copying it to yourtheme/woocommerce/content-widget-reviews.php
+ * 
  * HOWEVER, on occasion WooCommerce will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
  * maintain compatibility. We try to do this as little as possible, but it does
@@ -10,30 +11,24 @@
  * the readme will list any important changes.
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
- * @author  WooThemes
  * @package WooCommerce/Templates
- * @version 3.3.0
+ * @version 3.4.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 
-global $product;
 ?>
 <li>
-	<?php do_action( 'woocommerce_widget_product_item_start', $args ); ?>
+	<?php do_action( 'woocommerce_widget_product_review_item_start', $args ); ?>
 
-	<a href="<?php echo esc_url( $product->get_permalink() ); ?>">
+	<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
 		<?php echo $product->get_image(); ?>
 		<span class="product-title"><?php echo $product->get_name(); ?></span>
 	</a>
 
-	<?php if ( ! empty( $show_rating ) ) : ?>
-		<?php echo wc_get_rating_html( $product->get_average_rating() ); ?>
-	<?php endif; ?>
+	<?php echo wc_get_rating_html( intval( get_comment_meta( $comment->comment_ID, 'rating', true ) ) );?>
 
-	<?php echo $product->get_price_html(); ?>
+	<span class="reviewer"><?php echo sprintf( esc_html__( 'by %s', 'woocommerce' ), get_comment_author( $comment->comment_ID ) ); ?></span>
 
-	<?php do_action( 'woocommerce_widget_product_item_end', $args ); ?>
+	<?php do_action( 'woocommerce_widget_product_review_item_end', $args ); ?>
 </li>

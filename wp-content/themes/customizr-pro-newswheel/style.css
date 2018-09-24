@@ -55,8 +55,10 @@ img.attachment-tc-thumb.tc-thumb-type-thumb.wp-post-image.wp-post-image.h-center
     height: 180px;
 }
 .tc-rectangular-thumb img {
-    object-fit: scale-down;
-    top: 0 !important;
+   /* height: unset !important;
+    width: unset !important;*/
+    object-fit: scale-down;	
+    top: 0px !important;
 }
 
 @media (max-width: 479px) {
