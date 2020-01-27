@@ -67,3 +67,21 @@ h2.woocommerce-loop-product__title {
     font-size: 12pt !important;
 	color: red;
 }
+
+/**
+ * Fix for thumbnail proportional scaling
+ */
+img.attachment-tc-thumb.tc-thumb-type-thumb.wp-post-image.wp-post-image.h-centered {
+    height: unset !important;
+    left: unset !important;
+}
+.thumb-wrapper .round-div {
+    width: 270px;
+    height: 180px;
+}
+.tc-rectangular-thumb img {
+    /* height: unset !important;
+     width: unset !important;*/
+    object-fit: scale-down;
+    top: 0px !important;
+}
