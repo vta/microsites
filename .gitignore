@@ -25,6 +25,8 @@ wp-config.php
 /wp-content/themes/**/
 !/wp-content/themes/customizr-pro-**
 
+# Demo Plugin
+!/wp-content/plugins/demo-print
 
 # Plugins
 /wp-content/plugins
