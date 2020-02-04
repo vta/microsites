@@ -36,3 +36,5 @@ wp-config.php
 
 # Backups
 /wp-content/updraft
+
+!/wp-content/plugins/demo-print
