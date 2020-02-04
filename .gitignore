@@ -25,16 +25,13 @@ wp-config.php
 /wp-content/themes/**/
 !/wp-content/themes/customizr-pro-**
 
-# Demo Plugin
-!/wp-content/plugins/demo-print
-
 # Plugins
-/wp-content/plugins
-
+!/wp-content/plugins/
+wp-content/plugins/**/
+# Demo Plugin
+!/wp-content/plugins/demo-print**
 # Uploads
 /wp-content/uploads
 
 # Backups
 /wp-content/updraft
-
-!/wp-content/plugins/demo-print
