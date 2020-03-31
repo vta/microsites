@@ -1,0 +1,14 @@
+/*
+Theme Name: SCVTA Copy Center (Twenty-Twenty)
+Description: A customized theme for testing the SCVTA Copy Center online form pages
+Author: James Pham
+Author URI: https://jamespham.io
+Template: twentytwenty
+Version: 1.0
+*/
+
+/** GLOBAL **/
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
