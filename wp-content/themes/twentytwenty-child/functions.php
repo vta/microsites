@@ -100,10 +100,16 @@ function entry_id_update_order_meta( $order_id )
 
 /**
  * Display field value on the order edit page with a link to download
+ * @TODO - will need to revise in the future. This is for business cards specifically...
  */
 add_action( 'woocommerce_admin_order_data_after_billing_address', 'my_custom_checkout_field_display_admin_order_meta', 10, 1 );
 function my_custom_checkout_field_display_admin_order_meta( $order )
 {
-    echo '<a><strong style="color: black;">' . __( 'Entry ID' ) . ':</strong> 
-          <span>' . get_post_meta( $order->get_id(), 'bc_entry_id', true ) . '</span></a>';
+    $entry_id = get_post_meta( $order->get_id(), 'bc_entry_id', true );
+    $uploads = wp_upload_dir();
+
+    echo "<strong style='color: black;'>" . __( 'Entry ID' ) . ":</strong>
+          <a href='" . esc_url( $uploads['baseurl'] . '/business_cards/business_card_' . $entry_id . '.pdf') . "'> 
+            <span> Business Card $entry_id </span>
+          </a>";
 }
