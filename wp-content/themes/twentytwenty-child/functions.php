@@ -29,6 +29,8 @@ function theme_start_session()
         session_start();
 }
 
+/** WooCommerce Hooks */
+
 /**
  * OVERRIDE WooCommerce Templates
  */
@@ -36,8 +38,6 @@ add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
 function mytheme_add_woocommerce_support() {
     add_theme_support( 'woocommerce' );
 }
-
-/** Woo Commerce Hooks */
 
 /**
  * REMOVE Shipping and Billing Fields in Checkout
@@ -65,7 +65,7 @@ function custom_override_checkout_fields( $fields )
 }
 
 /**
- * REDIRECT Continue Shopping to "services" page
+ * REDIRECT "Continue Shopping" to "services" page
  */
 add_filter( 'woocommerce_continue_shopping_redirect', 'wc_custom_redirect_continue_shopping' );
 function wc_custom_redirect_continue_shopping()
@@ -121,3 +121,11 @@ function my_custom_checkout_field_display_admin_order_meta( $order )
             <span> Business Card $entry_id </span>
           </a>";
 }
+
+/**
+ * REMOVE related products output
+ *
+ * This hook removes the related products on each product page (Standard-Size Printing, Large Format Printing)
+ * @see - https://docs.woocommerce.com/document/remove-related-posts-output/
+ */
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
