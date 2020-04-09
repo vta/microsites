@@ -112,10 +112,12 @@ function add_entry_id_to_cart_item( $cart_item_data, $product_id, $variation_id 
 {
     $entry_id = $_SESSION['entry_id'];
 
+    // if entry_id for business card was not set in wp-print-preview, then return item as is
     if ( empty( $entry_id ) ) {
         return $cart_item_data;
     }
 
+    // if entry_id was set in $_SESSION, ensure that it can only be added to business card
     if ( $product_id === 39 ) {
         $cart_item_data['bc_entry_id'] = $entry_id;
     }
@@ -139,9 +141,15 @@ function business_card_display_text_cart( $item_data, $cart_item )
         return $item_data;
     }
 
+    // Extract Fullname from GF Entries
+    $entry_id = $cart_item['bc_entry_id'];
+    $entry = GFAPI::get_entry($entry_id);
+    $fullname = $entry['2.3'] . " " . $entry['2.6'];
+
+    // Display Fullname in cart + checkout page
     $item_data[] = array(
-        'key' => __( 'Business Card Entry ID', 'bc_entry_id' ),
-        'value' => wc_clean( $cart_item['bc_entry_id'] ),
+        'key' => __( 'Name', 'fullname' ),
+        'value' => wc_clean( $fullname ),
         'display' => '',
     );
 
@@ -150,13 +158,14 @@ function business_card_display_text_cart( $item_data, $cart_item )
 
 
 /**
- * ADD business card PDF link to
+ * ADD business card PDF link to "Edit Order" admin page
  *
  * @param WC_Order_Item_Product $item
  * @param string $cart_item_key
  * @param array $values
  * @param WC_Order $order
  */
+add_action( 'woocommerce_checkout_create_order_line_item', 'bc_entry_id_text_to_order_items', 10, 4 );
 function bc_entry_id_text_to_order_items( $item, $cart_item_key, $values, $order )
 {
     if ( empty( $values['bc_entry_id'] ) ) {
