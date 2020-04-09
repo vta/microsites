@@ -14,6 +14,9 @@
  * @author    WooThemes
  * @package  WooCommerce/Templates
  * @version     3.2.0
+ *
+ * @edit - This page was edited at line 47 to add a 72 hour ETA when the order is placed. This page notifies
+ * immediately after the order
  */
 
 if ( !defined( 'ABSPATH' ) ) {

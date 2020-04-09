@@ -13,6 +13,8 @@
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce/Templates
  * @version 3.6.0
+ *
+ * @edit - At line 66, I added a link to the register form for users without an account
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
