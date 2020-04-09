@@ -12,3 +12,9 @@ html {
   box-sizing: border-box;
   font-size: 62.5%;
 }
+
+
+/** WooCommerce **/
+.woocommerce {
+  max-width: 1200px !important; /*Temporarily expand width of WooCommerce pages*/
+}
