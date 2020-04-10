@@ -143,7 +143,7 @@ function business_card_display_text_cart( $item_data, $cart_item )
 
     // Extract Fullname from GF Entries
     $entry_id = $cart_item['bc_entry_id'];
-    $entry = GFAPI::get_entry($entry_id);
+    $entry = GFAPI::get_entry( $entry_id );
     $fullname = $entry['2.3'] . " " . $entry['2.6'];
 
     // Display Fullname in cart + checkout page
@@ -177,16 +177,76 @@ function bc_entry_id_text_to_order_items( $item, $cart_item_key, $values, $order
     $entry_id = $values['bc_entry_id'];
 
     // pull name from business_card
-    $entry = GFAPI::get_entry($entry_id);
+    $entry = GFAPI::get_entry( $entry_id );
     $firstname = $entry['2.3'];
     $lastname = $entry['2.6'];
 
     //
-    $item->add_meta_data( __( 'Business Card Entry ID', 'bc_entry_id' ),
+    $item->add_meta_data( __( 'Business Card PDF', 'bc_entry_id' ),
         "
             <a href='" . esc_url( $uploads['baseurl'] . '/business_cards/business_card_' . $entry_id . '.pdf' ) . "'>
              " . "$firstname" . " " . "$lastname" . "
             </a>
         "
     );
+}
+
+/**
+ * REMOVE PDF download link from emails and front
+ */
+add_filter( 'woocommerce_order_item_get_formatted_meta_data', 'unset_specific_order_item_meta_data', 10, 2);
+function unset_specific_order_item_meta_data($formatted_meta, $item){
+
+    if( is_admin() || is_wc_endpoint_url() )
+        return $formatted_meta;
+
+    foreach( $formatted_meta as $key => $meta ){
+        if( in_array( $meta->key, array('Business Card PDF') ) )
+            unset($formatted_meta[$key]);
+    }
+    return $formatted_meta;
+}
+
+/** CUSTOM ORDER STATUS (NOT INCLUDED IN WOOCOMMERCE CORE) */
+
+/**
+ * REGISTER "Ready for Pick Up" status
+ */
+add_action( 'init', 'register_ready_for_pickup_order_status' );
+function register_ready_for_pickup_order_status()
+{
+    register_post_status( 'wc-ready-for-pickup', array(
+        'label' => 'Ready for Pick Up',
+        'public' => true,
+        'exclude_from_search' => false,
+        'show_in_admin_all_list' => true,
+        'show_in_admin_status_list' => true,
+        'label_count' => _n_noop( 'Your order is ready for pick up!', 'Your orders are ready for pick up' )
+    ) );
+}
+
+/**
+ * ADD newly registered order status to the menu
+ *
+ * @param $order_statuses - current order status in assoc array
+ * @return array - updated order statuses
+ */
+add_filter( 'wc_order_statuses', 'add_awaiting_shipment_to_order_statuses' );
+function add_awaiting_shipment_to_order_statuses( $order_statuses )
+{
+
+    $new_order_statuses = array();
+
+    // add new order status after processing
+    foreach ( $order_statuses as $key => $status ) {
+
+        $new_order_statuses[$key] = $status;
+
+        // place ready for pick up after "Processing"
+        if ( 'wc-on-hold' === $key ) {
+            $new_order_statuses['wc-ready-for-pickup'] = 'Ready for Pick Up';
+        }
+    }
+
+    return $new_order_statuses;
 }
