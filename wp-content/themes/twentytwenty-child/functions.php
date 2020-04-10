@@ -194,15 +194,16 @@ function bc_entry_id_text_to_order_items( $item, $cart_item_key, $values, $order
 /**
  * REMOVE PDF download link from emails and front
  */
-add_filter( 'woocommerce_order_item_get_formatted_meta_data', 'unset_specific_order_item_meta_data', 10, 2);
-function unset_specific_order_item_meta_data($formatted_meta, $item){
+add_filter( 'woocommerce_order_item_get_formatted_meta_data', 'unset_specific_order_item_meta_data', 10, 2 );
+function unset_specific_order_item_meta_data( $formatted_meta, $item )
+{
 
-    if( is_admin() || is_wc_endpoint_url() )
+    if ( is_admin() || is_wc_endpoint_url() )
         return $formatted_meta;
 
-    foreach( $formatted_meta as $key => $meta ){
-        if( in_array( $meta->key, array('Business Card PDF') ) )
-            unset($formatted_meta[$key]);
+    foreach ( $formatted_meta as $key => $meta ) {
+        if ( in_array( $meta->key, array( 'Business Card PDF' ) ) )
+            unset( $formatted_meta[$key] );
     }
     return $formatted_meta;
 }
@@ -226,13 +227,46 @@ function register_ready_for_pickup_order_status()
 }
 
 /**
+ * REGISTER "Special" status
+ */
+add_action( 'init', 'register_special_status' );
+function register_special_status()
+{
+    register_post_status( 'wc-special', array(
+        'label' => 'Special',
+        'public' => true,
+        'exclude_from_search' => false,
+        'show_in_admin_all_list' => true,
+        'show_in_admin_status_list' => true,
+        'label_count' => _n_noop( 'Special Processing. Please Await for more notifications.', 'Special Processing. Please Await for more notifications.' )
+    ) );
+}
+
+
+/**
+ * FINISHING "Finshing" status
+ */
+add_action( 'init', 'register_finishing_status' );
+function register_finshing_status()
+{
+    register_post_status( 'wc-finshing', array(
+        'label' => 'Finshing',
+        'public' => true,
+        'exclude_from_search' => false,
+        'show_in_admin_all_list' => true,
+        'show_in_admin_status_list' => true,
+        'label_count' => 'Finishing touches... Almost done! Await for your pick email.'
+    ) );
+}
+
+/**
  * ADD newly registered order status to the menu
  *
  * @param $order_statuses - current order status in assoc array
  * @return array - updated order statuses
  */
-add_filter( 'wc_order_statuses', 'add_awaiting_shipment_to_order_statuses' );
-function add_awaiting_shipment_to_order_statuses( $order_statuses )
+add_filter( 'wc_order_statuses', 'add_ready_to_pick_up_to_order_statuses' );
+function add_ready_to_pick_up_to_order_statuses( $order_statuses )
 {
 
     $new_order_statuses = array();
@@ -242,7 +276,18 @@ function add_awaiting_shipment_to_order_statuses( $order_statuses )
 
         $new_order_statuses[$key] = $status;
 
-        // place ready for pick up after "Processing"
+
+        // place special for pick up after "Processing"
+        if ( 'wc-processing' === $key ) {
+            $new_order_statuses['wc-special'] = 'Special';
+        }
+
+        // place special for pick up after "Finishing"
+        if ( 'wc-on-hold' === $key ) {
+            $new_order_statuses['wc-finishing'] = 'Finishing';
+        }
+
+        // place ready for pick up after "On Hold"
         if ( 'wc-on-hold' === $key ) {
             $new_order_statuses['wc-ready-for-pickup'] = 'Ready for Pick Up';
         }
