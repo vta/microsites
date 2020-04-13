@@ -216,13 +216,13 @@ function unset_specific_order_item_meta_data( $formatted_meta, $item )
 add_action( 'init', 'register_ready_for_pickup_order_status' );
 function register_ready_for_pickup_order_status()
 {
-    register_post_status( 'wc-ready-for-pickup', array(
+    register_post_status( 'wc-ready', array(
         'label' => 'Ready for Pick Up',
         'public' => true,
         'exclude_from_search' => false,
         'show_in_admin_all_list' => true,
         'show_in_admin_status_list' => true,
-        'label_count' => _n_noop( 'Your order is ready for pick up!', 'Your orders are ready for pick up' )
+        'label_count' => _n_noop( 'Ready for Pick Up', 'Ready for Pick Up' )    // Shows up under Order's tab / filter
     ) );
 }
 
@@ -238,24 +238,24 @@ function register_special_status()
         'exclude_from_search' => false,
         'show_in_admin_all_list' => true,
         'show_in_admin_status_list' => true,
-        'label_count' => _n_noop( 'Special Processing. Please Await for more notifications.', 'Special Processing. Please Await for more notifications.' )
+        'label_count' => _n_noop( 'Special', 'Special' )                        // Shows up under Order's tab / filter
     ) );
 }
 
 
 /**
- * FINISHING "Finshing" status
+ * FINISHING "Finishing" status
  */
 add_action( 'init', 'register_finishing_status' );
-function register_finshing_status()
+function register_finishing_status()
 {
-    register_post_status( 'wc-finshing', array(
-        'label' => 'Finshing',
+    register_post_status( 'wc-finishing', array(
+        'label' => 'Finishing',
         'public' => true,
         'exclude_from_search' => false,
         'show_in_admin_all_list' => true,
         'show_in_admin_status_list' => true,
-        'label_count' => 'Finishing touches... Almost done! Await for your pick email.'
+        'label_count' => 'Finishing'                                                                // Shows up under Order's tab / filter
     ) );
 }
 
@@ -265,8 +265,8 @@ function register_finshing_status()
  * @param $order_statuses - current order status in assoc array
  * @return array - updated order statuses
  */
-add_filter( 'wc_order_statuses', 'add_ready_to_pick_up_to_order_statuses' );
-function add_ready_to_pick_up_to_order_statuses( $order_statuses )
+add_filter( 'wc_order_statuses', 'add_custom_order_statuses' );
+function add_custom_order_statuses( $order_statuses )
 {
 
     $new_order_statuses = array();
@@ -289,7 +289,7 @@ function add_ready_to_pick_up_to_order_statuses( $order_statuses )
 
         // place ready for pick up after "On Hold"
         if ( 'wc-on-hold' === $key ) {
-            $new_order_statuses['wc-ready-for-pickup'] = 'Ready for Pick Up';
+            $new_order_statuses['wc-ready'] = 'Ready for Pick Up';
         }
     }
 
