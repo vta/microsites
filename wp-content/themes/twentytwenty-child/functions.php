@@ -192,13 +192,14 @@ function bc_entry_id_text_to_order_items( $item, $cart_item_key, $values, $order
 }
 
 /**
- * REMOVE PDF download link from emails and front
+ * ::IMPORTANT:: REMOVES PDF download link from emails and user dashboard (basically everyone except admin dashboard)
  */
 add_filter( 'woocommerce_order_item_get_formatted_meta_data', 'unset_specific_order_item_meta_data', 10, 2 );
 function unset_specific_order_item_meta_data( $formatted_meta, $item )
 {
 
-    if ( is_admin() || is_wc_endpoint_url() )
+    // If, they are admin, Business Card PDF metadata (link) will be visible
+    if ( is_admin() )
         return $formatted_meta;
 
     foreach ( $formatted_meta as $key => $meta ) {
@@ -208,7 +209,7 @@ function unset_specific_order_item_meta_data( $formatted_meta, $item )
     return $formatted_meta;
 }
 
-/** CUSTOM ORDER STATUS (NOT INCLUDED IN WOOCOMMERCE CORE) */
+/** CUSTOM ORDER STATUSES (NOT INCLUDED IN WOOCOMMERCE CORE) */
 
 /**
  * REGISTER "Ready for Pick Up" status
