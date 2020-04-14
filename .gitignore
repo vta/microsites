@@ -24,6 +24,7 @@ wp-config.php
 !/wp-content/themes
 /wp-content/themes/**/
 !/wp-content/themes/customizr-pro-**
+!/wp-content/themes/twentytwenty-child
 
 
 # Plugins
