@@ -7,15 +7,73 @@ Template: twentytwenty
 Version: 1.0
 */
 
+/***************/
+/** VARIABLES **/
+/***************/
+:root {
+  --darker-blue: #0a5387;
+  --dark-blue: #29588C;
+  --light-blue: #4CB4E7;
+
+  --header-gradient: linear-gradient(
+          90deg,
+          rgba(10,83,135,1) 0%,
+          rgba(25,95,145,1) 35%,
+          rgba(80,119,161,1) 55%,
+          rgba(255,255,255,1) 100%
+  );
+}
+
+/************/
 /** GLOBAL **/
+/************/
 html {
   box-sizing: border-box;
   font-size: 62.5%;
 }
-
 
 /** WooCommerce **/
 .woocommerce {
   max-width: 1200px !important; /*Temporarily expand width of WooCommerce pages*/
 }
 
+/************/
+/** HEADER **/
+/************/
+
+/**
+Outside entry-header Wrapper
+ */
+header.entry-header {
+  display: flex;
+  justify-content: start;
+  flex: 0 0 100rem;
+}
+
+/* background style override; added CSS ID */
+#entry-header-outer {
+  background: var(--darker-blue);
+  background: var(--header-gradient);
+}
+
+/* override padding rules of outside wrapper */
+.singular header.entry-header {
+  padding: 0;
+}
+
+/**
+Inner entry-header Wrapper
+ */
+.entry-header-inner.section-inner.medium {
+  max-width: 50rem;
+  margin: 0;
+  padding: 8rem;
+}
+
+/**
+Header Text
+ */
+.entry-header-inner.section-inner.medium h1 {
+  color: var(--light-blue);
+}
+>>>>>>> Stashed changes
