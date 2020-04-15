@@ -158,3 +158,23 @@ Service Page Shortcode Ultimate buttons
 div.su-button-center {
   text-align: left;
 }
+
+/************/
+/** FOOTER **/
+/************/
+
+/**
+Parent Footer Container
+- create blue background
+ */
+footer#site-footer {
+  background: var(--light-blue);
+}
+
+/**
+Inner Footer Wrapper
+- Center child items vertically
+ */
+footer#site-footer > div.section-inner {
+  align-items: center;
+}
