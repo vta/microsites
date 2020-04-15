@@ -42,7 +42,7 @@
 
     <?php if ( has_nav_menu( 'inner_footer' ) ) { ?>
 
-      <nav class="inner-footer-wrapper">
+      <nav class="inner-footer-menu-wrapper">
         <ul class="inner-footer-menu">
         <?php
           wp_nav_menu(
