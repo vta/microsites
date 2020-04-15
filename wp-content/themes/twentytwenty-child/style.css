@@ -89,3 +89,44 @@ Header Title
   font-weight: 700;
   font-size: 4rem;
 }
+
+/******************/
+/** PAGE CONTENT **/
+/******************/
+
+/**
+Outer Wrapper for Posts/Page Content
+- add padding to match header divider
+ */
+div.post-inner {
+  padding-left: 50rem;
+}
+
+/**
+Inner Wrapper for Posts/Page Content
+- add margin to the top of the entry-content container
+ */
+div.entry-content {
+  margin-top: 2rem;
+}
+
+/**
+Child elements in entry-content
+- override margin-left to left justify children
+ */
+.entry-content > * {
+  margin-left: unset;
+}
+
+/******************/
+/** SERVICE PAGE **/
+/******************/
+
+/**
+Service Page Shortcode Ultimate buttons
+- align buttons to the left (against the divider)
+@TODO - add a unique class for service buttons
+ */
+div.su-button-center {
+  text-align: left;
+}
