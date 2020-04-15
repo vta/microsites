@@ -63,6 +63,7 @@ header.entry-header {
 
 /**
 Inner entry-header Wrapper
+-define container style within header
  */
 .entry-header-inner.section-inner.medium {
   max-width: 50rem;
@@ -74,6 +75,7 @@ Inner entry-header Wrapper
 
 /**
 Header Site Description
+-style text for site description
  */
 h2.header-site-description {
   color: #ffffff;
@@ -83,6 +85,7 @@ h2.header-site-description {
 
 /**
 Header Title
+-style text for page title
  */
 .entry-header-inner.section-inner.medium h1 {
   color: var(--light-blue);
@@ -105,9 +108,11 @@ div.post-inner {
 /**
 Inner Wrapper for Posts/Page Content
 - add margin to the top of the entry-content container
+- remove "times" font styling
  */
 div.entry-content {
   margin-top: 2rem;
+  font-family: unset;
 }
 
 /**
