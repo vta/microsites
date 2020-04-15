@@ -38,6 +38,24 @@
 
     </div><!-- .footer-credits -->
 
+    <?php get_template_part( 'template-parts/footer-menus-widgets' ); ?>
+
+    <?php
+      $has_inner_footer_menu = has_nav_menu( 'inner_footer' );
+    ?>
+
+    <?php
+      wp_nav_menu(
+        array(
+          'container' => '',
+          'depth' => 1,
+          'items_wrap' => '%3$s',
+          'theme_location' => 'inner_footer',
+        )
+      );
+
+    ?>
+
     <a class="to-the-top" href="#site-header">
 						<span class="to-the-top-long">
 							<?php
@@ -60,4 +78,5 @@
 <?php wp_footer(); ?>
 
 </body>
+
 </html>
