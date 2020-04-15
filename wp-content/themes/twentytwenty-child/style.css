@@ -166,9 +166,11 @@ div.su-button-center {
 /**
 Parent Footer Container
 - create blue background
+- set text color as white
  */
 footer#site-footer {
   background: var(--light-blue);
+  color: white;
 }
 
 /**
@@ -177,4 +179,30 @@ Inner Footer Wrapper
  */
 footer#site-footer > div.section-inner {
   align-items: center;
+}
+
+/**
+Footer Credits
+ */
+div.footer-credits {
+  font-size: 2rem;
+}
+
+/**
+Copyright
+- increase font-size
+ */
+div.footer-credits > p.footer-copyright {
+  font-size: 2.5rem;
+  text-transform: uppercase;
+}
+
+/**
+Powered by WordPress logo
+- change color to white
+- increase font-size
+ */
+div.footer-credits > p.powered-by-wordpress {
+  font-size: 2.5rem;
+  color: white;
 }
