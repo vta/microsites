@@ -68,11 +68,24 @@ Inner entry-header Wrapper
   max-width: 50rem;
   margin: 0;
   padding: 8rem;
+  border-right: 2rem white solid;
+  text-align: right;
 }
 
 /**
-Header Text
+Header Site Description
+ */
+h2.header-site-description {
+  color: #ffffff;
+  font-size: 2rem;
+  margin: 0;
+}
+
+/**
+Header Title
  */
 .entry-header-inner.section-inner.medium h1 {
   color: var(--light-blue);
+  font-weight: 700;
+  font-size: 4rem;
 }

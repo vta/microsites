@@ -17,7 +17,8 @@ if ( is_singular() ) {
 
 ?>
 
-<header id="entry-header-outer"  class="entry-header has-text-align-center<?php echo esc_attr( $entry_header_classes ); ?>">
+<header id="entry-header-outer"
+        class="entry-header has-text-align-center<?php echo esc_attr( $entry_header_classes ); ?>">
 
   <div class="entry-header-inner section-inner medium">
 
@@ -25,9 +26,9 @@ if ( is_singular() ) {
     /**
      * Allow child themes and plugins to filter the display of the categories in the entry header.
      *
+     * @param bool   Whether to show the categories in header, Default true.
      * @since Twenty Twenty 1.0
      *
-     * @param bool   Whether to show the categories in header, Default true.
      */
     $show_categories = apply_filters( 'twentytwenty_show_categories_in_entry_header', true );
 
@@ -46,8 +47,13 @@ if ( is_singular() ) {
     ?>
 
 
-    // Add "Copy Center Online Form" here above page title
-    <?php echo twentytwenty_site_description(); ?>
+    <!--Add site descriptions above page title-->
+    <h2 class="header-site-description">
+      <?php
+//      echo twentytwenty_site_description();
+      echo get_bloginfo( 'description' );
+      ?>
+    </h2>
 
     <?php
     if ( is_singular() ) {
