@@ -145,11 +145,19 @@ function business_card_display_text_cart( $item_data, $cart_item )
     $entry_id = $cart_item['bc_entry_id'];
     $entry = GFAPI::get_entry( $entry_id );
     $fullname = $entry['2.3'] . " " . $entry['2.6'];
+    $quantity = $entry['10'];
 
     // Display Fullname in cart + checkout page
     $item_data[] = array(
         'key' => __( 'Name', 'fullname' ),
         'value' => wc_clean( $fullname ),
+        'display' => '',
+    );
+
+    // Display Qty in cart + checkout page
+    $item_data[] = array(
+        'key' => __( 'Quantity', 'qty' ),
+        'value' => wc_clean( $quantity ),
         'display' => '',
     );
 
@@ -180,8 +188,9 @@ function bc_entry_id_text_to_order_items( $item, $cart_item_key, $values, $order
     $entry = GFAPI::get_entry( $entry_id );
     $firstname = $entry['2.3'];
     $lastname = $entry['2.6'];
+    $quantity = $entry['10'];
 
-    //
+    // add business card download link as meta data
     $item->add_meta_data( __( 'Business Card PDF', 'bc_entry_id' ),
         "
             <a href='" . esc_url( $uploads['baseurl'] . '/business_cards/business_card_' . $entry_id . '.pdf' ) . "'>
@@ -189,6 +198,10 @@ function bc_entry_id_text_to_order_items( $item, $cart_item_key, $values, $order
             </a>
         "
     );
+
+    // add quantity as meta data
+    $item->add_meta_data( __( 'Quantity', 'qty'), $quantity);
+
 }
 
 /**
