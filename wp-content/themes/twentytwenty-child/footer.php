@@ -40,21 +40,24 @@
 
     <?php get_template_part( 'template-parts/footer-menus-widgets' ); ?>
 
-    <?php
-      $has_inner_footer_menu = has_nav_menu( 'inner_footer' );
-    ?>
+    <?php if ( has_nav_menu( 'inner_footer' ) ) { ?>
 
-    <?php
-      wp_nav_menu(
-        array(
-          'container' => '',
-          'depth' => 1,
-          'items_wrap' => '%3$s',
-          'theme_location' => 'inner_footer',
-        )
-      );
+      <nav class="inner-footer-wrapper">
+        <ul class="inner-footer-menu">
+        <?php
+          wp_nav_menu(
+            array(
+              'container' => '',
+              'depth' => 1,
+              'items_wrap' => '%3$s',
+              'theme_location' => 'inner_footer',
+            )
+          );
+        ?>
+        </ul>
+      </nav>
 
-    ?>
+    <?php } ?>
 
     <a class="to-the-top" href="#site-header">
 						<span class="to-the-top-long">
