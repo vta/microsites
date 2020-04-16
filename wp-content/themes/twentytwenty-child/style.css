@@ -173,12 +173,37 @@ Child elements in entry-content
 }
 
 /**
-@TODO - document + add CSS class to paragraph
+Entry Content Paragraph
+- extend the width of the paragraph
+- change font weight
 */
 .entry-content > p {
   max-width: 80% !important;
   font-weight: 700;
   margin-bottom: 5rem;
+}
+
+/**
+< Smaller Screens (1200px)
+ */
+@media (max-width: 1200px) {
+
+  /**
+  Outer Wrapper for Posts/Page Content
+  - remove padding to match header divider
+  */
+  div.post-inner {
+    padding: 0;
+  }
+
+  /**
+  Entry Content Paragraph
+  - center text on smaller screens
+  */
+  .entry-content > * {
+    margin: auto;
+  }
+
 }
 
 /******************/
@@ -195,11 +220,23 @@ div.su-button-center {
 }
 
 div.su-button-center > a {
-<<<<<<< Updated upstream
   width: 25rem;
-=======
-  width: 7rem;
->>>>>>> Stashed changes
+}
+
+/**
+< Smaller Screens (1200px)
+ */
+@media (max-width: 1200px) {
+
+  /**
+  Service Page Shortcode Ultimate buttons
+  - center buttons
+   */
+  div.su-button-center {
+    text-align: center;
+    margin: auto;
+  }
+
 }
 
 /************/
