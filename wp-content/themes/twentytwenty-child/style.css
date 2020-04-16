@@ -236,7 +236,7 @@ div.su-button-center > a {
    */
   div.su-button-center {
     text-align: center;
-    margin: auto;
+    margin: 2rem auto;
   }
 
 }
