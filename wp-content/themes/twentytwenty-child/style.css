@@ -146,6 +146,15 @@ Child elements in entry-content
   margin-left: unset;
 }
 
+/**
+@TODO - document + add CSS class to paragraph
+*/
+.entry-content > p {
+  max-width: 80% !important;
+  font-weight: 700;
+  margin-bottom: 5rem;
+}
+
 /******************/
 /** SERVICE PAGE **/
 /******************/
@@ -157,6 +166,10 @@ Service Page Shortcode Ultimate buttons
  */
 div.su-button-center {
   text-align: left;
+}
+
+div.su-button-center > a {
+  width: 25rem;
 }
 
 /************/
