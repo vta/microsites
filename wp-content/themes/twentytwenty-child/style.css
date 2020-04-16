@@ -37,9 +37,9 @@ html {
   max-width: 1200px !important; /*Temporarily expand width of WooCommerce pages*/
 }
 
-/*********************/
-/** HEADER NAV MENU **/
-/*********************/
+/******************/
+/** TOP NAV MENU **/
+/******************/
 
 /**
 Menu Links
@@ -66,6 +66,7 @@ nav.primary-menu-wrapper ul.primary-menu > li.current-menu-item > a {
 
 /**
 Outside entry-header Wrapper
+- flex the parent container
  */
 header.entry-header {
   display: flex;
@@ -114,6 +115,31 @@ Header Title
   color: var(--light-blue);
   font-weight: 700;
   font-size: 4rem;
+}
+
+/**
+< Smaller Screens (1200px)
+ */
+@media (max-width: 1200px) {
+
+  /**
+  Outside entry-header Wrapper
+  - center the title container
+ */
+  header.entry-header {
+    justify-content: center;
+  }
+
+  /**
+  Inner entry-header Wrapper
+  - center text
+  - remove divider
+  */
+  .entry-header-inner.section-inner.medium {
+    text-align: center;
+    border: none;
+  }
+
 }
 
 /******************/
@@ -169,7 +195,11 @@ div.su-button-center {
 }
 
 div.su-button-center > a {
+<<<<<<< Updated upstream
   width: 25rem;
+=======
+  width: 7rem;
+>>>>>>> Stashed changes
 }
 
 /************/
