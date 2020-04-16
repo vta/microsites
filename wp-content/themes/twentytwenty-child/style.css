@@ -22,6 +22,8 @@ Version: 1.0
           rgba(80,119,161,1) 55%,
           rgba(255,255,255,1) 100%
   );
+
+  --footer-height: 166px;
 }
 
 /************/
@@ -248,11 +250,16 @@ Parent Footer Container
 - create blue background
 - set text color as white
 - reduce padding
+- set min height
+- align items vertically
  */
 footer#site-footer {
   background: var(--light-blue);
   color: white;
   padding: 1rem;
+  min-height: var(--footer-height);
+  display: flex;
+  align-items: center;
 }
 
 /**
@@ -337,7 +344,31 @@ To The Top Link
 - adjust permanent position
  */
 a.to-the-top {
-  position: absolute;
-  right: 50%;
+  display: none;
   color: white;
+}
+
+
+/**
+< Smaller Screens (1200px)
+ */
+@media (max-width: 1200px) {
+
+  /**
+  Inner Footer Menu Wrapper
+  - hide footer menu on smaller viewports
+  */
+  nav.inner-footer-menu-wrapper {
+    display: none;
+  }
+
+  /**
+  To The Top Link
+  - show
+   */
+  a.to-the-top {
+    display: block;
+    position: absolute;
+    right: 0;
+  }
 }
