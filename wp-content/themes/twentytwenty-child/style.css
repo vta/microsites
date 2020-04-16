@@ -371,4 +371,19 @@ a.to-the-top {
     position: absolute;
     right: 0;
   }
+
+}
+
+/* change verbiage early to avoid text collision */
+@media (max-width: 835px) {
+    
+  .to-the-top-long {
+    display: none;
+  }
+
+  /* override parent media query */
+  .to-the-top-short {
+    display: inline !important;
+  }
+
 }
