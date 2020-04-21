@@ -385,20 +385,65 @@ a.to-the-top {
 
 /**
 Progress Bar
-- hide
+- hide in multi-step form
  */
 div.gf_progressbar_wrapper {
   display: none;
 }
+
+/**
+Required Asterisk
+- change color to blue
+ */
+
 
 /************************/
 /** BUSINESS CARD FORM **/
 /************************/
 
 /**
+Form Wrapper
+- Extend the form to the whole page
+@TODO - this may be a global form style. Will not override width + max-width without ID selector
+ */
+div#gform_wrapper_4.gform_wrapper {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+/**
 Business Card Form
+- change color + background color
+- add padding to the form
+@TODO - might be a global FORM style
  */
 form.business-card-form {
   background: var(--light-gray);
   color: var(--darker-blue);
+  padding: 2rem;
+}
+
+/**
+Form Body (Child of GF Form Element)
+ */
+div.gform_body {
+  position: relative;
+}
+
+/**
+Form Button Container
+- move it the right of the form
+- align button to the right of the container
+- remove top border
+- fix spacing
+@TODO - might be hacky when repositioning it to the bottom for submitting/preview on the last page
+ */
+.gform_wrapper div.gform_page_footer {
+  position: absolute;
+  top: 0;
+  text-align: right;
+  border-top: none;
+  padding: 0;
+  margin: 0;
 }
