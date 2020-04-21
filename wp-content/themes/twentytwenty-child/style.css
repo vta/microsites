@@ -384,18 +384,35 @@ a.to-the-top {
 /**********************/
 
 /**
-Progress Bar
-- hide in multi-step form
+Next Button
+- change shape of next button (forward pentagon)
  */
-div.gf_progressbar_wrapper {
-  display: none;
+input.gform_next_button.button {
+  background: var(--darker-blue);
+  --webkit-clip-path: polygon(0% 0%, 75% 0%, 90% 50%, 75% 100%, 0% 100%);
+  clip-path: polygon(0% 0%, 75% 0%, 90% 50%, 75% 100%, 0% 100%);
+  padding: 1.5rem 4rem 1.5rem 2rem;
+}
+
+
+/**
+Previous Button
+- change shape of previous button (backwards pentagon)
+ */
+input.gform_previous_button.button {
+  background: var(--darker-blue);
+  --webkit-clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
+  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
+  padding: 1.5rem 2rem 1.5rem 4rem;
 }
 
 /**
 Required Asterisk
-- change color to blue
+- change color from red to blue
  */
-
+.gform_wrapper span.gfield_required {
+  color: var(--darker-blue);
+}
 
 /************************/
 /** BUSINESS CARD FORM **/
@@ -447,3 +464,4 @@ Form Button Container
   padding: 0;
   margin: 0;
 }
+
