@@ -15,6 +15,7 @@ Version: 1.0
   --dark-blue: #29588C;
   --light-blue: #4CB4E7;
 
+  --lighter-gray: #F4F4F4;
   --light-gray: #EEEEEE;
 
   --header-gradient: linear-gradient(
@@ -389,20 +390,20 @@ Next Button
  */
 input.gform_next_button.button {
   background: var(--darker-blue);
-  --webkit-clip-path: polygon(0% 0%, 75% 0%, 90% 50%, 75% 100%, 0% 100%);
-  clip-path: polygon(0% 0%, 75% 0%, 90% 50%, 75% 100%, 0% 100%);
+  --webkit-clip-path: polygon(0% 0%, 75% 0%, 95% 50%, 75% 100%, 0% 100%);
+  clip-path: polygon(0% 0%, 75% 0%, 95% 50%, 75% 100%, 0% 100%);
   padding: 1.5rem 4rem 1.5rem 2rem;
 }
 
 
 /**
-Previous Button
+Previous (Back) Button
 - change shape of previous button (backwards pentagon)
  */
 input.gform_previous_button.button {
   background: var(--darker-blue);
-  --webkit-clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
-  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
+  --webkit-clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 20% 100%, 0% 50%);
+  clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 20% 100%, 0% 50%);
   padding: 1.5rem 2rem 1.5rem 4rem;
 }
 
@@ -417,6 +418,7 @@ Required Asterisk
 /************************/
 /** BUSINESS CARD FORM **/
 /************************/
+/* @TODO - be aware of transferring some styles GLOBALLY as it may apply to other forms*/
 
 /**
 Form Wrapper
@@ -433,7 +435,7 @@ div#gform_wrapper_4.gform_wrapper {
 Business Card Form
 - change color + background color
 - add padding to the form
-@TODO - might be a global FORM style
+@TODO - might be a global FORM style in the future
  */
 form.business-card-form {
   background: var(--light-gray);
@@ -444,7 +446,7 @@ form.business-card-form {
 /**
 Form Body (Child of GF Form Element)
  */
-div.gform_body {
+form.business-card-form div.gform_body {
   position: relative;
 }
 
@@ -455,13 +457,73 @@ Form Button Container
 - remove top border
 - fix spacing
 @TODO - might be hacky when repositioning it to the bottom for submitting/preview on the last page
+@TODO - might be a global FORM style in the future
  */
 .gform_wrapper div.gform_page_footer {
   position: absolute;
   top: 0;
   text-align: right;
   border-top: none;
-  padding: 0;
+  padding: 4rem 0 0 0;
   margin: 0;
 }
 
+/**
+Form Field Wrapper
+- change display to flex
+- user ID selector for highest priority
+@TODO - may be GLOBAL in the future
+@TODO - might be a global FORM style in the future
+ */
+form.business-card-form div.gform_body ul.gform_fields {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/*
+1st Form Field (Top Row)
+- expand wide enough without growing or shrinking
+- add margin to clear next form field from entering the row
+@TODO - might be a global FORM style in the future
+ */
+form.business-card-form div.gform_body div.gform_page  ul.gform_fields li.gfield:first-of-type {
+  flex: 0 1 80%;
+  margin-right: 20rem;
+}
+
+/**
+2nd Form Field Row
+@TODO - might be a global FORM style in the future
+ */
+form.business-card-form div.gform_body div.gform_page ul.gform_fields li.gfield {
+  margin: 1rem;
+  flex: 1 1 20rem;
+}
+
+/**
+Address Field
+- expand to be larger than other fields on 2nd row
+ */
+form.business-card-form div.gform_body div.gform_page ul.gform_fields li.gfield.address-field{
+  flex: 1 1 50rem;
+}
+
+/*
+Form Field INPUT
+- expand input to be 100% with a max limit
+@TODO - might be a global FORM style in the future
+ */
+form.business-card-form div.gform_body ul.gform_fields li.gfield input {
+  width: 100%;
+  max-width: 50rem;
+}
+
+/**
+Submit Button
+- reduce padding
+@TODO - might be a global FORM style in the future
+ */
+input[type='submit'].business-card-form {
+  padding: 1.5rem;
+}
