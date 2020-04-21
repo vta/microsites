@@ -15,6 +15,8 @@ Version: 1.0
   --dark-blue: #29588C;
   --light-blue: #4CB4E7;
 
+  --light-gray: #EEEEEE;
+
   --header-gradient: linear-gradient(
           90deg,
           rgba(10,83,135,1) 0%,
@@ -371,4 +373,32 @@ a.to-the-top {
     position: absolute;
     right: 0;
   }
+}
+
+/*********************************/
+/** GRAVITY FORMS CUSTOMIZATION **/
+/*********************************/
+
+/**********************/
+/** GLOBAL GF STYLES **/
+/**********************/
+
+/**
+Progress Bar
+- hide
+ */
+div.gf_progressbar_wrapper {
+  display: none;
+}
+
+/************************/
+/** BUSINESS CARD FORM **/
+/************************/
+
+/**
+Business Card Form
+ */
+form.business-card-form {
+  background: var(--light-gray);
+  color: var(--darker-blue);
 }
