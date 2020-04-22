@@ -38,7 +38,7 @@ Version: 1.0
 
   /* @TODO - we can store SCSS variables for @media queries in the future*/
 
-  /* shapes */
+  /* Button Shapes */
   --next-button-shape:      polygon(0% 0%, 75% 0%, 95% 50%, 75% 100%, 0% 100%);
   --next-button-padding:    1.5rem 4rem 1.5rem 2rem;
 
@@ -47,6 +47,14 @@ Version: 1.0
 
   --preview-button-shape:   polygon(0% 0%, 75% 0%, 90% 50%, 75% 100%, 0% 100%);
   --preview-button-padding: 1.5rem 5rem 1.5rem 2rem;
+
+  /* Box shadows */
+  /* @credit - https://codepen.io/sdthornton/pen/wBZdXq */
+  --lightest-box-shadow:        0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  --light-box-shadow:           0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  --medium-box-shadow:          0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  --heavy-box-shadow:           0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  --heaviest-box-shadow:        0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 
 /************/
@@ -117,7 +125,7 @@ Inner entry-header Wrapper
 .entry-header-inner.section-inner.medium {
   max-width: 50rem;
   margin: 0;
-  padding: 8rem;
+  padding: 6rem;
   border-right: 2rem white solid;
   text-align: right;
 }
@@ -145,7 +153,7 @@ Header Title
 /**
 screensize < desktop (1200px)
  */
-@media (max-width: 1200px) {
+@media (max-width: 1440px) {
 
   /**
   Outside entry-header Wrapper
@@ -174,19 +182,25 @@ screensize < desktop (1200px)
 /**
 Outer Wrapper for Posts/Page Content
 - add padding to match header divider
+- extend page content to the bottom
  */
 div.post-inner {
   padding-left: 50rem;
+  min-height: 53vh;
 }
 
 /**
 Inner Wrapper for Posts/Page Content
 - add margin to the top of the entry-content container
 - remove "times" font styling
+- set max-width (for bigger screen)
+- add padding
  */
 div.entry-content {
   margin-top: 2rem;
   font-family: unset;
+  max-width: 1200px;
+  padding: 2rem 2rem 6rem 2rem;
 }
 
 /**
@@ -203,15 +217,13 @@ Entry Content Paragraph
 - change font weight
 */
 .entry-content > p {
-  max-width: 80% !important;
-  font-weight: 700;
+  max-width: 100% !important;
+  font-weight: 600;
   margin-bottom: 5rem;
 }
 
-/**
-< Smaller Screens (1200px)
- */
-@media (max-width: 1200px) {
+/* screensize < Large Screen (1440px) */
+@media (max-width: 1440px) {
 
   /**
   Outer Wrapper for Posts/Page Content
@@ -222,8 +234,16 @@ Entry Content Paragraph
   }
 
   /**
+  Entry Content
+  - center entry content (left padding on parent container no longer exists)
+   */
+  .entry-content {
+    margin: auto;
+  }
+
+  /**
   Entry Content Paragraph
-  - center text on smaller screens
+  - center contents on smaller screens
   */
   .entry-content > * {
     margin: auto;
@@ -231,9 +251,9 @@ Entry Content Paragraph
 
 }
 
-/******************/
-/** SERVICE PAGE **/
-/******************/
+/*******************/
+/** SERVICES PAGE **/
+/*******************/
 
 /**
 Service Page Shortcode Ultimate buttons
@@ -246,6 +266,25 @@ div.su-button-center {
 
 div.su-button-center > a {
   width: 25rem;
+}
+
+/**
+Service Page Content
+- add backround & border
+ */
+article#post-8 div.post-inner div.entry-content {
+  background: var(--light-gray);
+  border: var(--thin-medium-gray);
+}
+
+  /**
+  Service Page Paragraphs
+  - add font style
+   */
+article#post-8 div.post-inner div.entry-content > p.intro-text {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--darker-blue);
 }
 
 /**
@@ -587,7 +626,7 @@ Form Fields
  */
 form.business-card-form div.gform_body div.gform_page ul.gform_fields li.gfield {
   margin: 2rem;
-  flex: 1 1 60rem;
+  flex: 0 1 46rem;
   z-index: 2;
   min-height: 120px;
 }
@@ -628,12 +667,12 @@ Form Button Container
 @TODO - might be a global FORM style in the future
  */
 .gform_wrapper div.gform_page_footer {
-  position: relative;
+  position: absolute;
   bottom: 0;
   right: 0;
   text-align: right;
   border-top: none;
-  padding: 2rem 0;
+  padding: 7rem 0;
   margin: 0;
 }
 
@@ -648,21 +687,20 @@ input[type='submit']#gform_submit_button_4 {
   padding: var(--preview-button-padding);
 }
 
-/* screensize > 1440px (Large Desktop) */
-@media (min-width: 1440px) {
+/* screensize < 1200px (Large Desktop) */
+@media (max-width: 1200px) {
   /**
   Button Wrapper
   - occupy right hand side & overlap with bottom row
    */
   .gform_wrapper div.gform_page_footer {
-    position: absolute;
-    max-width: 50rem;
-    padding: 7rem 0;
+    position: relative;
+    padding: 2rem 0;
   }
 }
 
-/* screensize < 1200px (Desktop) */
-@media (max-width: 1200px) {
+/* screensize < 1024px (Smaller Desktop) */
+@media (max-width: 1024px) {
   /**
   Business Card Form
   - add margin around the form
@@ -672,8 +710,8 @@ input[type='submit']#gform_submit_button_4 {
   }
 }
 
-/* screensize < 768px (Tablets */
-@media (max-width: 768px) {
+/* screensize < 780px (Tablets */
+@media (max-width: 780px) {
   /**
   Steps Container
    */
@@ -722,11 +760,20 @@ input[type='submit']#gform_submit_button_4 {
 @media (max-width: 540px) {
 
   /**
+  Form
+  - remove margin
+   */
+  div#gform_wrapper_4.gform_wrapper form.business-card-form {
+    margin: 0;
+  }
+
+  /**
   Form Body
   - remove inside padding
    */
   form.business-card-form div.gform_body {
     padding: 0;
+    margin: 0;
   }
 
   /**
