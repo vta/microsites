@@ -143,7 +143,7 @@ Header Title
 }
 
 /**
-< Smaller Screens (1200px)
+screensize < desktop (1200px)
  */
 @media (max-width: 1200px) {
 
@@ -520,6 +520,7 @@ Non-active Steps
 - override opacity
 - specify borders
  */
+form.business-card-form div.gf_page_steps div.gf_step,
 form.business-card-form div.gf_page_steps div.gf_step.gf_step_pending,
 form.business-card-form div.gf_page_steps div.gf_step.gf_step_previous,
 form.business-card-form div.gf_page_steps div.gf_step.gf_step_next
@@ -562,25 +563,7 @@ form.business-card-form div.gform_body {
   background: var(--light-gray);
   padding: 2rem;
   border: var(--thin-medium-gray);
-}
-
-/**
-Form Button Container
-- move it the right of the form
-- align button to the right of the container
-- remove top border
-- fix spacing
-@TODO - might be a global FORM style in the future
- */
-.gform_wrapper div.gform_page_footer {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  text-align: right;
-  border-top: none;
-  padding: 2rem;
-  margin: 0;
-  max-width: 50rem;
+  min-height: 325px;
 }
 
 /**
@@ -599,10 +582,31 @@ form.business-card-form div.gform_body ul.gform_fields {
 /**
 Form Fields
 - Determine base size for each form field
+- increase z-index to ensure fields aren't blocked form overlapping containers
+- increase minimum height;
  */
 form.business-card-form div.gform_body div.gform_page ul.gform_fields li.gfield {
   margin: 2rem;
-  flex: 1 1 40rem;
+  flex: 1 1 60rem;
+  z-index: 2;
+  min-height: 120px;
+}
+
+/**
+Job Title Form Field
+- give it its own row with flex-basis
+ */
+form.business-card-form div.gform_body div.gform_page ul.gform_fields li.gfield.job-title-field {
+  flex-basis: 60%;
+}
+
+/**
+Form Fields (Phone Field)
+- reduce flex starting size to shrink fields
+ */
+form.business-card-form div.gform_body div.gform_page ul.gform_fields li.gfield.phone-field {
+  flex-basis: 20rem;
+  flex-grow: 0;
 }
 
 /*
@@ -616,7 +620,25 @@ form.business-card-form div.gform_body ul.gform_fields li.gfield input {
 }
 
 /**
-Submit Button
+Form Button Container
+- move it the right of the form
+- align button to the right of the container
+- remove top border
+- fix spacing
+@TODO - might be a global FORM style in the future
+ */
+.gform_wrapper div.gform_page_footer {
+  position: relative;
+  bottom: 0;
+  right: 0;
+  text-align: right;
+  border-top: none;
+  padding: 2rem 0;
+  margin: 0;
+}
+
+/**
+Preview Button
 - reduce padding
 @TODO - might be a global FORM style in the future
  */
@@ -624,4 +646,123 @@ input[type='submit']#gform_submit_button_4 {
   --webkit-clip-path: var(--preview-button-shape);
   clip-path: var(--preview-button-shape);
   padding: var(--preview-button-padding);
+}
+
+/* screensize > 1440px (Large Desktop) */
+@media (min-width: 1440px) {
+  /**
+  Button Wrapper
+  - occupy right hand side & overlap with bottom row
+   */
+  .gform_wrapper div.gform_page_footer {
+    position: absolute;
+    max-width: 50rem;
+    padding: 7rem 0;
+  }
+}
+
+/* screensize < 1200px (Desktop) */
+@media (max-width: 1200px) {
+  /**
+  Business Card Form
+  - add margin around the form
+   */
+  .gform_wrapper form.business-card-form {
+    margin: 2rem;
+  }
+}
+
+/* screensize < 768px (Tablets */
+@media (max-width: 768px) {
+  /**
+  Steps Container
+   */
+  form.business-card-form div.gf_page_steps {
+    width: 100%;
+  }
+
+  /**
+  Steps
+   */
+  form.business-card-form div.gf_page_steps div.gf_step {
+    margin: 2px 0;
+    width: 100%;
+  }
+
+  /**
+  Active Step
+  - add blue outline to easier identify active step
+   */
+  form.business-card-form div.gf_page_steps div.gf_step.gf_step_active {
+    font-weight: 700;
+  }
+
+  /**
+  First Step
+  - remove top margin
+   */
+  form.business-card-form div.gf_page_steps div.gf_step.gf_step_first {
+    margin-top: 0;
+  }
+
+  /**
+  Buttons (Next & Back)
+  - override included styles and prevent it from expanding to 100%
+   */
+  .gform_wrapper .gform_page_footer input.button.gform_previous_button,
+  .gform_wrapper .gform_page_footer input.button.gform_next_button,
+  input[type='submit']#gform_submit_button_4
+  {
+    width: unset;
+  }
+
+}
+
+/* screensize < 540px (Phones Portrait) */
+@media (max-width: 540px) {
+
+  /**
+  Form Body
+  - remove inside padding
+   */
+  form.business-card-form div.gform_body {
+    padding: 0;
+  }
+
+  /**
+  Form Field Wrapper
+  - add padding to the inside
+   */
+  form.business-card-form div.gform_body ul.gform_fields {
+    padding: 2rem;
+  }
+
+  /**
+  Form Fields
+  - remove min-height
+  */
+  form.business-card-form div.gform_body div.gform_page ul.gform_fields li.gfield {
+    min-height: unset;
+  }
+
+  /**
+  Buttons Container
+  - convert to flex and line at the end
+  - change position to absolute
+   */
+  form.business-card-form div.gform_page_footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /**
+  Buttons
+  - remove bottom margin
+   */
+  .gform_wrapper .gform_page_footer input.button.gform_previous_button,
+  .gform_wrapper .gform_page_footer input.button.gform_next_button,
+  input[type='submit']#gform_submit_button_4
+  {
+    margin-bottom: 0;
+  }
 }
