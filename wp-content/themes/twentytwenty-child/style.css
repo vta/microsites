@@ -11,6 +11,7 @@ Version: 1.0
 /** VARIABLES **/
 /***************/
 :root {
+  /* Colors */
   --darker-blue: #0a5387;
   --dark-blue: #29588C;
   --light-blue: #4CB4E7;
@@ -18,6 +19,7 @@ Version: 1.0
   --lighter-gray: #F4F4F4;
   --light-gray: #EEEEEE;
 
+  /* Gradients */
   --header-gradient: linear-gradient(
           90deg,
           rgba(10,83,135,1) 0%,
@@ -26,7 +28,18 @@ Version: 1.0
           rgba(255,255,255,1) 100%
   );
 
+  /* Dimensions */
   --footer-height: 166px;
+
+  /* shapes */
+  --next-button-shape: polygon(0% 0%, 75% 0%, 95% 50%, 75% 100%, 0% 100%);
+  --next-button-padding: 1.5rem 4rem 1.5rem 2rem;
+
+  --back-button-shape: polygon(20% 0%, 100% 0%, 100% 100%, 20% 100%, 0% 50%);
+  --back-button-padding: 1.5rem 2rem 1.5rem 4rem;
+
+  --preview-button-shape: polygon(0% 0%, 75% 0%, 90% 50%, 75% 100%, 0% 100%);
+  --preview-button-padding: 1.5rem 5rem 1.5rem 2rem;
 }
 
 /************/
@@ -239,7 +252,7 @@ div.su-button-center > a {
    */
   div.su-button-center {
     text-align: center;
-    margin: auto;
+    margin: 2rem auto;
   }
 
 }
@@ -390,9 +403,9 @@ Next Button
  */
 input.gform_next_button.button {
   background: var(--darker-blue);
-  --webkit-clip-path: polygon(0% 0%, 75% 0%, 95% 50%, 75% 100%, 0% 100%);
-  clip-path: polygon(0% 0%, 75% 0%, 95% 50%, 75% 100%, 0% 100%);
-  padding: 1.5rem 4rem 1.5rem 2rem;
+  --webkit-clip-path: var(--next-button-shape);
+  clip-path: var(--next-button-shape);
+  padding: var(--next-button-padding);
 }
 
 
@@ -402,9 +415,9 @@ Previous (Back) Button
  */
 input.gform_previous_button.button {
   background: var(--darker-blue);
-  --webkit-clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 20% 100%, 0% 50%);
-  clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 20% 100%, 0% 50%);
-  padding: 1.5rem 2rem 1.5rem 4rem;
+  --webkit-clip-path: var(--back-button-shape);
+  clip-path: var(--back-button-shape);
+  padding: var(--back-button-padding);
 }
 
 /**
@@ -456,16 +469,19 @@ Form Button Container
 - align button to the right of the container
 - remove top border
 - fix spacing
+- negative z-index
 @TODO - might be hacky when repositioning it to the bottom for submitting/preview on the last page
 @TODO - might be a global FORM style in the future
  */
 .gform_wrapper div.gform_page_footer {
   position: absolute;
-  top: 0;
+  bottom: 0;
+  right: 0;
   text-align: right;
   border-top: none;
-  padding: 4rem 0 0 0;
+  padding: 2rem;
   margin: 0;
+  max-width: 50rem;
 }
 
 /**
@@ -478,35 +494,16 @@ Form Field Wrapper
 form.business-card-form div.gform_body ul.gform_fields {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-/*
-1st Form Field (Top Row)
-- expand wide enough without growing or shrinking
-- add margin to clear next form field from entering the row
-@TODO - might be a global FORM style in the future
- */
-form.business-card-form div.gform_body div.gform_page  ul.gform_fields li.gfield:first-of-type {
-  flex: 0 1 80%;
-  margin-right: 20rem;
+  align-items: start;
 }
 
 /**
-2nd Form Field Row
-@TODO - might be a global FORM style in the future
+Form Fields
+- Determine base size for each form field
  */
 form.business-card-form div.gform_body div.gform_page ul.gform_fields li.gfield {
-  margin: 1rem;
-  flex: 1 1 20rem;
-}
-
-/**
-Address Field
-- expand to be larger than other fields on 2nd row
- */
-form.business-card-form div.gform_body div.gform_page ul.gform_fields li.gfield.address-field{
-  flex: 1 1 50rem;
+  margin: 2rem;
+  flex: 1 1 40rem;
 }
 
 /*
@@ -524,6 +521,8 @@ Submit Button
 - reduce padding
 @TODO - might be a global FORM style in the future
  */
-input[type='submit'].business-card-form {
-  padding: 1.5rem;
+input[type='submit']#gform_submit_button_4 {
+  --webkit-clip-path: var(--preview-button-shape);
+  clip-path: var(--preview-button-shape);
+  padding: var(--preview-button-padding);
 }
