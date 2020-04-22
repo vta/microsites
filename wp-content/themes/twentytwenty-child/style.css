@@ -12,13 +12,13 @@ Version: 1.0
 /***************/
 :root {
   /* Colors */
-  --darker-blue: #0a5387;
-  --dark-blue: #29588C;
-  --light-blue: #4CB4E7;
+  --darker-blue:  #0a5387;
+  --dark-blue:    #29588C;
+  --light-blue:   #4CB4E7;
 
   --lighter-gray: #F4F4F4;
-  --light-gray: #EEEEEE;
-  --medium-gray: #CCCCCC;
+  --light-gray:   #EEEEEE;
+  --medium-gray:  #CCCCCC;
 
   /* Gradients */
   --header-gradient: linear-gradient(
@@ -29,17 +29,23 @@ Version: 1.0
           rgba(255,255,255,1) 100%
   );
 
+  /* Borders */
+  --thin-light-gray:  1px solid var(--light-gray);
+  --thin-medium-gray: 1px solid var(--medium-gray);
+
   /* Dimensions */
   --footer-height: 166px;
 
+  /* @TODO - we can store SCSS variables for @media queries in the future*/
+
   /* shapes */
-  --next-button-shape: polygon(0% 0%, 75% 0%, 95% 50%, 75% 100%, 0% 100%);
-  --next-button-padding: 1.5rem 4rem 1.5rem 2rem;
+  --next-button-shape:      polygon(0% 0%, 75% 0%, 95% 50%, 75% 100%, 0% 100%);
+  --next-button-padding:    1.5rem 4rem 1.5rem 2rem;
 
-  --back-button-shape: polygon(20% 0%, 100% 0%, 100% 100%, 20% 100%, 0% 50%);
-  --back-button-padding: 1.5rem 2rem 1.5rem 4rem;
+  --back-button-shape:      polygon(20% 0%, 100% 0%, 100% 100%, 20% 100%, 0% 50%);
+  --back-button-padding:    1.5rem 2rem 1.5rem 4rem;
 
-  --preview-button-shape: polygon(0% 0%, 75% 0%, 90% 50%, 75% 100%, 0% 100%);
+  --preview-button-shape:   polygon(0% 0%, 75% 0%, 90% 50%, 75% 100%, 0% 100%);
   --preview-button-padding: 1.5rem 5rem 1.5rem 2rem;
 }
 
@@ -458,14 +464,20 @@ form.business-card-form {
 
 /**
 Steps Container
-- remove margin & border
+- adjust margin to hide top form-body top border
+- add background color for tab spacing appearance
+- position relative + negative margin overlaps top border
 @TODO - might be a global FORM style in the future
  */
 form.business-card-form div.gf_page_steps {
+  position: relative;
   width: fit-content;
-  border-bottom: none;
   padding: 0;
-  margin: 0;
+  border: var(--thin-medium-gray);
+  border-bottom: none;
+  background: var(--light-gray);
+  margin: 0 0 -2px 0;
+  z-index: 2;
 }
 
 /**
@@ -480,14 +492,18 @@ form.business-card-form div.gf_step_clear {
 Step (Tabs)
 - increase font-size
 - increase spacing
+- establish set width
+- center text
 @TODO - might be a global FORM style in the future
  */
 form.business-card-form div.gf_page_steps div.gf_step {
   font-size: 2rem;
-  padding: 3rem;
-  border-right: 2px solid var(--light-gray);
-  border-left: 2px solid var(--light-gray);
-  margin: 0;
+  font-weight: 500;
+  padding: 1.4rem;
+  margin: 0 2px;
+  width: 23rem;
+  height: unset;
+  text-align: center;
 }
 
 /**
@@ -513,12 +529,39 @@ form.business-card-form div.gf_page_steps div.gf_step.gf_step_next
 }
 
 /**
+First Step
+- add left border & remove left margin
+ */
+form.business-card-form div.gf_page_steps div.gf_step.gf_step_first {
+  margin-left: 0;
+}
+
+/**
+Last Step
+- remove end border (background blends with border)
+ */
+form.business-card-form div.gf_page_steps div.gf_step.gf_step_last {
+  margin-right: 0;
+}
+
+/**
+Step Label
+- increase font size
+ */
+form.business-card-form div.gf_page_steps div.gf_step {
+  font-size: 2rem;
+}
+
+/**
 Form Body (Child of GF Form Element)
+- make it relative to position button container (absolute)
+- add inner spacing
  */
 form.business-card-form div.gform_body {
   position: relative;
   background: var(--light-gray);
   padding: 2rem;
+  border: var(--thin-medium-gray);
 }
 
 /**
