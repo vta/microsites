@@ -24,9 +24,9 @@ Version: 1.0
   --header-gradient: linear-gradient(
           90deg,
           rgba(10,83,135,1) 0%,
-          rgba(25,95,145,1) 35%,
-          rgba(80,119,161,1) 55%,
-          rgba(255,255,255,1) 100%
+          rgba(25,95,145,1) 47%,
+          rgba(80,119,161,1) 79%,
+          rgba(138,164,192,1) 100%
   );
 
   /* Borders */
