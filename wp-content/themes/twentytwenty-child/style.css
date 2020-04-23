@@ -859,6 +859,10 @@ article#post-157.post-157 img.bc-preview-image {
   box-shadow: var(--medium-box-shadow);
 }
 
+#confirm-bc {
+  margin: auto;
+}
+
 /**
 Business Card Preview Button Container
 - align buttons to the right
