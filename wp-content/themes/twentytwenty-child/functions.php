@@ -23,7 +23,7 @@ function child_scripts()
 
   // Our JS Script
   wp_enqueue_script(
-    'script',
+    'child-script',
     get_stylesheet_directory_uri() . '/js/scripts.js',
     array( 'jquery' ),
     '1.0.0',

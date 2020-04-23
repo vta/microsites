@@ -1,12 +1,17 @@
-jQuery(document).ready(function($) {
+jQuery(document).ready(function ($) {
 
-  console.log('hello');
+  
 
   /**
-   *
+   * Business Card
    */
-  function business_card_tabs() {
+  $('#gf_step_4_2').on('click', function() {
 
-  }
+    console.log('Tab 2!');
+    $('#gform_target_page_number_4').val('2');
+
+  });
+
+
 
 });
