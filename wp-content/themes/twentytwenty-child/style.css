@@ -125,7 +125,7 @@ Inner entry-header Wrapper
 .entry-header-inner.section-inner.medium {
   max-width: 50rem;
   margin: 0;
-  padding: 6rem;
+  padding: 5rem;
   border-right: 2rem white solid;
   text-align: right;
 }
@@ -287,10 +287,8 @@ article#post-8 div.post-inner div.entry-content > p.intro-text {
   color: var(--darker-blue);
 }
 
-/**
-< Smaller Screens (1200px)
- */
-@media (max-width: 1200px) {
+/* screensize < Medium Screens (1440px) */
+@media (max-width: 1440px) {
 
   /**
   Service Page Shortcode Ultimate buttons
@@ -454,7 +452,6 @@ input.gform_next_button.button {
   padding: var(--next-button-padding);
 }
 
-
 /**
 Previous (Back) Button
 - change shape of previous button (backwards pentagon)
@@ -464,6 +461,23 @@ input.gform_previous_button.button {
   --webkit-clip-path: var(--back-button-shape);
   clip-path: var(--back-button-shape);
   padding: var(--back-button-padding);
+}
+
+/**
+GF form validation
+- blend background with the rest of the form
+- remove margin
+- position element above others
+ */
+
+.gform_wrapper form div.gf_page_steps+div.validation_error {
+  background: var(--light-gray);
+  margin-top: 0;
+  margin-bottom: 0;
+  z-index: 3;
+  position: relative;
+  border-right: var(--thin-medium-gray);
+  border-left: var(--thin-medium-gray);
 }
 
 /**
@@ -606,7 +620,7 @@ form.business-card-form div.gform_body {
 }
 
 /**
-Form Field Wrapper
+Form Fields Wrapper
 - change display to flex
 - user ID selector for highest priority
 @TODO - may be GLOBAL in the future
@@ -699,8 +713,24 @@ input[type='submit']#gform_submit_button_4 {
   }
 }
 
-/* screensize < 1024px (Smaller Desktop) */
+/* screensize < 1024px (Tablet Landscape) */
 @media (max-width: 1024px) {
+  /**
+  Form Fields Wrapper
+  - center all form fields
+   */
+  form.business-card-form div.gform_body ul.gform_fields {
+    justify-content: center;
+  }
+
+  /**
+  Job Title Field
+  - reduce flex-basis to standard size
+   */
+  form.business-card-form div.gform_body div.gform_page ul.gform_fields li.gfield.job-title-field {
+    flex: 0 1 46rem;
+  }
+
   /**
   Business Card Form
   - add margin around the form
@@ -710,7 +740,7 @@ input[type='submit']#gform_submit_button_4 {
   }
 }
 
-/* screensize < 780px (Tablets */
+/* screensize < 780px (Tablets Portrait) */
 @media (max-width: 780px) {
   /**
   Steps Container
@@ -777,7 +807,7 @@ input[type='submit']#gform_submit_button_4 {
   }
 
   /**
-  Form Field Wrapper
+  Form Fields Wrapper
   - add padding to the inside
    */
   form.business-card-form div.gform_body ul.gform_fields {
