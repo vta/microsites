@@ -20,6 +20,8 @@ Version: 1.0
   --light-gray:   #EEEEEE;
   --medium-gray:  #CCCCCC;
 
+  --dark-red : #c62828;
+
   /* Gradients */
   --header-gradient: linear-gradient(
           90deg,
@@ -842,4 +844,51 @@ input[type='submit']#gform_submit_button_4 {
   {
     margin-bottom: 0;
   }
+}
+
+/**********************/
+/** BUSINESS PREVIEW **/
+/**********************/
+
+/**
+Business Card Preview Image
+- add drop shadow and margin
+ */
+article#post-157.post-157 img.bc-preview-image {
+  margin: 4rem auto;
+  box-shadow: var(--medium-box-shadow);
+}
+
+/**
+Business Card Preview Button Container
+- align buttons to the right
+- add spacing to the bottom
+ */
+article#post-157.post-157 #confirm-bc > div.bc-preview-button-container {
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 0;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+/**
+Business Card Preview Cancel Button
+- change the color to red
+ */
+article#post-157.post-157 button[name='cancel'].bc-preview-cancel {
+  background: var(--dark-red);
+}
+
+/**
+Business Card Preview WooCommerce Add To Cart Button
+- set width
+- align to the right
+- remove border
+ */
+article#post-157.post-157 div.entry-content p.product.add_to_cart_bc {
+  max-width: 580px;
+  margin: auto;
+  text-align: right;
+  border: none;
 }

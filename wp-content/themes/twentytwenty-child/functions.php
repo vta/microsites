@@ -81,7 +81,7 @@ function wc_custom_redirect_continue_shopping()
 add_filter( 'woocommerce_product_add_to_cart_text', 'woocommerce_custom_product_add_to_cart_text' );
 function woocommerce_custom_product_add_to_cart_text()
 {
-    return __( 'Add Order', 'woocommerce' );
+    return __( 'Continue', 'woocommerce' );
 }
 
 /**
