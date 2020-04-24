@@ -54,6 +54,7 @@ function theme_start_session()
         session_start();
 }
 
+wp_logout_url('/');
 
 /**
  * Logout Redirection
@@ -77,6 +78,30 @@ function custom_logout_redirect( $redirect_to, $requested_redirect_to, $user ) {
 /** WooCommerce Hooks */
 
 /** USER FRONT-END CHANGES */
+
+/**
+ * INSERT dynamic Login/Logout into menu
+ *
+ * @param $items
+ * @param $args
+ * @return string
+ */
+add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
+function add_loginout_link( $items, $args ) {
+
+  $css_class = 'login-logout-button';
+
+  if (is_user_logged_in() && $args->theme_location == 'primary') {
+    $items .= '<li><a class="'. $css_class . '" href="'. wp_logout_url( get_permalink( wc_get_page_id( 'myaccount' ) ) ) .'">Log Out</a></li>';
+  }
+
+  elseif (!is_user_logged_in() && $args->theme_location == 'primary') {
+    $items .= '<li><a class="'. $css_class . '" href="' . get_permalink( wc_get_page_id( 'myaccount' ) ) . '">Log In</a></li>';
+  }
+
+  return $items;
+}
+
 /**
  * REMOVE related products output
  *
