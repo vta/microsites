@@ -54,7 +54,15 @@ function theme_start_session()
         session_start();
 }
 
-wp_logout_url('/');
+add_action('wp_logout','logout_redirect');
+
+function logout_redirect(){
+
+  wp_redirect( home_url() );
+
+  exit;
+
+}
 
 /**
  * Logout Redirection
@@ -75,12 +83,8 @@ function custom_logout_redirect( $redirect_to, $requested_redirect_to, $user ) {
   return $requested_redirect_to;
 }
 
-/** WooCommerce Hooks */
-
-/** USER FRONT-END CHANGES */
-
 /**
- * INSERT dynamic Login/Logout into menu
+ * INSERT dynamic Login/Logout links into menu
  *
  * @param $items
  * @param $args
@@ -101,6 +105,33 @@ function add_loginout_link( $items, $args ) {
 
   return $items;
 }
+
+/**
+ * BYPASS Log out confirmatio
+ * @see - https://gist.github.com/lukecav/9e7775cbe3172ef32b5191f5b56d64fb
+ */
+add_action( 'check_admin_referer', 'logout_without_confirmation', 1, 2);
+/**
+ * Generates custom logout URL
+ */
+function getLogoutUrl($redirectUrl = ''){
+  if(!$redirectUrl) $redirectUrl = site_url();
+  $return = str_replace("&amp;", '&', wp_logout_url($redirectUrl));
+  return $return;
+}
+/**
+ * Bypass logout confirmation on nonce verification failure
+ */
+function logout_without_confirmation($action, $result){
+  if(!$result && ($action == 'log-out')){
+    wp_safe_redirect(getLogoutUrl());
+    exit();
+  }
+}
+
+/** WooCommerce Hooks */
+
+/** USER FRONT-END CHANGES */
 
 /**
  * REMOVE related products output
