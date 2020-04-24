@@ -54,6 +54,26 @@ function theme_start_session()
         session_start();
 }
 
+
+/**
+ * Logout Redirection
+ *
+ * @param $redirect_to
+ * @param $requested_redirect_to
+ * @param $user
+ * @return string|void
+ */
+add_filter( 'logout_redirect', 'custom_logout_redirect', 10, 3 );
+function custom_logout_redirect( $redirect_to, $requested_redirect_to, $user ) {
+  if ( in_array( 'subscriber', $user->roles ) ) {
+    $requested_redirect_to = home_url();
+  } else {
+    $requested_redirect_to = home_url( '/' );
+  }
+
+  return $requested_redirect_to;
+}
+
 /** WooCommerce Hooks */
 
 /** USER FRONT-END CHANGES */
