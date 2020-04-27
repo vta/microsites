@@ -3,38 +3,20 @@
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
-add_action( 'init', function() {
-  /* Force no-cache headers on *ALL* front pages and in *ALL* cases */
-  /* Proof of concept, do not use */
-  header( 'Cache-Control: no-cache, no-store, must-revalidate' );
-  header( 'Pragma: no-cache' );
-  header( 'Expires: 0' );
-  /* Do same for admin_init to get dashboard to not cache */
-} );
-//
-//add_action( 'admin_init', function() {
-//  /* Force no-cache headers on *ALL* front pages and in *ALL* cases */
-//  /* Proof of concept, do not use */
-//  header( 'Cache-Control: no-cache, no-store, must-revalidate' );
-//  header( 'Pragma: no-cache' );
-//  header( 'Expires: 0' );
-//  /* Do same for admin_init to get dashboard to not cache */
-//} );
-
 /**
  * Enqueue child styles. Will be used to data via SESSION
  */
 add_action( 'wp_enqueue_scripts', 'child_scripts' );
 function child_scripts()
 {
-    $parent_style = 'parent-style';
-    wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' );
-    wp_enqueue_style(
-        'twentytwenty-child-style',
-        get_stylesheet_directory_uri() . '/style.css',
-        array( $parent_style ),
-        wp_get_theme()->get( 'Version' )
-    );
+  $parent_style = 'parent-style';
+  wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' );
+  wp_enqueue_style(
+    'twentytwenty-child-style',
+    get_stylesheet_directory_uri() . '/style.css',
+    array( $parent_style ),
+    wp_get_theme()->get( 'Version' )
+  );
 
   // jQuery
   wp_enqueue_script( 'jquery' );
@@ -52,11 +34,11 @@ function child_scripts()
 /**
  * Register Custom Inner Footer Menu
  */
-add_action('init', 'register_menus');
+add_action( 'init', 'register_menus' );
 function register_menus()
 {
   $locations = array(
-    'inner_footer'   => __( 'Inner Footer Menu', 'twentytwenty' ),
+    'inner_footer' => __( 'Inner Footer Menu', 'twentytwenty' ),
   );
 
   register_nav_menus( $locations );
@@ -64,6 +46,7 @@ function register_menus()
 
 /**
  * Start user session for each individual user
+ * REQUIRED for attaching meta data to business card product
  */
 add_action( "init", "theme_start_session", 1 );
 function theme_start_session()
@@ -73,45 +56,27 @@ function theme_start_session()
 }
 
 /**
- * Logout Redirection - redirect to home upon logging out
- *
- * @param $redirect_to
- * @param $requested_redirect_to
- * @param $user
- * @return string|void
- */
-add_filter( 'logout_redirect', 'custom_logout_redirect', 10, 3 );
-function custom_logout_redirect( $redirect_to, $requested_redirect_to, $user ) {
-  if ( in_array( 'subscriber', $user->roles ) ) {
-    $requested_redirect_to = home_url();
-  } else {
-    $requested_redirect_to = home_url( '/' );
-  }
-
-  return $requested_redirect_to;
-}
-
-/**
  * BYPASS Log out confirmation
  * @see - https://gist.github.com/lukecav/9e7775cbe3172ef32b5191f5b56d64fb
  */
-add_action( 'check_admin_referer', 'logout_without_confirmation', 1, 2);
+add_action( 'check_admin_referer', 'logout_without_confirmation', 1, 2 );
 /**
  * Generates custom logout URL
  */
-function getLogoutUrl($redirectUrl = '')
+function getLogoutUrl( $redirectUrl = '' )
 {
-  if(!$redirectUrl) $redirectUrl = site_url();
-  $return = str_replace("&amp;", '&', wp_logout_url($redirectUrl));
+  if ( !$redirectUrl ) $redirectUrl = site_url();
+  $return = str_replace( "&amp;", '&', wp_logout_url( $redirectUrl ) );
   return $return;
 }
+
 /**
  * Bypass logout confirmation on nonce verification failure
  */
-function logout_without_confirmation($action, $result)
+function logout_without_confirmation( $action, $result )
 {
-  if(!$result && ($action == 'log-out')){
-    wp_safe_redirect(getLogoutUrl());
+  if ( !$result && ($action == 'log-out') ) {
+    wp_safe_redirect( getLogoutUrl() );
     exit();
   }
 }
@@ -124,6 +89,19 @@ add_filter( 'woocommerce_login_redirect', 'wc_login_redirect' );
 function wc_login_redirect()
 {
   return get_permalink( wc_get_page_id( 'myaccount' ) );
+}
+
+/**
+ * EMPTY cart upon logout
+ */
+add_action('wp_logout', 'clear_cart');
+function clear_cart()
+{
+
+  // Clear WooCommerce Cart
+  if( function_exists('WC') ){
+    WC()->cart->empty_cart();
+  }
 }
 
 /** USER FRONT-END CHANGES */
@@ -142,8 +120,8 @@ remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_r
 add_filter( 'woocommerce_continue_shopping_redirect', 'wc_custom_redirect_continue_shopping' );
 function wc_custom_redirect_continue_shopping()
 {
-    //return your desired link here.
-    return get_site_url() . '/services';
+  //return your desired link here.
+  return get_site_url() . '/services';
 }
 
 /**
@@ -152,7 +130,7 @@ function wc_custom_redirect_continue_shopping()
 add_filter( 'woocommerce_product_add_to_cart_text', 'woocommerce_custom_product_add_to_cart_text' );
 function woocommerce_custom_product_add_to_cart_text()
 {
-    return __( 'Continue', 'woocommerce' );
+  return __( 'Continue', 'woocommerce' );
 }
 
 /**
@@ -161,7 +139,7 @@ function woocommerce_custom_product_add_to_cart_text()
 add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
 function mytheme_add_woocommerce_support()
 {
-    add_theme_support( 'woocommerce' );
+  add_theme_support( 'woocommerce' );
 }
 
 /**
@@ -173,23 +151,23 @@ function mytheme_add_woocommerce_support()
 add_filter( 'woocommerce_checkout_fields', 'custom_override_checkout_fields' );
 function custom_override_checkout_fields( $fields )
 {
-    unset( $fields['billing']['billing_first_name'] );
-    unset( $fields['billing']['billing_last_name'] );
-    unset( $fields['billing']['billing_company'] );
-    unset( $fields['billing']['billing_address_1'] );
-    unset( $fields['billing']['billing_address_2'] );
-    unset( $fields['billing']['billing_city'] );
-    unset( $fields['billing']['billing_postcode'] );
-    unset( $fields['billing']['billing_country'] );
-    unset( $fields['billing']['billing_state'] );
-    unset( $fields['billing']['billing_phone'] );
-    unset( $fields['billing']['billing_address_2'] );
-    unset( $fields['billing']['billing_postcode'] );
-    unset( $fields['billing']['billing_company'] );
-    unset( $fields['billing']['billing_last_name'] );
-    unset( $fields['billing']['billing_email'] );
-    unset( $fields['billing']['billing_city'] );
-    return $fields;
+  unset( $fields['billing']['billing_first_name'] );
+  unset( $fields['billing']['billing_last_name'] );
+  unset( $fields['billing']['billing_company'] );
+  unset( $fields['billing']['billing_address_1'] );
+  unset( $fields['billing']['billing_address_2'] );
+  unset( $fields['billing']['billing_city'] );
+  unset( $fields['billing']['billing_postcode'] );
+  unset( $fields['billing']['billing_country'] );
+  unset( $fields['billing']['billing_state'] );
+  unset( $fields['billing']['billing_phone'] );
+  unset( $fields['billing']['billing_address_2'] );
+  unset( $fields['billing']['billing_postcode'] );
+  unset( $fields['billing']['billing_company'] );
+  unset( $fields['billing']['billing_last_name'] );
+  unset( $fields['billing']['billing_email'] );
+  unset( $fields['billing']['billing_city'] );
+  return $fields;
 }
 
 /** BACK-END, METADATA, & WP ADMIN CHANGES  */
@@ -206,19 +184,19 @@ function custom_override_checkout_fields( $fields )
 add_filter( 'woocommerce_add_cart_item_data', 'add_entry_id_to_cart_item', 10, 3 );
 function add_entry_id_to_cart_item( $cart_item_data, $product_id, $variation_id )
 {
-    $entry_id = $_SESSION['entry_id'];
+  $entry_id = $_SESSION['entry_id'];
 
-    // if entry_id for business card was not set in wp-print-preview, then return item as is
-    if ( empty( $entry_id ) ) {
-        return $cart_item_data;
-    }
-
-    // if entry_id was set in $_SESSION, ensure that it can only be added to business card
-    if ( $product_id === 39 ) {
-        $cart_item_data['bc_entry_id'] = $entry_id;
-    }
-
+  // if entry_id for business card was not set in wp-print-preview, then return item as is
+  if ( empty( $entry_id ) ) {
     return $cart_item_data;
+  }
+
+  // if entry_id was set in $_SESSION, ensure that it can only be added to business card
+  if ( $product_id === 39 ) {
+    $cart_item_data['bc_entry_id'] = $entry_id;
+  }
+
+  return $cart_item_data;
 }
 
 
@@ -233,23 +211,23 @@ function add_entry_id_to_cart_item( $cart_item_data, $product_id, $variation_id 
 add_filter( 'woocommerce_get_item_data', 'business_card_display_text_cart', 10, 2 );
 function business_card_display_text_cart( $item_data, $cart_item )
 {
-    if ( empty( $cart_item['bc_entry_id'] ) ) {
-        return $item_data;
-    }
-
-    // Extract Fullname from GF Entries
-    $entry_id = $cart_item['bc_entry_id'];
-    $entry = GFAPI::get_entry( $entry_id );
-    $fullname = $entry['2.3'] . " " . $entry['2.6'];
-
-    // Display Fullname in cart + checkout page
-    $item_data[] = array(
-        'key' => __( 'Name', 'fullname' ),
-        'value' => wc_clean( $fullname ),
-        'display' => '',
-    );
-
+  if ( empty( $cart_item['bc_entry_id'] ) ) {
     return $item_data;
+  }
+
+  // Extract Fullname from GF Entries
+  $entry_id = $cart_item['bc_entry_id'];
+  $entry = GFAPI::get_entry( $entry_id );
+  $fullname = $entry['2.3'] . " " . $entry['2.6'];
+
+  // Display Fullname in cart + checkout page
+  $item_data[] = array(
+    'key' => __( 'Name', 'fullname' ),
+    'value' => wc_clean( $fullname ),
+    'display' => '',
+  );
+
+  return $item_data;
 }
 
 
@@ -264,27 +242,27 @@ function business_card_display_text_cart( $item_data, $cart_item )
 add_action( 'woocommerce_checkout_create_order_line_item', 'bc_entry_id_text_to_order_items', 10, 4 );
 function bc_entry_id_text_to_order_items( $item, $cart_item_key, $values, $order )
 {
-    if ( empty( $values['bc_entry_id'] ) ) {
-        return;
-    }
+  if ( empty( $values['bc_entry_id'] ) ) {
+    return;
+  }
 
-    // get upload directory + entry_id
-    $uploads = wp_upload_dir();
-    $entry_id = $values['bc_entry_id'];
+  // get upload directory + entry_id
+  $uploads = wp_upload_dir();
+  $entry_id = $values['bc_entry_id'];
 
-    // pull name from business_card
-    $entry = GFAPI::get_entry( $entry_id );
-    $firstname = $entry['2.3'];
-    $lastname = $entry['2.6'];
+  // pull name from business_card
+  $entry = GFAPI::get_entry( $entry_id );
+  $firstname = $entry['2.3'];
+  $lastname = $entry['2.6'];
 
-    //
-    $item->add_meta_data( __( 'Business Card PDF', 'bc_entry_id' ),
-        "
+  //
+  $item->add_meta_data( __( 'Business Card PDF', 'bc_entry_id' ),
+    "
             <a href='" . esc_url( $uploads['baseurl'] . '/business_cards/business_card_' . $entry_id . '.pdf' ) . "'>
              " . "$firstname" . " " . "$lastname" . "
             </a>
         "
-    );
+  );
 }
 
 /**
@@ -294,15 +272,15 @@ add_filter( 'woocommerce_order_item_get_formatted_meta_data', 'unset_specific_or
 function unset_specific_order_item_meta_data( $formatted_meta, $item )
 {
 
-    // If, they are admin, Business Card PDF metadata (link) will be visible
-    if ( is_admin() )
-        return $formatted_meta;
-
-    foreach ( $formatted_meta as $key => $meta ) {
-        if ( in_array( $meta->key, array( 'Business Card PDF' ) ) )
-            unset( $formatted_meta[$key] );
-    }
+  // If, they are admin, Business Card PDF metadata (link) will be visible
+  if ( is_admin() )
     return $formatted_meta;
+
+  foreach ( $formatted_meta as $key => $meta ) {
+    if ( in_array( $meta->key, array( 'Business Card PDF' ) ) )
+      unset( $formatted_meta[$key] );
+  }
+  return $formatted_meta;
 }
 
 /** CUSTOM ORDER STATUSES (NOT INCLUDED IN WOOCOMMERCE CORE) */
@@ -313,14 +291,14 @@ function unset_specific_order_item_meta_data( $formatted_meta, $item )
 add_action( 'init', 'register_ready_for_pickup_order_status' );
 function register_ready_for_pickup_order_status()
 {
-    register_post_status( 'wc-ready', array(
-        'label' => 'Ready for Pick Up',
-        'public' => true,
-        'exclude_from_search' => false,
-        'show_in_admin_all_list' => true,
-        'show_in_admin_status_list' => true,
-        'label_count' => _n_noop( 'Ready for Pick Up', 'Ready for Pick Up' )    // Shows up under Order's tab / filter
-    ) );
+  register_post_status( 'wc-ready', array(
+    'label' => 'Ready for Pick Up',
+    'public' => true,
+    'exclude_from_search' => false,
+    'show_in_admin_all_list' => true,
+    'show_in_admin_status_list' => true,
+    'label_count' => _n_noop( 'Ready for Pick Up', 'Ready for Pick Up' )    // Shows up under Order's tab / filter
+  ) );
 }
 
 /**
@@ -329,14 +307,14 @@ function register_ready_for_pickup_order_status()
 add_action( 'init', 'register_special_status' );
 function register_special_status()
 {
-    register_post_status( 'wc-special', array(
-        'label' => 'Special',
-        'public' => true,
-        'exclude_from_search' => false,
-        'show_in_admin_all_list' => true,
-        'show_in_admin_status_list' => true,
-        'label_count' => _n_noop( 'Special', 'Special' )                        // Shows up under Order's tab / filter
-    ) );
+  register_post_status( 'wc-special', array(
+    'label' => 'Special',
+    'public' => true,
+    'exclude_from_search' => false,
+    'show_in_admin_all_list' => true,
+    'show_in_admin_status_list' => true,
+    'label_count' => _n_noop( 'Special', 'Special' )                        // Shows up under Order's tab / filter
+  ) );
 }
 
 
@@ -346,14 +324,14 @@ function register_special_status()
 add_action( 'init', 'register_finishing_status' );
 function register_finishing_status()
 {
-    register_post_status( 'wc-finishing', array(
-        'label' => 'Finishing',
-        'public' => true,
-        'exclude_from_search' => false,
-        'show_in_admin_all_list' => true,
-        'show_in_admin_status_list' => true,
-        'label_count' => 'Finishing'                                                                // Shows up under Order's tab / filter
-    ) );
+  register_post_status( 'wc-finishing', array(
+    'label' => 'Finishing',
+    'public' => true,
+    'exclude_from_search' => false,
+    'show_in_admin_all_list' => true,
+    'show_in_admin_status_list' => true,
+    'label_count' => 'Finishing'                                                                // Shows up under Order's tab / filter
+  ) );
 }
 
 /**
@@ -366,29 +344,29 @@ add_filter( 'wc_order_statuses', 'add_custom_order_statuses' );
 function add_custom_order_statuses( $order_statuses )
 {
 
-    $new_order_statuses = array();
+  $new_order_statuses = array();
 
-    // add new order status after processing
-    foreach ( $order_statuses as $key => $status ) {
+  // add new order status after processing
+  foreach ( $order_statuses as $key => $status ) {
 
-        $new_order_statuses[$key] = $status;
+    $new_order_statuses[$key] = $status;
 
 
-        // place special for pick up after "Processing"
-        if ( 'wc-processing' === $key ) {
-            $new_order_statuses['wc-special'] = 'Special';
-        }
-
-        // place special for pick up after "Finishing"
-        if ( 'wc-on-hold' === $key ) {
-            $new_order_statuses['wc-finishing'] = 'Finishing';
-        }
-
-        // place ready for pick up after "On Hold"
-        if ( 'wc-on-hold' === $key ) {
-            $new_order_statuses['wc-ready'] = 'Ready for Pick Up';
-        }
+    // place special for pick up after "Processing"
+    if ( 'wc-processing' === $key ) {
+      $new_order_statuses['wc-special'] = 'Special';
     }
 
-    return $new_order_statuses;
+    // place special for pick up after "Finishing"
+    if ( 'wc-on-hold' === $key ) {
+      $new_order_statuses['wc-finishing'] = 'Finishing';
+    }
+
+    // place ready for pick up after "On Hold"
+    if ( 'wc-on-hold' === $key ) {
+      $new_order_statuses['wc-ready'] = 'Ready for Pick Up';
+    }
+  }
+
+  return $new_order_statuses;
 }
