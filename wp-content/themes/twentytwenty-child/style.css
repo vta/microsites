@@ -79,7 +79,6 @@ html {
 /**
 Menu Links
 - Change color to black
-- remove underline
  */
 nav.primary-menu-wrapper > ul.primary-menu > li.menu-item > a {
   color: #000;
@@ -93,6 +92,14 @@ Current/Selected Menu Links
 nav.primary-menu-wrapper ul.primary-menu > li.current-menu-item > a {
   color: var(--light-blue);
   text-decoration: none;
+}
+
+/**
+Login/Logout button
+- change default color to black
+ */
+#site-header > div > div.header-navigation-wrapper > nav > ul > li> a.login-logout-button  {
+  color: #000;
 }
 
 /************/

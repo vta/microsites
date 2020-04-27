@@ -3,6 +3,24 @@
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
+add_action( 'init', function() {
+  /* Force no-cache headers on *ALL* front pages and in *ALL* cases */
+  /* Proof of concept, do not use */
+  header( 'Cache-Control: no-cache, no-store, must-revalidate' );
+  header( 'Pragma: no-cache' );
+  header( 'Expires: 0' );
+  /* Do same for admin_init to get dashboard to not cache */
+} );
+//
+//add_action( 'admin_init', function() {
+//  /* Force no-cache headers on *ALL* front pages and in *ALL* cases */
+//  /* Proof of concept, do not use */
+//  header( 'Cache-Control: no-cache, no-store, must-revalidate' );
+//  header( 'Pragma: no-cache' );
+//  header( 'Expires: 0' );
+//  /* Do same for admin_init to get dashboard to not cache */
+//} );
+
 /**
  * Enqueue child styles. Will be used to data via SESSION
  */
@@ -54,18 +72,8 @@ function theme_start_session()
         session_start();
 }
 
-add_action('wp_logout','logout_redirect');
-
-function logout_redirect(){
-
-  wp_redirect( home_url() );
-
-  exit;
-
-}
-
 /**
- * Logout Redirection
+ * Logout Redirection - redirect to home upon logging out
  *
  * @param $redirect_to
  * @param $requested_redirect_to
@@ -84,37 +92,15 @@ function custom_logout_redirect( $redirect_to, $requested_redirect_to, $user ) {
 }
 
 /**
- * INSERT dynamic Login/Logout links into menu
- *
- * @param $items
- * @param $args
- * @return string
- */
-add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
-function add_loginout_link( $items, $args ) {
-
-  $css_class = 'login-logout-button';
-
-  if (is_user_logged_in() && $args->theme_location == 'primary') {
-    $items .= '<li><a class="'. $css_class . '" href="'. wp_logout_url( get_permalink( wc_get_page_id( 'myaccount' ) ) ) .'">Log Out</a></li>';
-  }
-
-  elseif (!is_user_logged_in() && $args->theme_location == 'primary') {
-    $items .= '<li><a class="'. $css_class . '" href="' . get_permalink( wc_get_page_id( 'myaccount' ) ) . '">Log In</a></li>';
-  }
-
-  return $items;
-}
-
-/**
- * BYPASS Log out confirmatio
+ * BYPASS Log out confirmation
  * @see - https://gist.github.com/lukecav/9e7775cbe3172ef32b5191f5b56d64fb
  */
 add_action( 'check_admin_referer', 'logout_without_confirmation', 1, 2);
 /**
  * Generates custom logout URL
  */
-function getLogoutUrl($redirectUrl = ''){
+function getLogoutUrl($redirectUrl = '')
+{
   if(!$redirectUrl) $redirectUrl = site_url();
   $return = str_replace("&amp;", '&', wp_logout_url($redirectUrl));
   return $return;
@@ -122,7 +108,8 @@ function getLogoutUrl($redirectUrl = ''){
 /**
  * Bypass logout confirmation on nonce verification failure
  */
-function logout_without_confirmation($action, $result){
+function logout_without_confirmation($action, $result)
+{
   if(!$result && ($action == 'log-out')){
     wp_safe_redirect(getLogoutUrl());
     exit();
@@ -130,6 +117,14 @@ function logout_without_confirmation($action, $result){
 }
 
 /** WooCommerce Hooks */
+/**
+ * REDIRECT After WooCommerce Login
+ */
+add_filter( 'woocommerce_login_redirect', 'wc_login_redirect' );
+function wc_login_redirect()
+{
+  return get_permalink( wc_get_page_id( 'myaccount' ) );
+}
 
 /** USER FRONT-END CHANGES */
 
