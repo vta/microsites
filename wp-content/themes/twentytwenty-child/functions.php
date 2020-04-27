@@ -20,6 +20,19 @@ function child_enqueue_styles()
 }
 
 /**
+ * Register Custom Inner Footer Menu
+ */
+add_action('init', 'register_menus');
+function register_menus()
+{
+  $locations = array(
+    'inner_footer'   => __( 'Inner Footer Menu', 'twentytwenty' ),
+  );
+
+  register_nav_menus( $locations );
+}
+
+/**
  * Start user session for each individual user
  */
 add_action( "init", "theme_start_session", 1 );

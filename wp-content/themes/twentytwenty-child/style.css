@@ -7,15 +7,383 @@ Template: twentytwenty
 Version: 1.0
 */
 
+/***************/
+/** VARIABLES **/
+/***************/
+:root {
+  --darker-blue: #0a5387;
+  --dark-blue: #29588C;
+  --light-blue: #4CB4E7;
+
+  --header-gradient: linear-gradient(
+          90deg,
+          rgba(10,83,135,1) 0%,
+          rgba(25,95,145,1) 35%,
+          rgba(80,119,161,1) 55%,
+          rgba(255,255,255,1) 100%
+  );
+
+  --footer-height: 166px;
+}
+
+/************/
 /** GLOBAL **/
+/************/
 html {
   box-sizing: border-box;
   font-size: 62.5%;
 }
-
 
 /** WooCommerce **/
 .woocommerce {
   max-width: 1200px !important; /*Temporarily expand width of WooCommerce pages*/
 }
 
+/******************/
+/** TOP NAV MENU **/
+/******************/
+
+/**
+Menu Links
+- Change color to black
+- remove underline
+ */
+nav.primary-menu-wrapper > ul.primary-menu > li.menu-item > a {
+  color: #000;
+}
+
+/**
+Current/Selected Menu Links
+- Change color to blue
+- Remove underline from current link
+ */
+nav.primary-menu-wrapper ul.primary-menu > li.current-menu-item > a {
+  color: var(--light-blue);
+  text-decoration: none;
+}
+
+/************/
+/** HEADER **/
+/************/
+
+/**
+Outside entry-header Wrapper
+- flex the parent container
+ */
+header.entry-header {
+  display: flex;
+  justify-content: start;
+  flex: 0 0 100rem;
+}
+
+/* background style override; added CSS ID */
+#entry-header-outer {
+  background: var(--darker-blue);
+  background: var(--header-gradient);
+}
+
+/* override padding rules of outside wrapper */
+.singular header.entry-header {
+  padding: 0;
+}
+
+/**
+Inner entry-header Wrapper
+-define container style within header
+ */
+.entry-header-inner.section-inner.medium {
+  max-width: 50rem;
+  margin: 0;
+  padding: 8rem;
+  border-right: 2rem white solid;
+  text-align: right;
+}
+
+/**
+Header Site Description
+-style text for site description
+ */
+h2.header-site-description {
+  color: #ffffff;
+  font-size: 2rem;
+  margin: 0;
+}
+
+/**
+Header Title
+-style text for page title
+ */
+.entry-header-inner.section-inner.medium h1 {
+  color: var(--light-blue);
+  font-weight: 700;
+  font-size: 4rem;
+}
+
+/**
+< Smaller Screens (1200px)
+ */
+@media (max-width: 1200px) {
+
+  /**
+  Outside entry-header Wrapper
+  - center the title container
+ */
+  header.entry-header {
+    justify-content: center;
+  }
+
+  /**
+  Inner entry-header Wrapper
+  - center text
+  - remove divider
+  */
+  .entry-header-inner.section-inner.medium {
+    text-align: center;
+    border: none;
+  }
+
+}
+
+/******************/
+/** PAGE CONTENT **/
+/******************/
+
+/**
+Outer Wrapper for Posts/Page Content
+- add padding to match header divider
+ */
+div.post-inner {
+  padding-left: 50rem;
+}
+
+/**
+Inner Wrapper for Posts/Page Content
+- add margin to the top of the entry-content container
+- remove "times" font styling
+ */
+div.entry-content {
+  margin-top: 2rem;
+  font-family: unset;
+}
+
+/**
+Child elements in entry-content
+- override margin-left to left justify children
+ */
+.entry-content > * {
+  margin-left: unset;
+}
+
+/**
+Entry Content Paragraph
+- extend the width of the paragraph
+- change font weight
+*/
+.entry-content > p {
+  max-width: 80% !important;
+  font-weight: 700;
+  margin-bottom: 5rem;
+}
+
+/**
+< Smaller Screens (1200px)
+ */
+@media (max-width: 1200px) {
+
+  /**
+  Outer Wrapper for Posts/Page Content
+  - remove padding to match header divider
+  */
+  div.post-inner {
+    padding: 0;
+  }
+
+  /**
+  Entry Content Paragraph
+  - center text on smaller screens
+  */
+  .entry-content > * {
+    margin: auto;
+  }
+
+}
+
+/******************/
+/** SERVICE PAGE **/
+/******************/
+
+/**
+Service Page Shortcode Ultimate buttons
+- align buttons to the left (against the divider)
+@TODO - add a unique class for service buttons
+ */
+div.su-button-center {
+  text-align: left;
+}
+
+div.su-button-center > a {
+  width: 25rem;
+}
+
+/**
+< Smaller Screens (1200px)
+ */
+@media (max-width: 1200px) {
+
+  /**
+  Service Page Shortcode Ultimate buttons
+  - center buttons
+   */
+  div.su-button-center {
+    text-align: center;
+    margin: 2rem auto;
+  }
+
+}
+
+/************/
+/** FOOTER **/
+/************/
+
+/**
+Parent Footer Container
+- create blue background
+- set text color as white
+- reduce padding
+- set min height
+- align items vertically
+ */
+footer#site-footer {
+  background: var(--light-blue);
+  color: white;
+  padding: 1rem;
+  min-height: var(--footer-height);
+  display: flex;
+  align-items: center;
+}
+
+/**
+Inner Footer Wrapper
+- Center child items vertically
+- expand the site of the container
+ */
+footer#site-footer > div.section-inner {
+  align-items: center;
+  margin: 0 4rem;
+  max-width: unset;
+}
+
+/**
+Footer Credits
+ */
+div.footer-credits {
+  font-size: 2rem;
+}
+
+/**
+Copyright
+- increase font-size
+ */
+div.footer-credits > p.footer-copyright {
+  font-size: 2.5rem;
+  text-transform: uppercase;
+}
+
+/**
+"Powered by WordPress" logo
+- change color to white
+- increase font-size
+ */
+div.footer-credits > p.powered-by-wordpress {
+  font-size: 2.5rem;
+  color: white;
+}
+
+/**
+Inner Footer Menu Wrapper
+- increase width
+ */
+nav.inner-footer-menu-wrapper {
+  width: 50rem;
+  padding: 2rem;
+}
+
+/**
+Inner UL for Inner Footer Menu
+- create flex behavior
+- remove margin
+- set max height to force vertical wrapping
+ */
+nav.inner-footer-menu-wrapper > ul.inner-footer-menu {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  max-height: 12rem;
+  justify-content: space-between;
+}
+
+nav.inner-footer-menu-wrapper > ul.inner-footer-menu > li {
+  display: inline;
+}
+
+/**
+Menu Items
+- change color, boldness, + font size
+ */
+nav.inner-footer-menu-wrapper > ul.inner-footer-menu > li > a {
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/**
+To The Top Link
+- change font color
+- adjust permanent position
+ */
+a.to-the-top {
+  display: none;
+  color: white;
+}
+
+
+/**
+< Smaller Screens (1200px)
+ */
+@media (max-width: 1200px) {
+
+  /**
+  Inner Footer Menu Wrapper
+  - hide footer menu on smaller viewports
+  */
+  nav.inner-footer-menu-wrapper {
+    display: none;
+  }
+
+  /**
+  To The Top Link
+  - show
+   */
+  a.to-the-top {
+    display: block;
+    position: absolute;
+    right: 0;
+  }
+
+}
+
+/* change verbiage early to avoid text collision */
+@media (max-width: 835px) {
+    
+  .to-the-top-long {
+    display: none;
+  }
+
+  /* override parent media query */
+  .to-the-top-short {
+    display: inline !important;
+  }
+
+}
