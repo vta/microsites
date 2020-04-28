@@ -130,7 +130,7 @@ function add_cart_total( $items, $args )
 
         if ( $item->title == 'Cart' ) {
             array_push($item->classes, 'custom-wc-cart');
-            error_log( json_encode($item->classes, JSON_PRETTY_PRINT) );
+//            error_log( json_encode($item->classes, JSON_PRETTY_PRINT) );
         }
     }
     return $items;

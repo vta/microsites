@@ -473,6 +473,24 @@ input.gform_previous_button.button {
 }
 
 /**
+Form Button Container
+- move it the right of the form
+- align button to the right of the container
+- remove top border
+- fix spacing
+@TODO - might be a global FORM style in the future
+ */
+.gform_wrapper div.gform_page_footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-align: right;
+  border-top: none;
+  padding: 7rem 0;
+  margin: 0;
+}
+
+/**
 GF form validation
 - blend background with the rest of the form
 - remove margin
@@ -495,6 +513,19 @@ Required Asterisk
  */
 .gform_wrapper span.gfield_required {
   color: var(--darker-blue);
+}
+
+/**
+Form Body (Child of GF Form Element)
+- make it relative to position button container (absolute)
+- add inner spacing
+ */
+form div.gform_body {
+  position: relative;
+  background: var(--light-gray);
+  padding: 2rem;
+  border: var(--thin-medium-gray);
+  min-height: 325px;
 }
 
 /************************/
@@ -616,26 +647,13 @@ form.business-card-form div.gf_page_steps div.gf_step {
 }
 
 /**
-Form Body (Child of GF Form Element)
-- make it relative to position button container (absolute)
-- add inner spacing
- */
-form.business-card-form div.gform_body {
-  position: relative;
-  background: var(--light-gray);
-  padding: 2rem;
-  border: var(--thin-medium-gray);
-  min-height: 325px;
-}
-
-/**
 Form Fields Wrapper
 - change display to flex
 - user ID selector for highest priority
 @TODO - may be GLOBAL in the future
 @TODO - might be a global FORM style in the future
  */
-form.business-card-form div.gform_body ul.gform_fields {
+form div.gform_body ul.gform_fields {
   display: flex;
   flex-wrap: wrap;
   align-items: start;
@@ -681,23 +699,6 @@ form.business-card-form div.gform_body ul.gform_fields li.gfield input {
   max-width: 50rem;
 }
 
-/**
-Form Button Container
-- move it the right of the form
-- align button to the right of the container
-- remove top border
-- fix spacing
-@TODO - might be a global FORM style in the future
- */
-.gform_wrapper div.gform_page_footer {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  text-align: right;
-  border-top: none;
-  padding: 7rem 0;
-  margin: 0;
-}
 
 /**
 Preview Button
@@ -853,9 +854,9 @@ input[type='submit']#gform_submit_button_4 {
   }
 }
 
-/**********************/
-/** BUSINESS PREVIEW **/
-/**********************/
+/***************************/
+/** BUSINESS CARD PREVIEW **/
+/***************************/
 
 /**
 Business Card Preview Image
@@ -902,4 +903,31 @@ article#post-157.post-157 div.entry-content p.product.add_to_cart_bc {
   margin: auto;
   text-align: right;
   border: none;
+}
+
+/****************************/
+/** STANDARD-SIZE PRINTING **/
+/****************************/
+
+
+
+/*******************************/
+/** WOOCOMMERCE GLOBAL STYLES **/
+/*******************************/
+/**
+Product Image
+- hide this container on standard-size printing and large-format printing
+ */
+div.woocommerce-product-gallery.woocommerce-product-gallery--with-images.images {
+  display: none;
+}
+
+/**
+WooCommerce Summary (Gravity Forms)
+- expand container to fit the entire page
+ */
+.woocommerce div.product div.summary.entry-summary {
+  float: unset;
+  clear: unset;
+  width: 100%;
 }
