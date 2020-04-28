@@ -51,8 +51,8 @@ function register_menus()
 add_action( "init", "theme_start_session", 1 );
 function theme_start_session()
 {
-    if ( !session_id() )
-        session_start();
+  if ( !session_id() )
+    session_start();
 }
 
 /**
@@ -65,6 +65,7 @@ add_action( 'check_admin_referer', 'logout_without_confirmation', 1, 2 );
  */
 function getLogoutUrl( $redirectUrl = '' )
 {
+
   if ( !$redirectUrl ) $redirectUrl = site_url();
   $return = str_replace( "&amp;", '&', wp_logout_url( $redirectUrl ) );
   return $return;
@@ -81,9 +82,30 @@ function logout_without_confirmation( $action, $result )
   }
 }
 
+apply_filters( 'set_logged_in_cookie', 'change_logged_in_cookie_expiration', 10, 6 );
+function change_logged_in_cookie_expiration( $logged_in_cookie, $expire, $expiration, $user_id, $scheme, $token )
+{
+  if ( $expire > 0 ) {
+    $expire = -1;
+  }
+  return $expire;
+}
+
+/**
+ * EMPTY cart upon logout
+ */
+add_action( 'wp_logout', 'clear_cart' );
+function clear_cart()
+{
+  // Clear WooCommerce Cart
+  if ( function_exists( 'WC' ) ) {
+    WC()->cart->empty_cart();
+  }
+}
+
 /** WooCommerce Hooks */
 /**
- * REDIRECT After WooCommerce Login
+ * REDIRECT to "My Account" after WooCommerce Login
  */
 add_filter( 'woocommerce_login_redirect', 'wc_login_redirect' );
 function wc_login_redirect()
@@ -91,18 +113,6 @@ function wc_login_redirect()
   return get_permalink( wc_get_page_id( 'myaccount' ) );
 }
 
-/**
- * EMPTY cart upon logout
- */
-add_action('wp_logout', 'clear_cart');
-function clear_cart()
-{
-
-  // Clear WooCommerce Cart
-  if( function_exists('WC') ){
-    WC()->cart->empty_cart();
-  }
-}
 
 /** USER FRONT-END CHANGES */
 
