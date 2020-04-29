@@ -1,3 +1,5 @@
+// BUSINESS CARDS
+
 /**
  * Business Card Tab Select (Helper Function)
  *
@@ -30,14 +32,29 @@ const bc_tabs = ($) => {
   $('#gf_step_4_3').live('click', () => bc_select_tab($, '3'));
 }
 
+// STANDARD-SIZE PRINTING FORM
+
 /**
- * Form Class Function
+ * Business Card Form Setup
  *
- * current workaround to add classes to woocommerce product forms
+ * runs functions to set up business card form
+ * @param $
+ */
+const bc_form_setup = ($) => {
+
+  // add tab functionality to business cards
+  bc_tabs($);
+
+}
+
+/**
+ * Standard-Size Printing Form Addinng Classes
+ *
+ * current workaround to add classes to WooCommerce product forms
  * (gf classes are removed when forms are integrated with WC)
  * @param $ - jQuery selector
  */
-const wc_form_class = ($) => {
+const ssp_form_class = ($) => {
 
   // Add generic "cc-form" class to all forms
   $('form.cart').addClass('cc-form');
@@ -48,13 +65,62 @@ const wc_form_class = ($) => {
 }
 
 /**
+ *  Standard-Size Printing Insert Container
+ * @param $
+ */
+const ssp_insert_containers = ($) => {
+
+  const formWrapper = 'form.standard-size-form ul.gform_fields';
+
+  // create containers 1 thru 4 and add within formWrapper
+  for (let i = 1; i <= 4; i++) {
+
+    let childFields = `form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.container-${i}-child`;
+
+    // new container element
+    let newChild = $(`
+      <li class="container-${i}">
+        <h1>
+          Child ${i}
+        </h1>
+        <ul class="container-${i}-list">
+        
+        </ul>
+      </li>
+    `);
+
+    // detach from parent node & append to new child
+    $(childFields).detach().appendTo(newChild);
+
+    // add empty container-{#} to our form body wrapper
+    $(formWrapper).append(newChild);
+  }
+
+}
+
+/**
+ * Standard-Size Printing Form Setup
+ *
+ * runs function to set up business card forms
+ * @param $ - jQuery selector
+ */
+const ssp_form_setup = ($) => {
+
+  // adding additional classes to SSP form
+  ssp_form_class($);
+
+  // insert new containers
+  ssp_insert_containers($);
+}
+
+/**
  * Load jQuery when document is ready...
  */
 jQuery(document).ready(function ($) {
 
-  // add tab functionality to business cards
-  bc_tabs($);
+  // Set up business card form
+  bc_form_setup($);
 
-  // add "cc-class" to wc forms
-  wc_form_class($);
+  // Set up standard-size printing form
+  ssp_form_setup($);
 });

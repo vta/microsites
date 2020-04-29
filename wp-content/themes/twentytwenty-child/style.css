@@ -34,6 +34,7 @@ Version: 1.0
   /* Borders */
   --thin-light-gray:  1px solid var(--light-gray);
   --thin-medium-gray: 1px solid var(--medium-gray);
+  --normal-dark-blue: 2px solid var(--dark-blue);
 
   /* Dimensions */
   --footer-height: 166px;
@@ -67,9 +68,8 @@ html {
   font-size: 62.5%;
 }
 
-/** WooCommerce **/
-.woocommerce {
-  max-width: 1200px !important; /*Temporarily expand width of WooCommerce pages*/
+.hidden {
+  display: hidden;
 }
 
 /******************/
@@ -914,13 +914,6 @@ article#post-157.post-157 div.entry-content p.product.add_to_cart_bc {
 }
 
 /**
-Form Field Wrapper
- */
-form.standard-size-form ul.gform_fields {
-  justify-content: space-evenly;
-}
-
-/**
 Standard Size Form Fields
 - remove margin & min-height from cc-form styles
  */
@@ -930,16 +923,44 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield 
   flex: 0 1 48rem;
 }
 
-/**
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print {
+  flex: 0 1 100%;
+}
 
+/**
+Radio Buttons Containers
+- center vertically
+ */
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield ul.gfield_radio {
+  display: flex;
+  align-items: center;
+}
+
+/**
+Levels Options Field
  */
 form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.levels-options {
   flex: 0 1 100%;
 }
 
+/**
+SSP First Container
+- add top blue border
+ */
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields .container-1 {
+  flex-basis: 100%;
+  border-top: var(--normal-dark-blue);
+}
+
 /*******************************/
 /** WOOCOMMERCE GLOBAL STYLES **/
 /*******************************/
+
+/** WooCommerce **/
+.woocommerce {
+  max-width: 1200px !important; /*Temporarily expand width of WooCommerce pages*/
+}
+
 /**
 Product Image
 - hide this container on standard-size printing and large-format printing
