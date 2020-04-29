@@ -93,6 +93,11 @@ const ssp_insert_containers = ($) => {
     $(formWrapper).append(newChild);
   }
 
+  const stapleOptionsElem = $('li.gfield.container-4-child');
+
+  // insert hole-punch field into staple options list
+  $()
+
 }
 
 /**

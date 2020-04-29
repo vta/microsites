@@ -635,6 +635,14 @@ form.cc-form div.gform_body ul.gform_fields li.gfield input {
   max-width: 50rem;
 }
 
+/**
+Generic Number Input Instruction
+- hide
+ */
+form div.gform_wrapper div.instruction {
+  display: none;
+}
+
 /************************/
 /** BUSINESS CARD FORM **/
 /************************/
@@ -931,15 +939,6 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
 }
 
 /**
-Radio Buttons Containers
-- center vertically
- */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield ul.gfield_radio {
-  display: flex;
-  align-items: center;
-}
-
-/**
 Levels Options Field
  */
 form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.levels-options {
@@ -966,6 +965,14 @@ form.standard-size-form div.gform_body div.gform_page li.container-1 > ul.contai
   flex-wrap: wrap;
   flex: 0 1 40rem;
   margin: 4rem 2rem;
+}
+
+/**
+SSP 1st Container Fields
+ */
+form.standard-size-form div.gform_body div.gform_page li.container-1 > ul.container-1-list li.container-1-child {
+  flex: 0 1 40rem;
+  margin-right: 10rem;
 }
 
 /**
@@ -1022,6 +1029,51 @@ SSP 2nd Container Label
 form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-2 div.gfield_description {
   float: unset;
   width: 100%;
+  margin: 0;
+}
+
+/**
+SSP 3rd Container
+- add top border
+- expand the rest of the container to cover the remaining width
+ */
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-3 {
+  border-top: var(--normal-dark-blue);
+  flex-grow: 2;
+}
+
+/**
+SSP 3d Container List Wrapper
+ */
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-3 ul.container-3-list {
+  margin: 4rem 0;
+}
+
+/**
+SSP 3rd Container Form Field
+- change to flex
+ */
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-3 ul.container-3-list li.gfield {
+  display: flex;
+  align-items: center;
+}
+
+/**
+SSP 3rd Container Radio Button Wrapper
+- remove margin
+- change to flex
+- align vertically
+ */
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-3 ul.container-3-list li.gfield div.ginput_container ul.gfield_radio {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+  /**
+  SSP 3rd Container Label
+   */
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-3 ul.container-3-list li.gfield label {
   margin: 0;
 }
 
