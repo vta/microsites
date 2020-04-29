@@ -80,17 +80,14 @@ const ssp_insert_containers = ($) => {
     // new container element
     let newChild = $(`
       <li class="container-${i}">
-        <h1>
-          Child ${i}
-        </h1>
         <ul class="container-${i}-list">
         
         </ul>
       </li>
     `);
 
-    // detach from parent node & append to new child
-    $(childFields).detach().appendTo(newChild);
+    // detach from parent node & append to <ul> element inside of newChild
+    $(childFields).detach().appendTo(newChild.children());
 
     // add empty container-{#} to our form body wrapper
     $(formWrapper).append(newChild);
