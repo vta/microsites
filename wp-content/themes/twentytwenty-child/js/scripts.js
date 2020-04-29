@@ -39,8 +39,11 @@ const bc_tabs = ($) => {
  */
 const wc_form_class = ($) => {
 
-  // Add generic cc-form class to all forms
+  // Add generic "cc-form" class to all forms
   $('form.cart').addClass('cc-form');
+
+  // Add "standard-size-form" class
+  $('form.cart.cc-form').addClass('standard-size-form');
 
 }
 
