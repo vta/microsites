@@ -451,6 +451,105 @@ a.to-the-top {
 /**********************/
 
 /**
+Copy Center Form Sytles
+- change color + background color
+- add padding to the form
+ */
+form.cc-form {
+  background: white;
+  color: var(--darker-blue);
+}
+
+/**
+Steps Container
+- adjust margin to hide top form-body top border
+- add background color for tab spacing appearance
+- position relative + negative margin overlaps top border
+ */
+form.cc-form div.gf_page_steps {
+  position: relative;
+  width: fit-content;
+  padding: 0;
+  border: var(--thin-medium-gray);
+  border-bottom: none;
+  background: var(--light-gray);
+  margin: 0 0 -2px 0;
+  z-index: 2;
+}
+
+/**
+Step (Tabs)
+- increase font-size
+- increase spacing
+- establish set width
+- center text
+ */
+form.cc-form div.gf_page_steps div.gf_step {
+  font-size: 2rem;
+  font-weight: 500;
+  padding: 1.4rem;
+  margin: 0 2px;
+  width: 23rem;
+  height: unset;
+  text-align: center;
+}
+
+/**
+Steps Border
+- do not display (removes invisible border from form body and steps container)
+ */
+form.cc-form div.gf_step_clear {
+  display: none;
+}
+
+/**
+Active Step
+- match background with card
+ */
+form.cc-form div.gf_page_steps div.gf_step.gf_step_active {
+  background: var(--light-gray);
+}
+
+/**
+First Step
+- add left border & remove left margin
+ */
+form.cc-form div.gf_page_steps div.gf_step.gf_step_first {
+  margin-left: 0;
+}
+
+/**
+Last Step
+- remove end border (background blends with border)
+ */
+form.cc-form div.gf_page_steps div.gf_step.gf_step_last {
+  margin-right: 0;
+}
+
+/**
+Step Label
+- increase font size
+ */
+form.cc-form div.gf_page_steps div.gf_step {
+  font-size: 2rem;
+}
+
+/**
+Non-active Steps
+- give it a dark background
+- override opacity
+- specify borders
+ */
+form.cc-form div.gf_page_steps div.gf_step,
+form.cc-form div.gf_page_steps div.gf_step.gf_step_pending,
+form.cc-form div.gf_page_steps div.gf_step.gf_step_previous,
+form.cc-form div.gf_page_steps div.gf_step.gf_step_next
+{
+  background: var(--medium-gray);
+  opacity: 1;
+}
+
+/**
 Next Button
 - change shape of next button (forward pentagon)
  */
@@ -478,7 +577,6 @@ Form Button Container
 - align button to the right of the container
 - remove top border
 - fix spacing
-@TODO - might be a global FORM style in the future
  */
 .gform_wrapper div.gform_page_footer {
   position: absolute;
@@ -542,108 +640,6 @@ div#gform_wrapper_4.gform_wrapper {
   margin: 0;
   width: 100%;
   max-width: 100%;
-}
-
-/**
-Business Card Form
-- change color + background color
-- add padding to the form
-@TODO - might be a global FORM style in the future
- */
-form.business-card-form {
-  background: white;
-  color: var(--darker-blue);
-}
-
-/**
-Steps Container
-- adjust margin to hide top form-body top border
-- add background color for tab spacing appearance
-- position relative + negative margin overlaps top border
-@TODO - might be a global FORM style in the future
- */
-form.business-card-form div.gf_page_steps {
-  position: relative;
-  width: fit-content;
-  padding: 0;
-  border: var(--thin-medium-gray);
-  border-bottom: none;
-  background: var(--light-gray);
-  margin: 0 0 -2px 0;
-  z-index: 2;
-}
-
-/**
-Steps Border
-- do not display (removes invisible border from form body and steps container)
- */
-form.business-card-form div.gf_step_clear {
-  display: none;
-}
-
-/**
-Step (Tabs)
-- increase font-size
-- increase spacing
-- establish set width
-- center text
-@TODO - might be a global FORM style in the future
- */
-form.business-card-form div.gf_page_steps div.gf_step {
-  font-size: 2rem;
-  font-weight: 500;
-  padding: 1.4rem;
-  margin: 0 2px;
-  width: 23rem;
-  height: unset;
-  text-align: center;
-}
-
-/**
-Active Step
-- match background with card
- */
-form.business-card-form div.gf_page_steps div.gf_step.gf_step_active {
-  background: var(--light-gray);
-}
-
-/**
-Non-active Steps
-- give it a dark background
-- override opacity
-- specify borders
- */
-form.business-card-form div.gf_page_steps div.gf_step,
-form.business-card-form div.gf_page_steps div.gf_step.gf_step_pending,
-form.business-card-form div.gf_page_steps div.gf_step.gf_step_previous,
-form.business-card-form div.gf_page_steps div.gf_step.gf_step_next
-{
-  background: var(--medium-gray);
-  opacity: 1;
-}
-
-/**
-First Step
-- add left border & remove left margin
- */
-form.business-card-form div.gf_page_steps div.gf_step.gf_step_first {
-  margin-left: 0;
-}
-
-/**
-Last Step
-- remove end border (background blends with border)
- */
-form.business-card-form div.gf_page_steps div.gf_step.gf_step_last {
-  margin-right: 0;
-}
-
-/**
-Step Label
-- increase font size
- */
-form.business-card-form div.gf_page_steps div.gf_step {
-  font-size: 2rem;
 }
 
 /**
@@ -918,7 +914,7 @@ article#post-157.post-157 div.entry-content p.product.add_to_cart_bc {
 Product Image
 - hide this container on standard-size printing and large-format printing
  */
-div.woocommerce-product-gallery.woocommerce-product-gallery--with-images.images {
+div.woocommerce-product-gallery.woocommerce-product-gallery--without-images.images {
   display: none;
 }
 

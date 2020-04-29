@@ -31,10 +31,27 @@ const bc_tabs = ($) => {
 }
 
 /**
+ * Form Class Function
+ *
+ * current workaround to add classes to woocommerce product forms
+ * (gf classes are removed when forms are integrated with WC)
+ * @param $ - jQuery selector
+ */
+const wc_form_class = ($) => {
+
+  // Add generic cc-form class to all forms
+  $('form.cart').addClass('cc-form');
+
+}
+
+/**
  * Load jQuery when document is ready...
  */
 jQuery(document).ready(function ($) {
 
+  // add tab functionality to business cards
   bc_tabs($);
 
+  // add "cc-class" to wc forms
+  wc_form_class($);
 });
