@@ -18,45 +18,165 @@ function child_scripts()
         wp_get_theme()->get( 'Version' )
     );
 
-  // jQuery
-  wp_enqueue_script( 'jquery' );
+    // jQuery
+    wp_enqueue_script( 'jquery' );
 
-  // Our JS Script
-  wp_enqueue_script(
-    'child-script',
-    get_stylesheet_directory_uri() . '/js/scripts.js',
-    array( 'jquery' ),
-    '1.0.0',
-    true
-  );
+    // Our JS Script
+    wp_enqueue_script(
+        'child-script',
+        get_stylesheet_directory_uri() . '/js/scripts.js',
+        array( 'jquery' ),
+        '1.0.0',
+        true
+    );
 }
 
 /**
- * Register Custom Inner Footer Menu
+ * REGISTER Custom Inner Footer Menu
  */
-add_action('init', 'register_menus');
+add_action( 'wp_loaded', 'register_menus' );
 function register_menus()
 {
-  $locations = array(
-    'inner_footer'   => __( 'Inner Footer Menu', 'twentytwenty' ),
-  );
+    $locations = array(
+        'inner_footer' => __( 'Inner Footer Menu', 'twentytwenty' ),
+    );
 
-  register_nav_menus( $locations );
+    register_nav_menus( $locations );
 }
 
 /**
  * Start user session for each individual user
+ * REQUIRED for attaching meta data to business card product
  */
-add_action( "init", "theme_start_session", 1 );
+add_action( "wp_loaded", "theme_start_session", 1 );
 function theme_start_session()
 {
     if ( !session_id() )
         session_start();
 }
 
+/**
+ * BYPASS Log out confirmation
+ * @see - https://gist.github.com/lukecav/9e7775cbe3172ef32b5191f5b56d64fb
+ */
+add_action( 'check_admin_referer', 'logout_without_confirmation', 1, 2 );
+/**
+ * Generates custom logout URL
+ */
+function getLogoutUrl( $redirectUrl = '' )
+{
+    if ( !$redirectUrl ) $redirectUrl = site_url();
+    $return = str_replace( "&amp;", '&', wp_logout_url( $redirectUrl ) );
+    return $return;
+}
+
+/**
+ * Bypass logout confirmation on nonce verification failure
+ */
+function logout_without_confirmation( $action, $result )
+{
+    if ( !$result && ($action == 'log-out') ) {
+
+        wp_safe_redirect( getLogoutUrl() );
+        exit();
+    }
+}
+
+/**
+ * REMOVES wordpress_logged_in_XXXXXXXXXX cookie
+ *
+ * In the future, we may want to find a better implementation as to check every run this hook on every page load
+ * @see - https://www.sitepoint.com/how-to-set-get-and-delete-cookies-in-wordpress/
+ */
+add_action( 'wp', 'clear_myaccount_cookie' );
+function clear_myaccount_cookie()
+{
+    global $post;
+
+    // check if we are the "My Account" page
+    if ( isset($post->ID) && $post->ID == wc_get_page_id('myaccount') ) {
+
+        // Loop through each cookie
+        foreach($_COOKIE as $cookie_key => $val) {
+
+            // TARGET cookie wordpress_logged_in_XXXXXXX
+            $login_cookie_regex = '/wordpress_logged_in_[d]+/';
+
+            if ( preg_match( $login_cookie_regex, $cookie_key ) )
+            {
+                // clear the cookie and set ex
+                unset($_COOKIE[$cookie_key]);
+                setcookie( $cookie_key, '', time() - ( 15 * 60 ) );
+            }
+        }
+    }
+
+}
+
+/**
+ * REDIRECT to "My Account" after WooCommerce Login
+ */
+add_filter( 'woocommerce_login_redirect', 'wc_login_redirect' );
+function wc_login_redirect()
+{
+    return get_permalink( wc_get_page_id( 'myaccount' ) );
+}
+
+/**
+ * EMPTY cart upon logout
+ */
+add_action( 'wp_logout', 'clear_cart' );
+function clear_cart()
+{
+    // Clear WooCommerce Cart
+    if ( function_exists( 'WC' ) ) {
+        WC()->cart->empty_cart();
+    }
+}
+
 /** WooCommerce Hooks */
 
 /** USER FRONT-END CHANGES */
+
+/**
+ * ADD custom WC count to "Cart" menu link
+ */
+add_filter( 'wp_nav_menu_objects', 'add_cart_class', 9, 2 );
+function add_cart_class( $items, $args )
+{
+    foreach ( $items as $item ) {
+
+        // convert WP_Post into array
+        $item_array = $item->to_array();
+
+        if ( $item->title == 'Cart' ) {
+            // add "custom-wc-cart" class
+            array_push($item->classes, 'custom-wc-cart');
+            $item->title = 'Cart' . ' (<span id="count-cart-items">' .  WC()->cart->get_cart_contents_count() . '</span>)';
+        }
+    }
+    return $items;
+}
+
+/**
+ * UPDATE Cart Link item number with AJAX
+ * @see - https://stackoverflow.com/questions/53280425/ajax-update-product-count-on-cart-menu-in-woocommerce
+ */
+add_filter( 'woocommerce_add_to_cart_fragments', 'wc_refresh_cart_fragments', 50, 1 );
+function wc_refresh_cart_fragments( $fragments ){
+    $cart_count = WC()->cart->get_cart_contents_count();
+
+    // Normal version
+    $count_normal = '<span id="count-cart-items">' .  $cart_count . '</span>';
+    $fragments['#count-cart-items'] = $count_normal;
+
+    // Mobile version
+    $count_mobile = '<span id="count-cart-itemob">' .  $cart_count . '</span>';
+    $fragments['#count-cart-itemob'] = $count_mobile;
+
+    return $fragments;
+}
+
 /**
  * REMOVE related products output
  *
@@ -252,7 +372,7 @@ function unset_specific_order_item_meta_data( $formatted_meta, $item )
 /**
  * REGISTER "Ready for Pick Up" status
  */
-add_action( 'init', 'register_ready_for_pickup_order_status' );
+add_action( 'wp_loaded', 'register_ready_for_pickup_order_status' );
 function register_ready_for_pickup_order_status()
 {
     register_post_status( 'wc-ready', array(
@@ -268,7 +388,7 @@ function register_ready_for_pickup_order_status()
 /**
  * REGISTER "Special" status
  */
-add_action( 'init', 'register_special_status' );
+add_action( 'wp_loaded', 'register_special_status' );
 function register_special_status()
 {
     register_post_status( 'wc-special', array(
@@ -285,7 +405,7 @@ function register_special_status()
 /**
  * FINISHING "Finishing" status
  */
-add_action( 'init', 'register_finishing_status' );
+add_action( 'wp_loaded', 'register_finishing_status' );
 function register_finishing_status()
 {
     register_post_status( 'wc-finishing', array(
@@ -314,7 +434,6 @@ function add_custom_order_statuses( $order_statuses )
     foreach ( $order_statuses as $key => $status ) {
 
         $new_order_statuses[$key] = $status;
-
 
         // place special for pick up after "Processing"
         if ( 'wc-processing' === $key ) {

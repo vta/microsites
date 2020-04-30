@@ -79,7 +79,6 @@ html {
 /**
 Menu Links
 - Change color to black
-- remove underline
  */
 nav.primary-menu-wrapper > ul.primary-menu > li.menu-item > a {
   color: #000;
