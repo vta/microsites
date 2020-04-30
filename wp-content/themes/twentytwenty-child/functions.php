@@ -141,7 +141,7 @@ function clear_cart()
 /**
  * ADD custom WC count to "Cart" menu link
  */
-add_filter( 'wp_nav_menu_objects', 'add_cart_class', 9, 2 );
+add_filter( 'wp_nav_menu_objects', 'add_cart_number', 9, 2 );
 function add_cart_number( $items, $args )
 {
     // iterate through all menu items

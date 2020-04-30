@@ -931,6 +931,17 @@ article#post-157.post-157 div.entry-content p.product.add_to_cart_bc {
   }
 }
 
+/*
+SSP Form Wrapper
+- Extend the form to the whole page
+@TODO - this may be a global form style. Will not override width + max-width without ID selector
+*/
+div#gform_wrapper_1.gform_wrapper {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
 /**
 Standard Size Form Fields
 - remove margin & min-height from cc-form styles
@@ -950,181 +961,6 @@ Levels Options Field
  */
 form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.levels-options {
   flex: 0 1 100%;
-}
-
-/** Container 1 **/
-
-/**
-SSP 1st Container
-- add top blue border
-- fill entire width
- */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-1 {
-  flex-basis: 100%;
-  border-top: var(--normal-dark-blue);
-}
-
-/**
-SSP 1st Container List Wrapper
-- change to flex
-- margin around ul
- */
-form.standard-size-form div.gform_body div.gform_page li.container-1 > ul.container-1-list {
-  display: flex;
-  flex-wrap: wrap;
-  flex: 0 1 40rem;
-  margin: 4rem 2rem;
-}
-
-/**
-SSP 1st Container Fields
- */
-form.standard-size-form div.gform_body div.gform_page li.container-1 > ul.container-1-list li.container-1-child {
-  flex: 0 1 40rem;
-  margin-right: 10rem;
-}
-
-/** Container 2 **/
-
-/**
-SSP 2nd Container
-- add top blue border
-- fill about half the width
-- border top
- */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-2 {
-  flex-basis: 40rem;
-  display: flex;
-  flex-direction: column;
-  border-top: var(--normal-dark-blue);
-  margin-right: 10rem;
-}
-
-/**
-SSP 2nd Container Inner List
- */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-2 ul.container-2-list {
-  margin-top: 4rem;
-}
-
-/**
-SSP 2nd Container Radio Buttons Container
- */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-2 ul.gfield_radio {
-  flex-direction: column;
-}
-
-/**
-SSP 2nd Container List
-- remove margin
- */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-2 ul.container-2-list div.ginput_container {
-  width: unset;
-  margin: 0;
-}
-
-/**
-SSP 2nd Container Label
-- expand label
- */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-2 ul.container-2-list label {
-  float: unset;
-  width: 100%;
-}
-
-/**
-SSP 2nd Container Label
-- expand label
-- remove margin
- */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-2 div.gfield_description {
-  float: unset;
-  width: 100%;
-  margin: 0;
-}
-
-/**
-SSP 3rd Container
-- add top border
-- expand the rest of the container to cover the remaining width
- */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-3 {
-  border-top: var(--normal-dark-blue);
-  flex-grow: 2;
-}
-
-/** Container 3 **/
-
-/**
-SSP 3d Container List Wrapper
- */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-3 ul.container-3-list {
-  margin: 4rem 0;
-}
-
-/**
-SSP 3rd Container Form Field
-- change to flex
- */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-3 ul.container-3-list li.gfield {
-  display: flex;
-  align-items: center;
-}
-
-/**
-SSP 3rd Container Radio Button Wrapper
-- remove margin
-- change to flex
-- align vertically
- */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-3 ul.container-3-list li.gfield div.ginput_container ul.gfield_radio {
-  margin: 0;
-  display: flex;
-  align-items: center;
-}
-
-/**
-SSP 3rd Container Label
- */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-3 ul.container-3-list li.gfield label {
-  margin: 0;
-}
-
-/** Container 4 **/
-
-/**
-SSP 4th Container
-- expand to cover the entire container
- */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-4 {
-  flex-basis: 100%;
-  margin: 4rem 0;
-  border-top: var(--normal-dark-blue);
-}
-
-/**
-SSP 4th Container: Outer List
-- change to flex
- */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-4 ul.container-4-list {
-  display: flex;
-}
-
-
-/**
-SSP 4th Container: Hole Punch Label
-- remove label container
- */
-form.standard-size-form ul.gform_fields li.container-4 ul.container-4-list li.container-4-child.staple div.ginput_container ul.gfield_radio li.hole-punch label.gfield_label  {
-  display: none;
-}
-
-/**
-SSP 4th Container: Hole-Punch wrapper
-- remove margin
- */
-form.standard-size-form ul.gform_fields li.container-4 ul.container-4-list li.container-4-child.staple div.ginput_container ul.gfield_radio li.hole-punch div.ginput_container {
-
 }
 
 /*******************************/
