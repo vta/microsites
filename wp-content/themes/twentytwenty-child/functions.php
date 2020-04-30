@@ -6,8 +6,8 @@ if ( !defined( 'ABSPATH' ) ) exit;
 /**
  * Enqueue child styles. Will be used to data via SESSION
  */
-add_action( 'wp_enqueue_scripts', 'child_enqueue_styles' );
-function child_enqueue_styles()
+add_action( 'wp_enqueue_scripts', 'child_scripts' );
+function child_scripts()
 {
     $parent_style = 'parent-style';
     wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' );
@@ -17,6 +17,18 @@ function child_enqueue_styles()
         array( $parent_style ),
         wp_get_theme()->get( 'Version' )
     );
+
+  // jQuery
+  wp_enqueue_script( 'jquery' );
+
+  // Our JS Script
+  wp_enqueue_script(
+    'child-script',
+    get_stylesheet_directory_uri() . '/js/scripts.js',
+    array( 'jquery' ),
+    '1.0.0',
+    true
+  );
 }
 
 /**
@@ -69,7 +81,7 @@ function wc_custom_redirect_continue_shopping()
 add_filter( 'woocommerce_product_add_to_cart_text', 'woocommerce_custom_product_add_to_cart_text' );
 function woocommerce_custom_product_add_to_cart_text()
 {
-    return __( 'Add Order', 'woocommerce' );
+    return __( 'Continue', 'woocommerce' );
 }
 
 /**

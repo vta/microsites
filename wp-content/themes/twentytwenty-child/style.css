@@ -11,19 +11,52 @@ Version: 1.0
 /** VARIABLES **/
 /***************/
 :root {
-  --darker-blue: #0a5387;
-  --dark-blue: #29588C;
-  --light-blue: #4CB4E7;
+  /* Colors */
+  --darker-blue:  #0a5387;
+  --dark-blue:    #29588C;
+  --light-blue:   #4CB4E7;
 
+  --lighter-gray: #F4F4F4;
+  --light-gray:   #EEEEEE;
+  --medium-gray:  #CCCCCC;
+
+  --dark-red : #c62828;
+
+  /* Gradients */
   --header-gradient: linear-gradient(
           90deg,
           rgba(10,83,135,1) 0%,
-          rgba(25,95,145,1) 35%,
-          rgba(80,119,161,1) 55%,
-          rgba(255,255,255,1) 100%
+          rgba(25,95,145,1) 47%,
+          rgba(80,119,161,1) 79%,
+          rgba(138,164,192,1) 100%
   );
 
+  /* Borders */
+  --thin-light-gray:  1px solid var(--light-gray);
+  --thin-medium-gray: 1px solid var(--medium-gray);
+
+  /* Dimensions */
   --footer-height: 166px;
+
+  /* @TODO - we can store SCSS variables for @media queries in the future*/
+
+  /* Button Shapes */
+  --next-button-shape:      polygon(0% 0%, 75% 0%, 95% 50%, 75% 100%, 0% 100%);
+  --next-button-padding:    1.5rem 4rem 1.5rem 2rem;
+
+  --back-button-shape:      polygon(20% 0%, 100% 0%, 100% 100%, 20% 100%, 0% 50%);
+  --back-button-padding:    1.5rem 2rem 1.5rem 4rem;
+
+  --preview-button-shape:   polygon(0% 0%, 75% 0%, 90% 50%, 75% 100%, 0% 100%);
+  --preview-button-padding: 1.5rem 5rem 1.5rem 2rem;
+
+  /* Box shadows */
+  /* @credit - https://codepen.io/sdthornton/pen/wBZdXq */
+  --lightest-box-shadow:        0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  --light-box-shadow:           0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  --medium-box-shadow:          0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  --heavy-box-shadow:           0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  --heaviest-box-shadow:        0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 
 /************/
@@ -94,7 +127,7 @@ Inner entry-header Wrapper
 .entry-header-inner.section-inner.medium {
   max-width: 50rem;
   margin: 0;
-  padding: 8rem;
+  padding: 5rem;
   border-right: 2rem white solid;
   text-align: right;
 }
@@ -120,9 +153,9 @@ Header Title
 }
 
 /**
-< Smaller Screens (1200px)
+screensize < desktop (1200px)
  */
-@media (max-width: 1200px) {
+@media (max-width: 1440px) {
 
   /**
   Outside entry-header Wrapper
@@ -151,19 +184,25 @@ Header Title
 /**
 Outer Wrapper for Posts/Page Content
 - add padding to match header divider
+- extend page content to the bottom
  */
 div.post-inner {
   padding-left: 50rem;
+  min-height: 53vh;
 }
 
 /**
 Inner Wrapper for Posts/Page Content
 - add margin to the top of the entry-content container
 - remove "times" font styling
+- set max-width (for bigger screen)
+- add padding
  */
 div.entry-content {
   margin-top: 2rem;
   font-family: unset;
+  max-width: 1200px;
+  padding: 2rem 2rem 6rem 2rem;
 }
 
 /**
@@ -180,15 +219,13 @@ Entry Content Paragraph
 - change font weight
 */
 .entry-content > p {
-  max-width: 80% !important;
-  font-weight: 700;
+  max-width: 100% !important;
+  font-weight: 600;
   margin-bottom: 5rem;
 }
 
-/**
-< Smaller Screens (1200px)
- */
-@media (max-width: 1200px) {
+/* screensize < Large Screen (1440px) */
+@media (max-width: 1440px) {
 
   /**
   Outer Wrapper for Posts/Page Content
@@ -199,8 +236,16 @@ Entry Content Paragraph
   }
 
   /**
+  Entry Content
+  - center entry content (left padding on parent container no longer exists)
+   */
+  .entry-content {
+    margin: auto;
+  }
+
+  /**
   Entry Content Paragraph
-  - center text on smaller screens
+  - center contents on smaller screens
   */
   .entry-content > * {
     margin: auto;
@@ -208,9 +253,9 @@ Entry Content Paragraph
 
 }
 
-/******************/
-/** SERVICE PAGE **/
-/******************/
+/*******************/
+/** SERVICES PAGE **/
+/*******************/
 
 /**
 Service Page Shortcode Ultimate buttons
@@ -226,9 +271,26 @@ div.su-button-center > a {
 }
 
 /**
-< Smaller Screens (1200px)
+Service Page Content
+- add backround & border
  */
-@media (max-width: 1200px) {
+article#post-8 div.post-inner div.entry-content {
+  background: var(--light-gray);
+  border: var(--thin-medium-gray);
+}
+
+  /**
+  Service Page Paragraphs
+  - add font style
+   */
+article#post-8 div.post-inner div.entry-content > p.intro-text {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--darker-blue);
+}
+
+/* screensize < Medium Screens (1440px) */
+@media (max-width: 1440px) {
 
   /**
   Service Page Shortcode Ultimate buttons
@@ -386,4 +448,466 @@ a.to-the-top {
     display: inline !important;
   }
 
+}
+
+/*********************************/
+/** GRAVITY FORMS CUSTOMIZATION **/
+/*********************************/
+
+/**********************/
+/** GLOBAL GF STYLES **/
+/**********************/
+
+/**
+Next Button
+- change shape of next button (forward pentagon)
+ */
+input.gform_next_button.button {
+  background: var(--darker-blue);
+  --webkit-clip-path: var(--next-button-shape);
+  clip-path: var(--next-button-shape);
+  padding: var(--next-button-padding);
+}
+
+/**
+Previous (Back) Button
+- change shape of previous button (backwards pentagon)
+ */
+input.gform_previous_button.button {
+  background: var(--darker-blue);
+  --webkit-clip-path: var(--back-button-shape);
+  clip-path: var(--back-button-shape);
+  padding: var(--back-button-padding);
+}
+
+/**
+GF form validation
+- blend background with the rest of the form
+- remove margin
+- position element above others
+ */
+
+.gform_wrapper form div.gf_page_steps+div.validation_error {
+  background: var(--light-gray);
+  margin-top: 0;
+  margin-bottom: 0;
+  z-index: 3;
+  position: relative;
+  border-right: var(--thin-medium-gray);
+  border-left: var(--thin-medium-gray);
+}
+
+/**
+Required Asterisk
+- change color from red to blue
+ */
+.gform_wrapper span.gfield_required {
+  color: var(--darker-blue);
+}
+
+/************************/
+/** BUSINESS CARD FORM **/
+/************************/
+/* @TODO - be aware of transferring some styles GLOBALLY as it may apply to other forms*/
+
+/**
+Form Wrapper
+- Extend the form to the whole page
+@TODO - this may be a global form style. Will not override width + max-width without ID selector
+ */
+div#gform_wrapper_4.gform_wrapper {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+/**
+Business Card Form
+- change color + background color
+- add padding to the form
+@TODO - might be a global FORM style in the future
+ */
+form.business-card-form {
+  background: white;
+  color: var(--darker-blue);
+}
+
+/**
+Steps Container
+- adjust margin to hide top form-body top border
+- add background color for tab spacing appearance
+- position relative + negative margin overlaps top border
+@TODO - might be a global FORM style in the future
+ */
+form.business-card-form div.gf_page_steps {
+  position: relative;
+  width: fit-content;
+  padding: 0;
+  border: var(--thin-medium-gray);
+  border-bottom: none;
+  background: var(--light-gray);
+  margin: 0 0 -2px 0;
+  z-index: 2;
+}
+
+/**
+Steps Border
+- do not display (removes invisible border from form body and steps container)
+ */
+form.business-card-form div.gf_step_clear {
+  display: none;
+}
+
+/**
+Step (Tabs)
+- increase font-size
+- increase spacing
+- establish set width
+- center text
+@TODO - might be a global FORM style in the future
+ */
+form.business-card-form div.gf_page_steps div.gf_step {
+  font-size: 2rem;
+  font-weight: 500;
+  padding: 1.4rem;
+  margin: 0 2px;
+  width: 23rem;
+  height: unset;
+  text-align: center;
+}
+
+/**
+Active Step
+- match background with card
+ */
+form.business-card-form div.gf_page_steps div.gf_step.gf_step_active {
+  background: var(--light-gray);
+}
+
+/**
+Non-active Steps
+- give it a dark background
+- override opacity
+- specify borders
+ */
+form.business-card-form div.gf_page_steps div.gf_step,
+form.business-card-form div.gf_page_steps div.gf_step.gf_step_pending,
+form.business-card-form div.gf_page_steps div.gf_step.gf_step_previous,
+form.business-card-form div.gf_page_steps div.gf_step.gf_step_next
+{
+  background: var(--medium-gray);
+  opacity: 1;
+}
+
+/**
+First Step
+- add left border & remove left margin
+ */
+form.business-card-form div.gf_page_steps div.gf_step.gf_step_first {
+  margin-left: 0;
+}
+
+/**
+Last Step
+- remove end border (background blends with border)
+ */
+form.business-card-form div.gf_page_steps div.gf_step.gf_step_last {
+  margin-right: 0;
+}
+
+/**
+Step Label
+- increase font size
+ */
+form.business-card-form div.gf_page_steps div.gf_step {
+  font-size: 2rem;
+}
+
+/**
+Form Body (Child of GF Form Element)
+- make it relative to position button container (absolute)
+- add inner spacing
+ */
+form.business-card-form div.gform_body {
+  position: relative;
+  background: var(--light-gray);
+  padding: 2rem;
+  border: var(--thin-medium-gray);
+  min-height: 325px;
+}
+
+/**
+Form Fields Wrapper
+- change display to flex
+- user ID selector for highest priority
+@TODO - may be GLOBAL in the future
+@TODO - might be a global FORM style in the future
+ */
+form.business-card-form div.gform_body ul.gform_fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+}
+
+/**
+Form Fields
+- Determine base size for each form field
+- increase z-index to ensure fields aren't blocked form overlapping containers
+- increase minimum height;
+ */
+form.business-card-form div.gform_body div.gform_page ul.gform_fields li.gfield {
+  margin: 2rem;
+  flex: 0 1 46rem;
+  z-index: 2;
+  min-height: 120px;
+}
+
+/**
+Job Title Form Field
+- give it its own row with flex-basis
+ */
+form.business-card-form div.gform_body div.gform_page ul.gform_fields li.gfield.job-title-field {
+  flex-basis: 60%;
+}
+
+/**
+Form Fields (Phone Field)
+- reduce flex starting size to shrink fields
+ */
+form.business-card-form div.gform_body div.gform_page ul.gform_fields li.gfield.phone-field {
+  flex-basis: 20rem;
+  flex-grow: 0;
+}
+
+/*
+Form Field INPUT
+- expand input to be 100% with a max limit
+@TODO - might be a global FORM style in the future
+ */
+form.business-card-form div.gform_body ul.gform_fields li.gfield input {
+  width: 100%;
+  max-width: 50rem;
+}
+
+/**
+Form Button Container
+- move it the right of the form
+- align button to the right of the container
+- remove top border
+- fix spacing
+@TODO - might be a global FORM style in the future
+ */
+.gform_wrapper div.gform_page_footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-align: right;
+  border-top: none;
+  padding: 7rem 0;
+  margin: 0;
+}
+
+/**
+Preview Button
+- reduce padding
+@TODO - might be a global FORM style in the future
+ */
+input[type='submit']#gform_submit_button_4 {
+  --webkit-clip-path: var(--preview-button-shape);
+  clip-path: var(--preview-button-shape);
+  padding: var(--preview-button-padding);
+}
+
+/* screensize < 1200px (Large Desktop) */
+@media (max-width: 1200px) {
+  /**
+  Button Wrapper
+  - occupy right hand side & overlap with bottom row
+   */
+  .gform_wrapper div.gform_page_footer {
+    position: relative;
+    padding: 2rem 0;
+  }
+}
+
+/* screensize < 1024px (Tablet Landscape) */
+@media (max-width: 1024px) {
+  /**
+  Form Fields Wrapper
+  - center all form fields
+   */
+  form.business-card-form div.gform_body ul.gform_fields {
+    justify-content: center;
+  }
+
+  /**
+  Job Title Field
+  - reduce flex-basis to standard size
+   */
+  form.business-card-form div.gform_body div.gform_page ul.gform_fields li.gfield.job-title-field {
+    flex: 0 1 46rem;
+  }
+
+  /**
+  Business Card Form
+  - add margin around the form
+   */
+  .gform_wrapper form.business-card-form {
+    margin: 2rem;
+  }
+}
+
+/* screensize < 780px (Tablets Portrait) */
+@media (max-width: 780px) {
+  /**
+  Steps Container
+   */
+  form.business-card-form div.gf_page_steps {
+    width: 100%;
+  }
+
+  /**
+  Steps
+   */
+  form.business-card-form div.gf_page_steps div.gf_step {
+    margin: 2px 0;
+    width: 100%;
+  }
+
+  /**
+  Active Step
+  - add blue outline to easier identify active step
+   */
+  form.business-card-form div.gf_page_steps div.gf_step.gf_step_active {
+    font-weight: 700;
+  }
+
+  /**
+  First Step
+  - remove top margin
+   */
+  form.business-card-form div.gf_page_steps div.gf_step.gf_step_first {
+    margin-top: 0;
+  }
+
+  /**
+  Buttons (Next & Back)
+  - override included styles and prevent it from expanding to 100%
+   */
+  .gform_wrapper .gform_page_footer input.button.gform_previous_button,
+  .gform_wrapper .gform_page_footer input.button.gform_next_button,
+  input[type='submit']#gform_submit_button_4
+  {
+    width: unset;
+  }
+
+}
+
+/* screensize < 540px (Phones Portrait) */
+@media (max-width: 540px) {
+
+  /**
+  Form
+  - remove margin
+   */
+  div#gform_wrapper_4.gform_wrapper form.business-card-form {
+    margin: 0;
+  }
+
+  /**
+  Form Body
+  - remove inside padding
+   */
+  form.business-card-form div.gform_body {
+    padding: 0;
+    margin: 0;
+  }
+
+  /**
+  Form Fields Wrapper
+  - add padding to the inside
+   */
+  form.business-card-form div.gform_body ul.gform_fields {
+    padding: 2rem;
+  }
+
+  /**
+  Form Fields
+  - remove min-height
+  */
+  form.business-card-form div.gform_body div.gform_page ul.gform_fields li.gfield {
+    min-height: unset;
+  }
+
+  /**
+  Buttons Container
+  - convert to flex and line at the end
+  - change position to absolute
+   */
+  form.business-card-form div.gform_page_footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /**
+  Buttons
+  - remove bottom margin
+   */
+  .gform_wrapper .gform_page_footer input.button.gform_previous_button,
+  .gform_wrapper .gform_page_footer input.button.gform_next_button,
+  input[type='submit']#gform_submit_button_4
+  {
+    margin-bottom: 0;
+  }
+}
+
+/**********************/
+/** BUSINESS PREVIEW **/
+/**********************/
+
+/**
+Business Card Preview Image
+- add drop shadow and margin
+ */
+article#post-157.post-157 img.bc-preview-image {
+  margin: 4rem auto;
+  box-shadow: var(--medium-box-shadow);
+}
+
+#confirm-bc {
+  margin: auto;
+}
+
+/**
+Business Card Preview Button Container
+- align buttons to the right
+- add spacing to the bottom
+ */
+article#post-157.post-157 #confirm-bc > div.bc-preview-button-container {
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 0;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+/**
+Business Card Preview Cancel Button
+- change the color to red
+ */
+article#post-157.post-157 button[name='cancel'].bc-preview-cancel {
+  background: var(--dark-red);
+}
+
+/**
+Business Card Preview WooCommerce Add To Cart Button
+- set width
+- align to the right
+- remove border
+ */
+article#post-157.post-157 div.entry-content p.product.add_to_cart_bc {
+  max-width: 580px;
+  margin: auto;
+  text-align: right;
+  border: none;
 }
