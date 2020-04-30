@@ -1,5 +1,3 @@
-// BUSINESS CARDS
-
 /**
  * Business Card Tab Select (Helper Function)
  *
@@ -66,16 +64,18 @@ const ssp_form_class = ($) => {
 
 /**
  *  Standard-Size Printing Insert Container
- * @param $
+ * @param $ - jQuery selector
+ * @param pageNum - active page in form stepper
+ * @param numContainers - number of containers to pass through
  */
-const ssp_insert_containers = ($, numContainers) => {
+const ssp_insert_containers = ($, pageNum, numContainers) => {
 
   const formWrapper = 'form.standard-size-form ul.gform_fields';
 
   // create containers 1 thru 4 and add within formWrapper
-  for (let i = 1; i <= 4; i++) {
+  for (let i = 1; i <= numContainers; i++) {
 
-    let childFields = `form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.container-${i}-child`;
+    let childFields = `form.standard-size-form div.gform_body div#gform_page_1_${pageNum}.gform_page ul.gform_fields li.gfield.container-${i}-child`;
 
     // new container element
     let newChild = $(`
@@ -87,6 +87,9 @@ const ssp_insert_containers = ($, numContainers) => {
     `);
 
     // detach from parent node & append to <ul> element inside of newChild
+
+    console.log($(childFields).children());
+
     $(childFields).detach().appendTo(newChild.children());
 
     // add empty container-{#} to our form body wrapper
@@ -95,6 +98,7 @@ const ssp_insert_containers = ($, numContainers) => {
 
 }
 
+
 /**
  * Move Hole Punch Option
  *
@@ -102,16 +106,21 @@ const ssp_insert_containers = ($, numContainers) => {
  * into stapling options container
  * @param $
  */
-const move_holepunch_option = ($) => {
+const move_holepunch_option = ($, form_id, current_page) => {
 
-  // parent container
-  const stapleOptionsElem = $('li.gfield.container-4-child.staple > div.ginput_container > ul.gfield_radio');
+  // check if it is SSP Form & page 1
+  if (form_id === 1 && current_page === 1) {
+    // parent container
+    const stapleOptionsElem = $('li.gfield.container-4-child.staple > div.ginput_container > ul.gfield_radio ');
 
-  // child element
-  const holePunchElem = $('li.gfield.container-4-child.hole-punch');
+    // child element
+    // @TODO - this element is iterated 3 times
+    const holePunchElem = $('li.gfield.container-4-child.hole-punch');
 
-  // remove form current original parent element & insert into staple options container
-  holePunchElem.detach().appendTo(stapleOptionsElem);
+    // remove form current original parent element & insert into staple options container
+    holePunchElem.detach();
+    holePunchElem.children().eq(1).appendTo(stapleOptionsElem);
+  }
 }
 
 /**
@@ -120,26 +129,37 @@ const move_holepunch_option = ($) => {
  * runs function to set up business card forms
  * @param $ - jQuery selector
  */
-const ssp_form_setup = ($) => {
+const ssp_form_setup = ($, form_id, current_page) => {
 
   // adding additional classes to SSP form
   ssp_form_class($);
 
+  const numContainersPerPage = {
+    1: 4,
+    2: 1,
+    3: 2,
+  }
+
+  const numContainers = numContainersPerPage[current_page];
+
   // insert new containers
-  ssp_insert_containers($);
+  ssp_insert_containers($, current_page, numContainers);
 
   // move staple options to hole punch element
-  move_holepunch_option($);
+  move_holepunch_option($, form_id, current_page);
 }
 
 /**
- * Load jQuery when document is ready...
+ * Load scripts when Gravity Forms Render
  */
-jQuery(document).ready(function ($) {
+jQuery(document).on('gform_post_render',  (event, form_id, current_page) => {
+
+  // save global variable
+  const $ = jQuery;
 
   // Set up business card form
   bc_form_setup($);
 
   // Set up standard-size printing form
-  ssp_form_setup($);
+  ssp_form_setup($, form_id, current_page);
 });
