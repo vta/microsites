@@ -76,6 +76,11 @@ function getLogoutUrl( $redirectUrl = '' )
 function logout_without_confirmation( $action, $result )
 {
     if ( !$result && ($action == 'log-out') ) {
+
+        // DEBUG
+        wp_safe_redirect( wc_get_page_id( 'myaccount' ) );
+        error_log( json_encode($_COOKIE), JSON_PRETTY_PRINT);
+
         wp_safe_redirect( getLogoutUrl() );
         exit();
     }
@@ -88,6 +93,34 @@ function change_logged_in_cookie_expiration( $logged_in_cookie, $expire, $expira
         $expire = -1;
     }
     return $expire;
+}
+
+add_filter( 'auth_cookie_expiration', 'expire_cookie_logout' );
+function expire_cookie_logout( $length ) {
+    return time();
+}
+
+// ISSUE: wordpress_logged_in_XXXXXXX cookie is stuck in WooCommerce /my-account
+//          (Causes login behavior for that specific page only!)
+// @TODO - route to /my-account page
+// @TODO - find wordpress_logged_in_XXXXXXX
+// @TODO - unset cookie
+// test after...
+
+/**
+ * @TEST_1 - deleting wp_logged_in cookie at every page...
+ */
+add_action( 'wp', 'clear_myaccount_cookie' );
+function clear_myaccount_cookie()
+{
+    global $post;
+
+    // check if we are the "My Account" page
+    if ($post->ID == wc_get_page_id('myaccount') ) {
+        // DEBUG: LOGS COOKIES AT EVERY PAGE
+        error_log( json_encode( $_COOKIE ), JSON_PRETTY_PRINT );
+        error_log( $post->ID, JSON_PRETTY_PRINT );
+    }
 }
 
 /**
@@ -116,25 +149,25 @@ function clear_cart()
 
 /** USER FRONT-END CHANGES */
 
-/**
- * ADD custom CSS class to "Cart" menu link
- */
-add_filter( 'wp_nav_menu_objects', 'add_cart_total', 9, 2 );
-function add_cart_total( $items, $args )
-{
-    foreach ( $items as $item ) {
-        error_log( json_encode($item->to_array(), JSON_PRETTY_PRINT) );
-
-        // convert WP_Post into array
-        $item_array = $item->to_array();
-
-        if ( $item->title == 'Cart' ) {
-            array_push($item->classes, 'custom-wc-cart');
-            error_log( json_encode($item->classes, JSON_PRETTY_PRINT) );
-        }
-    }
-    return $items;
-}
+///**
+// * ADD custom CSS class to "Cart" menu link
+// */
+//add_filter( 'wp_nav_menu_objects', 'add_cart_total', 9, 2 );
+//function add_cart_total( $items, $args )
+//{
+//    foreach ( $items as $item ) {
+//        error_log( json_encode($item->to_array(), JSON_PRETTY_PRINT) );
+//
+//        // convert WP_Post into array
+//        $item_array = $item->to_array();
+//
+//        if ( $item->title == 'Cart' ) {
+//            array_push($item->classes, 'custom-wc-cart');
+//            error_log( json_encode($item->classes, JSON_PRETTY_PRINT) );
+//        }
+//    }
+//    return $items;
+//}
 
 /**
  * REMOVE related products output
