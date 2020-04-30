@@ -76,18 +76,41 @@ function getLogoutUrl( $redirectUrl = '' )
 function logout_without_confirmation( $action, $result )
 {
     if ( !$result && ($action == 'log-out') ) {
+
         wp_safe_redirect( getLogoutUrl() );
         exit();
     }
 }
 
-apply_filters( 'set_logged_in_cookie', 'change_logged_in_cookie_expiration', 10, 6 );
-function change_logged_in_cookie_expiration( $logged_in_cookie, $expire, $expiration, $user_id, $scheme, $token )
+/**
+ * REMOVES wordpress_logged_in_XXXXXXXXXX cookie
+ *
+ * In the future, we may want to find a better implementation as to check every run this hook on every page load
+ * @see - https://www.sitepoint.com/how-to-set-get-and-delete-cookies-in-wordpress/
+ */
+add_action( 'wp', 'clear_myaccount_cookie' );
+function clear_myaccount_cookie()
 {
-    if ( $expire > 0 ) {
-        $expire = -1;
+    global $post;
+
+    // check if we are the "My Account" page
+    if ( isset($post->ID) && $post->ID == wc_get_page_id('myaccount') ) {
+
+        // Loop through each cookie
+        foreach($_COOKIE as $cookie_key => $val) {
+
+            // TARGET cookie wordpress_logged_in_XXXXXXX
+            $login_cookie_regex = '/wordpress_logged_in_[d]+/';
+
+            if ( preg_match( $login_cookie_regex, $cookie_key ) )
+            {
+                // clear the cookie and set ex
+                unset($_COOKIE[$cookie_key]);
+                setcookie( $cookie_key, '', time() - ( 15 * 60 ) );
+            }
+        }
     }
-    return $expire;
+
 }
 
 /**
@@ -113,27 +136,47 @@ function clear_cart()
 
 /** WooCommerce Hooks */
 
-
 /** USER FRONT-END CHANGES */
 
 /**
- * ADD custom CSS class to "Cart" menu link
+ * ADD custom WC count to "Cart" menu link
  */
-add_filter( 'wp_nav_menu_objects', 'add_cart_total', 9, 2 );
-function add_cart_total( $items, $args )
+add_filter( 'wp_nav_menu_objects', 'add_cart_class', 9, 2 );
+function add_cart_number( $items, $args )
 {
+    // iterate through all menu items
     foreach ( $items as $item ) {
-        error_log( json_encode($item->to_array(), JSON_PRETTY_PRINT) );
 
-        // convert WP_Post into array
-        $item_array = $item->to_array();
-
+        // If menu link is "Cart"
         if ( $item->title == 'Cart' ) {
+            // add "custom-wc-cart" class
             array_push($item->classes, 'custom-wc-cart');
-//            error_log( json_encode($item->classes, JSON_PRETTY_PRINT) );
+
+            $item->title = 'Cart' . ' (<span id="count-cart-items">' .  WC()->cart->get_cart_contents_count() . '</span>)';
         }
     }
+
     return $items;
+}
+
+/**
+ * UPDATE Cart Link item number with AJAX
+ * @see - https://stackoverflow.com/questions/53280425/ajax-update-product-count-on-cart-menu-in-woocommerce
+ */
+add_filter( 'woocommerce_add_to_cart_fragments', 'wc_refresh_cart_fragments', 50, 1 );
+function wc_refresh_cart_fragments( $fragments )
+{
+    $cart_count = WC()->cart->get_cart_contents_count();
+
+    // Normal version
+    $count_normal = '<span id="count-cart-items">' .  $cart_count . '</span>';
+    $fragments['#count-cart-items'] = $count_normal;
+
+    // Mobile version
+    $count_mobile = '<span id="count-cart-itemob">' .  $cart_count . '</span>';
+    $fragments['#count-cart-itemob'] = $count_mobile;
+
+    return $fragments;
 }
 
 /**
@@ -249,11 +292,19 @@ function business_card_display_text_cart( $item_data, $cart_item )
     $entry_id = $cart_item['bc_entry_id'];
     $entry = GFAPI::get_entry( $entry_id );
     $fullname = $entry['2.3'] . " " . $entry['2.6'];
+    $quantity = $entry['10'];
 
     // Display Fullname in cart + checkout page
     $item_data[] = array(
         'key' => __( 'Name', 'fullname' ),
         'value' => wc_clean( $fullname ),
+        'display' => '',
+    );
+
+    // Display Qty in cart + checkout page
+    $item_data[] = array(
+        'key' => __( 'Quantity', 'qty' ),
+        'value' => wc_clean( $quantity ),
         'display' => '',
     );
 
@@ -284,8 +335,9 @@ function bc_entry_id_text_to_order_items( $item, $cart_item_key, $values, $order
     $entry = GFAPI::get_entry( $entry_id );
     $firstname = $entry['2.3'];
     $lastname = $entry['2.6'];
+    $quantity = $entry['10'];
 
-    //
+    // add business card download link as meta data
     $item->add_meta_data( __( 'Business Card PDF', 'bc_entry_id' ),
         "
             <a href='" . esc_url( $uploads['baseurl'] . '/business_cards/business_card_' . $entry_id . '.pdf' ) . "'>
@@ -293,6 +345,10 @@ function bc_entry_id_text_to_order_items( $item, $cart_item_key, $values, $order
             </a>
         "
     );
+
+    // add quantity as meta data
+    $item->add_meta_data( __( 'Quantity', 'qty'), $quantity);
+
 }
 
 /**
