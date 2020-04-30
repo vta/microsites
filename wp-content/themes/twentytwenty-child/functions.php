@@ -100,15 +100,11 @@ function expire_cookie_logout( $length ) {
     return time();
 }
 
-// ISSUE: wordpress_logged_in_XXXXXXX cookie is stuck in WooCommerce /my-account
-//          (Causes login behavior for that specific page only!)
-// @TODO - route to /my-account page
-// @TODO - find wordpress_logged_in_XXXXXXX
-// @TODO - unset cookie
-// test after...
-
 /**
- * @TEST_1 - deleting wp_logged_in cookie at every page...
+ * REMOVES wordpress_logged_in_XXXXXXXXXX cookie
+ *
+ * In the future, we may want to find a better implementation as to check every run this hook on every page load
+ * @see - https://www.sitepoint.com/how-to-set-get-and-delete-cookies-in-wordpress/
  */
 add_action( 'wp', 'clear_myaccount_cookie' );
 function clear_myaccount_cookie()
@@ -116,11 +112,23 @@ function clear_myaccount_cookie()
     global $post;
 
     // check if we are the "My Account" page
-    if ($post->ID == wc_get_page_id('myaccount') ) {
-        // DEBUG: LOGS COOKIES AT EVERY PAGE
-        error_log( json_encode( $_COOKIE ), JSON_PRETTY_PRINT );
-        error_log( $post->ID, JSON_PRETTY_PRINT );
+    if ( isset($post->ID) && $post->ID == wc_get_page_id('myaccount') ) {
+
+        // Loop through each cookie
+        foreach($_COOKIE as $cookie_key => $val) {
+
+            // TARGET cookie wordpress_logged_in_XXXXXXX
+            $login_cookie_regex = '/wordpress_logged_in_[d]+/';
+
+            if ( preg_match( $login_cookie_regex, $cookie_key ) )
+            {
+                // clear the cookie and set ex
+                unset($_COOKIE[$cookie_key]);
+                setcookie( $cookie_key, '', time() - ( 15 * 60 ) );
+            }
+        }
     }
+
 }
 
 /**
