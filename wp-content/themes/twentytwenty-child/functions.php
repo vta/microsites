@@ -77,27 +77,9 @@ function logout_without_confirmation( $action, $result )
 {
     if ( !$result && ($action == 'log-out') ) {
 
-        // DEBUG
-        wp_safe_redirect( wc_get_page_id( 'myaccount' ) );
-        error_log( json_encode($_COOKIE), JSON_PRETTY_PRINT);
-
         wp_safe_redirect( getLogoutUrl() );
         exit();
     }
-}
-
-apply_filters( 'set_logged_in_cookie', 'change_logged_in_cookie_expiration', 10, 6 );
-function change_logged_in_cookie_expiration( $logged_in_cookie, $expire, $expiration, $user_id, $scheme, $token )
-{
-    if ( $expire > 0 ) {
-        $expire = -1;
-    }
-    return $expire;
-}
-
-add_filter( 'auth_cookie_expiration', 'expire_cookie_logout' );
-function expire_cookie_logout( $length ) {
-    return time();
 }
 
 /**
@@ -154,28 +136,46 @@ function clear_cart()
 
 /** WooCommerce Hooks */
 
-
 /** USER FRONT-END CHANGES */
 
-///**
-// * ADD custom CSS class to "Cart" menu link
-// */
-//add_filter( 'wp_nav_menu_objects', 'add_cart_total', 9, 2 );
-//function add_cart_total( $items, $args )
-//{
-//    foreach ( $items as $item ) {
-//        error_log( json_encode($item->to_array(), JSON_PRETTY_PRINT) );
-//
-//        // convert WP_Post into array
-//        $item_array = $item->to_array();
-//
-//        if ( $item->title == 'Cart' ) {
-//            array_push($item->classes, 'custom-wc-cart');
-//            error_log( json_encode($item->classes, JSON_PRETTY_PRINT) );
-//        }
-//    }
-//    return $items;
-//}
+/**
+ * ADD custom WC count to "Cart" menu link
+ */
+add_filter( 'wp_nav_menu_objects', 'add_cart_class', 9, 2 );
+function add_cart_class( $items, $args )
+{
+    foreach ( $items as $item ) {
+
+        // convert WP_Post into array
+        $item_array = $item->to_array();
+
+        if ( $item->title == 'Cart' ) {
+            // add "custom-wc-cart" class
+            array_push($item->classes, 'custom-wc-cart');
+            $item->title = 'Cart' . ' (<span id="count-cart-items">' .  WC()->cart->get_cart_contents_count() . '</span>)';
+        }
+    }
+    return $items;
+}
+
+/**
+ * UPDATE Cart Link item number with AJAX
+ * @see - https://stackoverflow.com/questions/53280425/ajax-update-product-count-on-cart-menu-in-woocommerce
+ */
+add_filter( 'woocommerce_add_to_cart_fragments', 'wc_refresh_cart_fragments', 50, 1 );
+function wc_refresh_cart_fragments( $fragments ){
+    $cart_count = WC()->cart->get_cart_contents_count();
+
+    // Normal version
+    $count_normal = '<span id="count-cart-items">' .  $cart_count . '</span>';
+    $fragments['#count-cart-items'] = $count_normal;
+
+    // Mobile version
+    $count_mobile = '<span id="count-cart-itemob">' .  $cart_count . '</span>';
+    $fragments['#count-cart-itemob'] = $count_mobile;
+
+    return $fragments;
+}
 
 /**
  * REMOVE related products output
