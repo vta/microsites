@@ -90,7 +90,7 @@ const ssp_insert_containers = ($, pageNum, numContainers) => {
 
     console.log($(childFields).children());
 
-    $(childFields).detach().appendTo(newChild.children());
+    $(childFields).appendTo(newChild.children());
 
     // add empty container-{#} to our form body wrapper
     $(formWrapper).append(newChild);
@@ -118,8 +118,8 @@ const move_holepunch_option = ($, form_id, current_page) => {
     const holePunchElem = $('li.gfield.container-4-child.hole-punch');
 
     // remove form current original parent element & insert into staple options container
-    holePunchElem.detach();
-    holePunchElem.children().eq(1).appendTo(stapleOptionsElem);
+    // holePunchElem.detach();
+    holePunchElem.children().not('#field_1_61').eq(1).appendTo(stapleOptionsElem);
   }
 }
 
@@ -161,5 +161,5 @@ jQuery(document).on('gform_post_render',  (event, form_id, current_page) => {
   bc_form_setup($);
 
   // Set up standard-size printing form
-  ssp_form_setup($, form_id, current_page);
+  // ssp_form_setup($, form_id, current_page);
 });
