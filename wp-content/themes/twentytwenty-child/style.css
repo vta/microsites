@@ -94,14 +94,6 @@ nav.primary-menu-wrapper ul.primary-menu > li.current-menu-item > a {
   text-decoration: none;
 }
 
-/**
-Login/Logout button
-- change default color to black
- */
-#site-header > div > div.header-navigation-wrapper > nav > ul > li> a.login-logout-button  {
-  color: #000;
-}
-
 /************/
 /** HEADER **/
 /************/
