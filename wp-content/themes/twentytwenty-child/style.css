@@ -594,7 +594,7 @@ GF form validation
 - remove margin
 - position element above others
  */
-
+#gform_wrapper_1 > div.validation_error,
 .gform_wrapper form div.gf_page_steps+div.validation_error {
   background: var(--light-gray);
   margin-top: 0;
@@ -945,6 +945,8 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
   flex: 0 1 100%;
 }
 
+/** Container 1 **/
+
 /**
 SSP 1st Container
 - add top blue border
@@ -974,6 +976,8 @@ form.standard-size-form div.gform_body div.gform_page li.container-1 > ul.contai
   flex: 0 1 40rem;
   margin-right: 10rem;
 }
+
+/** Container 2 **/
 
 /**
 SSP 2nd Container
@@ -1042,6 +1046,8 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.contain
   flex-grow: 2;
 }
 
+/** Container 3 **/
+
 /**
 SSP 3d Container List Wrapper
  */
@@ -1070,11 +1076,35 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.contain
   align-items: center;
 }
 
-  /**
-  SSP 3rd Container Label
-   */
+/**
+SSP 3rd Container Label
+ */
 form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-3 ul.container-3-list li.gfield label {
   margin: 0;
+}
+
+/** Container 4 **/
+
+/**
+SSP 4th Container
+- expand to cover the entire container
+ */
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-4 {
+  flex-basis: 100%;
+  margin: 4rem 0;
+  border-top: var(--normal-dark-blue);
+}
+
+/**
+SSP 4th Container List
+- change to flex
+ */
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-4 ul.container-4-list {
+  display: flex;
+}
+
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.container-4 ul.container-4-list {
+
 }
 
 /*******************************/

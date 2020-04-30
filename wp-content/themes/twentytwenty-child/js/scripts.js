@@ -68,7 +68,7 @@ const ssp_form_class = ($) => {
  *  Standard-Size Printing Insert Container
  * @param $
  */
-const ssp_insert_containers = ($) => {
+const ssp_insert_containers = ($, numContainers) => {
 
   const formWrapper = 'form.standard-size-form ul.gform_fields';
 
@@ -93,11 +93,25 @@ const ssp_insert_containers = ($) => {
     $(formWrapper).append(newChild);
   }
 
-  const stapleOptionsElem = $('li.gfield.container-4-child');
+}
 
-  // insert hole-punch field into staple options list
-  $()
+/**
+ * Move Hole Punch Option
+ *
+ * moves the entire element from container 4 and inputs it
+ * into stapling options container
+ * @param $
+ */
+const move_holepunch_option = ($) => {
 
+  // parent container
+  const stapleOptionsElem = $('li.gfield.container-4-child.staple > div.ginput_container > ul.gfield_radio');
+
+  // child element
+  const holePunchElem = $('li.gfield.container-4-child.hole-punch');
+
+  // remove form current original parent element & insert into staple options container
+  holePunchElem.detach().appendTo(stapleOptionsElem);
 }
 
 /**
@@ -113,6 +127,9 @@ const ssp_form_setup = ($) => {
 
   // insert new containers
   ssp_insert_containers($);
+
+  // move staple options to hole punch element
+  move_holepunch_option($);
 }
 
 /**
