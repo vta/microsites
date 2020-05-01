@@ -691,7 +691,145 @@ form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield {
   z-index: 2;
   min-height: 120px;
 }
-
+li#field_1_29 {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1 100%;
+  padding:0 0 15px 0;
+  margin-bottom: 11px;
+  border-bottom: 1px solid #2c79ca;
+}
+li#field_1_29 > label {
+  display: inline-flex;
+  height: 20px;
+  margin: auto 0 auto auto;
+}
+li#field_1_29 > div {
+  margin-top: 0 !important;
+  left: 21px;
+  position: relative;
+}
+li#field_1_29 > div > input {
+  margin: auto 0 auto auto;
+  width: 150px;
+  height: 35px;
+}
+li#field_1_29 > div > img {
+  position: relative;
+  right: 30px;
+  top: 0;
+}
+li#field_1_1 {
+  flex: 0 50%;
+  min-width:280px;
+}
+li#field_1_5 {
+  flex: 0 100%;
+  min-width: 280px;
+  padding: 0 0 15px 0;
+  margin-bottom: 11px;
+  border-bottom: 1px solid #2c79ca;
+}
+li#field_1_5 > div > div.instruction {
+ padding: 5px 0 5px 0;
+}
+li#field_1_27 {
+  flex: 0 50%;
+  min-width: 280px;
+}
+li#field_1_61 {
+   flex: 0 100%;
+   min-width: 280px;
+}
+li#field_1_62 {
+   flex: 0 50% !important;
+   min-width: 280px;
+   margin-top: 25px;
+}
+li#field_1_62 > div > ul li {
+    background: #2c79ca;
+    color: #FFFFFF;
+    min-width: 280px;
+    max-width: 420px;
+    font-size: 1.4vh;
+    text-align: center;
+    padding: 15px !important;
+    border-radius: 6px;
+}
+li#field_1_62 > div > ul li > input {
+   opacity: 0;
+}
+li#field_1_63 {
+    flex: 0 100% !important;
+    min-width: 280px;
+    flex-flow: column;
+    display: inline-flex;
+    height: 50px;
+}
+li#field_1_63 > div > ul li label {
+   width: 60px;
+}
+li#field_1_63 > div > ul {
+  display: inline-flex;
+  margin: 0;
+}
+li#field_1_63 > div > ul li {
+   width: 88px;
+}
+input[name="input_63"]:before, input[name="input_8"]:before {
+    content: "";
+    display: block;
+    position: relative;
+    top: -3px;
+    left: 0px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1px solid #2c78ca;
+}
+input[name="input_63"]:checked:before, input[name="input_8"]:checked:before {
+ background: #2c79ca;
+ border: 1px solid #FFFFFF;
+}
+li#field_1_8 {
+    margin-top: 16px;
+    flex: 0 100% !important;
+    min-width: 280px;
+    height: 50px;
+    flex-flow: column;
+    display: inline-flex;
+}
+li#field_1_8 > div > ul {
+    margin: 0 !important;
+    height: 45px;
+    display: inline-flex;
+    vertical-align: middle;
+}
+li#field_1_8 > div > ul li {
+  margin: auto 0 auto 15px !important;
+  height: 30px;
+}
+li#field_1_8 > div > ul li:first-of-type > label {
+   width: 50px;
+}
+li#field_1_8 > div > ul li:first-of-type {
+   width: 88px;
+   margin-left: 0 !important;
+}
+li#field_1_8 > div, li#field_1_63 > div {
+ margin: 0 !important;
+}
+li#field_1_8 > label, li#field_1_63 > label {
+ display: inline-flex;
+ align-items: center;
+ padding-right: 10px;
+ margin: 0 !important;
+ font-size: 1.5vh;
+}
+li#field_1_8 > div > ul li:last-of-type > label {
+  width: 230px;
+}	
 /**
 Job Title Form Field
 - give it its own row with flex-basis
@@ -939,7 +1077,7 @@ SSP Form Wrapper
 div#gform_wrapper_1.gform_wrapper {
   margin: 0;
   width: 100%;
-  max-width: 100%;
+  max-width: unset;
 }
 
 /**
