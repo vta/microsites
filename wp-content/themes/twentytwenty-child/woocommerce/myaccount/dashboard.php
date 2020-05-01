@@ -37,6 +37,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <p>
         <?php
+        /**
+         * REMOVED "shipping & billing" link here
+         */
         printf(
             __( 'From your account dashboard you can view your <a href="%1$s">recent orders</a> and <a href="%2$s">edit your password and account details</a>.', 'woocommerce' ),
             esc_url( wc_get_endpoint_url( 'orders' ) ),

@@ -246,8 +246,8 @@ function custom_override_checkout_fields( $fields )
 /**
  * REMOVE Downloads & Address tab from "My Account"
  */
-add_filter( 'woocommerce_account_menu_items', 'customer_downloads_addresss' );
-function customer_downloads_addresss ($items)
+add_filter( 'woocommerce_account_menu_items', 'remove_customer_downloads_addresss' );
+function remove_customer_downloads_addresss ($items)
 {
     error_log( json_encode($items), JSON_PRETTY_PRINT);
 
