@@ -16,7 +16,7 @@
  * @package     WooCommerce/Templates
  * @version     2.6.
  *
- * TEMPLATE OVERRIDE - remove any links to "address"
+ * TEMPLATE OVERRIDE - remove any links to "address" (line 44-46)
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

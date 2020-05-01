@@ -14,7 +14,7 @@
  * @package WooCommerce/Templates
  * @version 3.4.4
  *
- * TEMPLATE OVERRIDE - remove shipping information
+ * TEMPLATE OVERRIDE - remove shipping information (line 33)
  */
 
 defined( 'ABSPATH' ) || exit;
