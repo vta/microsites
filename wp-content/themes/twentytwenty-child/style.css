@@ -458,7 +458,7 @@ a.to-the-top {
 /**********************/
 
 /**
-Copy Center Form Sytles
+Copy Center Form Styles
 - change color + background color
 - add padding to the form
  */
@@ -1099,6 +1099,10 @@ Levels Options Field
  */
 form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.levels-options {
   flex: 0 1 100%;
+}
+
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.levels-label {
+  flex: 0 1 60rem;
 }
 
 /*******************************/

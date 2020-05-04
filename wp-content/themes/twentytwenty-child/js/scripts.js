@@ -46,81 +46,22 @@ const bc_form_setup = ($) => {
 }
 
 /**
- * Standard-Size Printing Form Addinng Classes
+ * Standard-Size Printing Form Adding Classes
  *
  * current workaround to add classes to WooCommerce product forms
  * (gf classes are removed when forms are integrated with WC)
  * @param $ - jQuery selector
+ * @param form_id
  */
-const ssp_form_class = ($) => {
+const ssp_form_class = ($, form_id) => {
 
-  // Add generic "cc-form" class to all forms
-  $('form.cart').addClass('cc-form');
+  //@TODO - id selector is not working, will need to resolve later on
 
-  // Add "standard-size-form" class
-  $('form.cart.cc-form').addClass('standard-size-form');
+  // Add "standard-size-form" & "cc-form" class
+  $(`form.cart`)
+    .addClass('standard-size-form')
+    .addClass('cc-form');
 
-}
-
-/**
- *  Standard-Size Printing Insert Container
- * @param $ - jQuery selector
- * @param pageNum - active page in form stepper
- * @param numContainers - number of containers to pass through
- */
-const ssp_insert_containers = ($, pageNum, numContainers) => {
-
-  const formWrapper = 'form.standard-size-form ul.gform_fields';
-
-  // create containers 1 thru 4 and add within formWrapper
-  for (let i = 1; i <= numContainers; i++) {
-
-    let childFields = `form.standard-size-form div.gform_body div#gform_page_1_${pageNum}.gform_page ul.gform_fields li.gfield.container-${i}-child`;
-
-    // new container element
-    let newChild = $(`
-      <li class="container-${i}">
-        <ul class="container-${i}-list">
-        
-        </ul>
-      </li>
-    `);
-
-    // detach from parent node & append to <ul> element inside of newChild
-
-    console.log($(childFields).children());
-
-    $(childFields).appendTo(newChild.children());
-
-    // add empty container-{#} to our form body wrapper
-    $(formWrapper).append(newChild);
-  }
-
-}
-
-
-/**
- * Move Hole Punch Option
- *
- * moves the entire element from container 4 and inputs it
- * into stapling options container
- * @param $
- */
-const move_holepunch_option = ($, form_id, current_page) => {
-
-  // check if it is SSP Form & page 1
-  if (form_id === 1 && current_page === 1) {
-    // parent container
-    const stapleOptionsElem = $('li.gfield.container-4-child.staple > div.ginput_container > ul.gfield_radio ');
-
-    // child element
-    // @TODO - this element is iterated 3 times
-    const holePunchElem = $('li.gfield.container-4-child.hole-punch');
-
-    // remove form current original parent element & insert into staple options container
-    // holePunchElem.detach();
-    holePunchElem.children().not('#field_1_61').eq(1).appendTo(stapleOptionsElem);
-  }
 }
 
 /**
@@ -132,21 +73,7 @@ const move_holepunch_option = ($, form_id, current_page) => {
 const ssp_form_setup = ($, form_id, current_page) => {
 
   // adding additional classes to SSP form
-  ssp_form_class($);
-
-  const numContainersPerPage = {
-    1: 4,
-    2: 1,
-    3: 2,
-  }
-
-  const numContainers = numContainersPerPage[current_page];
-
-  // insert new containers
-  ssp_insert_containers($, current_page, numContainers);
-
-  // move staple options to hole punch element
-  move_holepunch_option($, form_id, current_page);
+  ssp_form_class($, form_id);
 }
 
 /**
@@ -161,5 +88,5 @@ jQuery(document).on('gform_post_render',  (event, form_id, current_page) => {
   bc_form_setup($);
 
   // Set up standard-size printing form
-  // ssp_form_setup($, form_id, current_page);
+  ssp_form_setup($, form_id, current_page);
 });
