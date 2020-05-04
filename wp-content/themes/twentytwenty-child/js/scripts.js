@@ -65,6 +65,45 @@ const ssp_form_class = ($, form_id) => {
 }
 
 /**
+ * SSP Conditional Checkbox Choices
+ *
+ * only allow for one type of staple to be chosen for stapling
+ * @param $
+ * @param form_id
+ */
+const ssp_staple_conditional_checkbox = ($, form_id) => {
+
+  if (form_id === 1) {
+
+    // array of child inputs
+    // const checkboxInputs = $(`li.gfield.staple.hole-punch div.ginput_container li input`);
+
+    const one_staple = $('input#choice_1_66_1');
+    const two_staple = $('input#choice_1_66_2');
+    const four_staple = $('input#choice_1_66_3');
+
+    // if 1-staple is chosen, remove options 2- & 4-
+    one_staple.change(() => {
+      two_staple.attr('checked', false);
+      four_staple.attr('checked', false);
+    });
+
+    // if 2-staple is chosen, remove options 1- & 4-
+    two_staple.change(() => {
+      one_staple.attr('checked', false);
+      four_staple.attr('checked', false);
+    });
+
+    // if 4-staple is chosen, remove options 1- & 2-
+    four_staple.change(() => {
+      one_staple.attr('checked', false);
+      two_staple.attr('checked', false);
+    });
+
+  }
+}
+
+/**
  * Standard-Size Printing Form Setup
  *
  * runs function to set up business card forms
@@ -74,12 +113,13 @@ const ssp_form_setup = ($, form_id, current_page) => {
 
   // adding additional classes to SSP form
   ssp_form_class($, form_id);
+  ssp_staple_conditional_checkbox($, form_id);
 }
 
 /**
  * Load scripts when Gravity Forms Render
  */
-jQuery(document).on('gform_post_render',  (event, form_id, current_page) => {
+jQuery(document).on('gform_post_render', (event, form_id, current_page) => {
 
   // save global variable
   const $ = jQuery;
