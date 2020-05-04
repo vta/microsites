@@ -311,6 +311,11 @@ function business_card_display_text_cart( $item_data, $cart_item )
     return $item_data;
 }
 
+add_filter ( 'is_vendor_can_see_order_billing_address',false );
+add_filter ( 'is_vendor_can_see_order_shipping_address', '__return_false' );
+add_filter( 'show_cust_billing_address_field','__return_true' );
+add_filter( 'show_cust_shipping_address_field','__return_false' );
+
 
 /**
  * ADD business card PDF link to "Edit Order" admin page

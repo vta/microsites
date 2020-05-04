@@ -556,6 +556,52 @@ form.cc-form div.gf_page_steps div.gf_step.gf_step_next
   opacity: 1;
 }
 
+/* screensize < 780px (Tablets Portrait) */
+@media (max-width: 780px) {
+  /**
+  Steps Container
+   */
+  form.cc-form div.gf_page_steps {
+    width: 100%;
+  }
+
+  /**
+  Steps
+   */
+  form.cc-form div.gf_page_steps div.gf_step {
+    margin: 2px 0;
+    width: 100%;
+  }
+
+  /**
+  Active Step
+  - add blue outline to easier identify active step
+   */
+  form.cc-form div.gf_page_steps div.gf_step.gf_step_active {
+    font-weight: 700;
+  }
+
+  /**
+  First Step
+  - remove top margin
+   */
+  form.cc-form div.gf_page_steps div.gf_step.gf_step_first {
+    margin-top: 0;
+  }
+
+  /**
+  Buttons (Next & Back)
+  - override included styles and prevent it from expanding to 100%
+   */
+  .gform_wrapper .gform_page_footer input.button.gform_previous_button,
+  .gform_wrapper .gform_page_footer input.button.gform_next_button,
+  input[type='submit']#gform_submit_button_4
+  {
+    width: unset;
+  }
+
+}
+
 /**
 Next Button
 - change shape of next button (forward pentagon)
@@ -897,51 +943,6 @@ input[type='submit']#gform_submit_button_4 {
   }
 }
 
-/* screensize < 780px (Tablets Portrait) */
-@media (max-width: 780px) {
-  /**
-  Steps Container
-   */
-  form.business-card-form div.gf_page_steps {
-    width: 100%;
-  }
-
-  /**
-  Steps
-   */
-  form.business-card-form div.gf_page_steps div.gf_step {
-    margin: 2px 0;
-    width: 100%;
-  }
-
-  /**
-  Active Step
-  - add blue outline to easier identify active step
-   */
-  form.business-card-form div.gf_page_steps div.gf_step.gf_step_active {
-    font-weight: 700;
-  }
-
-  /**
-  First Step
-  - remove top margin
-   */
-  form.business-card-form div.gf_page_steps div.gf_step.gf_step_first {
-    margin-top: 0;
-  }
-
-  /**
-  Buttons (Next & Back)
-  - override included styles and prevent it from expanding to 100%
-   */
-  .gform_wrapper .gform_page_footer input.button.gform_previous_button,
-  .gform_wrapper .gform_page_footer input.button.gform_next_button,
-  input[type='submit']#gform_submit_button_4
-  {
-    width: unset;
-  }
-
-}
 
 /* screensize < 540px (Phones Portrait) */
 @media (max-width: 540px) {
