@@ -637,7 +637,7 @@ Form Button Container
   right: 0;
   text-align: right;
   border-top: none;
-  padding: 7rem 0;
+  padding: 3rem 0;
   margin: 0;
   max-width: 60rem;
 }
@@ -969,6 +969,14 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
   flex: 0 1 60rem;
 }
 
+/**
+Field Inputs
+- remove vertical alignment for centering via flexbox
+ */
+form.standard-size-form div.gform_wrapper li.gfield .gfield_checkbox li input, .gform_wrapper .gfield_checkbox li input[type=checkbox] {
+  vertical-align: unset;
+}
+
 /** SSP Page 1 */
 
 /**
@@ -1158,14 +1166,15 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
   flex-basis: 30rem;
 }
 
-/** SSP Page 2 */
+/** SSP Page 2 & 3 */
 
 /**
-SSP 2: Fields
+SSP 2 & 3: Fields
 - consume entire row with flex-basis
 - change to flex item
  */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 {
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2,
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-3 {
   flex-basis: 100%;
   display: flex;
   align-items: center;
@@ -1173,17 +1182,19 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
 }
 
 /**
-SSP 2: Fields Container Wrapper
+SSP 2 & 3: Fields Container Wrapper
  */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 div.ginput_container {
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 div.ginput_container,
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-3 div.ginput_container {
   margin: 0;
 }
 
 /**
-SSP 2: Fields Container List
+SSP 2 & 3: Fields Container List
 - change list display to flex to align vertically and horizontally
  */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 div.ginput_container ul {
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 div.ginput_container ul,
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-3 div.ginput_container ul {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -1193,24 +1204,26 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
 SSP 2: Fields Label
 - remove margin from label
  */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 label {
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 label{
   margin: 0;
 }
 
 /**
-SSP 2: Fields Container List Item
+SSP 2 & 3: Fields Container List Item
 - add spacing between options
  */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 div.ginput_container ul li {
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 div.ginput_container ul li,
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-3 div.ginput_container ul li {
   margin: 0 2rem;
 }
 
 /**
-SSP 2: Field Inputs
-- remove vertical alignment for centering via flexbox
+SSP 3: Fields Label
+- remove margin from label
  */
-form.standard-size-form div.gform_wrapper li.gfield .gfield_checkbox li input, .gform_wrapper .gfield_checkbox li input[type=checkbox] {
-  vertical-align: unset;
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-3 label{
+  margin: 0;
+  width: 17rem;
 }
 
 /*******************************/
@@ -1238,4 +1251,30 @@ WooCommerce Summary (Gravity Forms)
   float: unset;
   clear: unset;
   width: 100%;
+}
+
+/**
+Categories
+- hide
+ */
+.single-product div.product_meta {
+  display: none;
+}
+
+/**
+Add to cart button for SSP and LFP
+- position to the right
+ */
+button.single_add_to_cart_button.button {
+  position: absolute;
+  right: 0;
+}
+
+/**
+Quantity Box
+- position to the left of "Add to Cart" button
+ */
+div.quantity {
+  position: absolute;
+  right: calc(115px + 6rem);
 }
