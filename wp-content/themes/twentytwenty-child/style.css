@@ -969,8 +969,10 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
   flex: 0 1 60rem;
 }
 
+/** SSP Page 1 */
+
 /**
-SSP: Due Date Field
+SSP 1: Due Date Field
  */
 li#field_1_29 {
   display: flex;
@@ -1002,7 +1004,7 @@ li#field_1_29 > div > img {
 }
 
 /**
-SSP: Job Name Field
+SSP 1: Job Name Field
  */
 li#field_1_1 {
   flex: 0 50%;
@@ -1010,7 +1012,7 @@ li#field_1_1 {
 }
 
 /**
-SSP: Department Field
+SSP 1: Department Field
  */
 li#field_1_27 {
   flex: 0 50%;
@@ -1018,7 +1020,7 @@ li#field_1_27 {
 }
 
 /**
-SSP: Requested Number of Fields
+SSP 1: Requested Number of Fields
  */
 li#field_1_5 {
   flex: 0 100%;
@@ -1032,7 +1034,7 @@ li#field_1_5 > div > div.instruction {
 }
 
 /**
-SSP: File Upload Field
+SSP 1: File Upload Field
  */
 li#field_1_61 {
   flex: 0 100%;
@@ -1040,7 +1042,7 @@ li#field_1_61 {
 }
 
 /**
-SSP: Proof Required Field
+SSP 1: Proof Required Field
  */
 li#field_1_62 {
   flex: 0 50% !important;
@@ -1062,7 +1064,7 @@ li#field_1_62 > div > ul li > input {
 }
 
 /**
-SSP: Print Type Field
+SSP 1: Print Type Field
  */
 li#field_1_8 {
   margin-top: 16px;
@@ -1104,7 +1106,7 @@ li#field_1_8 > div > ul li:last-of-type > label {
 }
 
 /**
-SSP: Levels Options Field
+SSP 1: Levels Options Field
  */
 li#field_1_63 {
   flex: 0 100% !important;
@@ -1141,7 +1143,7 @@ input[name="input_63"]:checked:before, input[name="input_8"]:checked:before {
 }
 
 /**
-SSP: Levels Labels
+SSP 1: Levels Labels
  */
 form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.levels-label {
   flex-basis: 100%;
@@ -1150,10 +1152,65 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
 }
 
 /**
-SSP: Finishing Options Fields (after Levels)
+SSP 1: Finishing Options Fields (after Levels)
  */
 form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.finishing-options {
   flex-basis: 30rem;
+}
+
+/** SSP Page 2 */
+
+/**
+SSP 2: Fields
+- consume entire row with flex-basis
+- change to flex item
+ */
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  margin: 1rem auto;
+}
+
+/**
+SSP 2: Fields Container Wrapper
+ */
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 div.ginput_container {
+  margin: 0;
+}
+
+/**
+SSP 2: Fields Container List
+- change list display to flex to align vertically and horizontally
+ */
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 div.ginput_container ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+/**
+SSP 2: Fields Label
+- remove margin from label
+ */
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 label {
+  margin: 0;
+}
+
+/**
+SSP 2: Fields Container List Item
+- add spacing between options
+ */
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 div.ginput_container ul li {
+  margin: 0 2rem;
+}
+
+/**
+SSP 2: Field Inputs
+- remove vertical alignment for centering via flexbox
+ */
+form.standard-size-form div.gform_wrapper li.gfield .gfield_checkbox li input, .gform_wrapper .gfield_checkbox li input[type=checkbox] {
+  vertical-align: unset;
 }
 
 /*******************************/
