@@ -641,6 +641,11 @@ Form Button Container
   margin: 0;
   max-width: 60rem;
 }
+@media (max-width: 1200px) {
+  .gform_wrapper div.gform_page_footer {
+    max-width: unset;
+  }
+}
 
 /**
 GF form validation
