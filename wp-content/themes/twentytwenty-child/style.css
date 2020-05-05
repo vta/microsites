@@ -657,7 +657,7 @@ GF form validation
 - position element above others
  */
 #gform_wrapper_1 > div.validation_error,
-.gform_wrapper form div.gf_page_steps+div.validation_error {
+form.cc-form .gform_wrapper form div.gf_page_steps+div.validation_error {
   background: var(--light-gray);
   margin-top: 0;
   margin-bottom: 0;
@@ -680,7 +680,7 @@ Form Body (Child of GF Form Element)
 - make it relative to position button container (absolute)
 - add inner spacing
  */
-form div.gform_body {
+form.cc-form div.gform_body {
   position: relative;
   background: var(--light-gray);
   padding: 2rem;
@@ -763,7 +763,7 @@ Form Fields Wrapper
 @TODO - may be GLOBAL in the future
 @TODO - might be a global FORM style in the future
  */
-form div.gform_body ul.gform_fields {
+form.form-cc div.gform_body ul.gform_fields {
   display: flex;
   flex-wrap: wrap;
   align-items: start;

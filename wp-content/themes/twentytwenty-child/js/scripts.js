@@ -104,31 +104,6 @@ const ssp_staple_conditional_checkbox = ($, form_id) => {
   }
 }
 
-const levels_field_rendering_bug = ($, form_id) =>  {
-
-  if (form_id === 1) {
-
-    // levels input
-    const level_1 = $('#choice_1_62_0');
-    const level_2 = $('#choice_1_62_1');
-    const level_3 = $('#choice_1_62_2');
-
-    // conditional fields
-    const staple_field = $('#field_1_66');
-
-    // Level is selected
-    level_1.change(() => {
-      console.log('should work');
-      console.log(staple_field.css('display'));
-      staple_field.css('display', 'block !important');
-      staple_field.css('visibility', 'visible')
-      console.log(staple_field.css('display'));
-    });
-
-  }
-
-}
-
 /**
  * Standard-Size Printing Form Setup
  *
@@ -168,18 +143,3 @@ jQuery(document).on('gform_post_render', (event, form_id, current_page) => {
   // Set up standard-size printing form
   ssp_form_setup($, form_id, current_page);
 });
-
-gform.addFilter( 'gform_conditional_logic_fields', 'set_conditional_field' );
-function set_conditional_field( options, form, selectedFieldId ){
-
-  console.log(form)
-
-  if ( form.id == 121 )
-  {
-    options.push( {
-      label: 'My Custom Field',
-      value: 5
-    } );
-  }
-  return options;
-}
