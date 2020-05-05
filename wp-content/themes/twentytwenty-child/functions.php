@@ -423,7 +423,7 @@ function register_special_status()
 
 
 /**
- * FINISHING "Finishing" status
+ * REGISTER "Finishing" status
  */
 add_action( 'wp_loaded', 'register_finishing_status' );
 function register_finishing_status()
@@ -435,6 +435,22 @@ function register_finishing_status()
         'show_in_admin_all_list' => true,
         'show_in_admin_status_list' => true,
         'label_count' => 'Finishing'                                                                // Shows up under Order's tab / filter
+    ) );
+}
+
+/**
+ * REGISTER "Proof Ready" status
+ */
+add_action( 'wp_loaded', 'register_proof_ready_status' );
+function register_proof_ready_status()
+{
+    register_post_status( 'wc-finishing', array(
+        'label' => 'Proof Ready',
+        'public' => true,
+        'exclude_from_search' => false,
+        'show_in_admin_all_list' => true,
+        'show_in_admin_status_list' => true,
+        'label_count' => 'Proof Ready'                                                                // Shows up under Order's tab / filter
     ) );
 }
 
@@ -460,14 +476,19 @@ function add_custom_order_statuses( $order_statuses )
             $new_order_statuses['wc-special'] = 'Special';
         }
 
-        // place special for pick up after "Finishing"
+        // place "Finishing" for pick up after "On Hold"
         if ( 'wc-on-hold' === $key ) {
             $new_order_statuses['wc-finishing'] = 'Finishing';
         }
 
-        // place ready for pick up after "On Hold"
+        // place 'Ready for Pick up' for pick up after "On Hold"
         if ( 'wc-on-hold' === $key ) {
             $new_order_statuses['wc-ready'] = 'Ready for Pick Up';
+        }
+
+        // place "Proof Ready" for pick up after "On Hold"
+        if ( 'wc-on-hold' === $key ) {
+            $new_order_statuses['proof-ready'] = 'Proof Ready';
         }
     }
 
