@@ -122,9 +122,6 @@ const ssp_form_setup = ($, form_id, current_page) => {
     // Add tab functionality to SSP
     bind_tabs_event($, form_id);
 
-    // Fix levels rendering
-    levels_field_rendering_bug($, form_id);
-
   }
 
 }
