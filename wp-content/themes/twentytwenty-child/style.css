@@ -500,6 +500,9 @@ form.cc-form div.gf_page_steps div.gf_step {
   height: unset;
   text-align: center;
 }
+form.cc-form div.gf_page_steps div.gf_step:hover {
+  cursor: pointer;
+}
 
 /**
 Steps Border
@@ -806,6 +809,8 @@ input[type='submit']#gform_submit_button_4 {
   clip-path: var(--preview-button-shape);
   padding: var(--preview-button-padding);
 }
+
+
 
 /* screensize < 1200px (Large Desktop) */
 @media (max-width: 1200px) {

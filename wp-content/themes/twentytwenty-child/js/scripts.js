@@ -22,7 +22,11 @@ const bind_tabs_event = ($, form_id) => {
 
   // Loop through the 3 tabs and set up event listeners
   for (let page_num = 1; page_num <= 3; page_num++) {
-    $(`#gf_step_${form_id}_${page_num}`).live('click', () => add_tab_select($, form_id, page_num));
+    $(`#gf_step_${form_id}_${page_num}`)
+      .attr('role', 'button')
+      .attr('aria-pressed', 'false')
+      .attr('tabindex', page_num)
+      .live('click', () => add_tab_select($, form_id, page_num));
   }
 
 }
