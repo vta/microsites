@@ -94,19 +94,18 @@ function clear_myaccount_cookie()
     global $post;
 
     // check if we are the "My Account" page
-    if ( isset($post->ID) && $post->ID == wc_get_page_id('myaccount') ) {
+    if ( isset( $post->ID ) && $post->ID == wc_get_page_id( 'myaccount' ) ) {
 
         // Loop through each cookie
-        foreach($_COOKIE as $cookie_key => $val) {
+        foreach ( $_COOKIE as $cookie_key => $val ) {
 
             // TARGET cookie wordpress_logged_in_XXXXXXX
             $login_cookie_regex = '/wordpress_logged_in_[d]+/';
 
-            if ( preg_match( $login_cookie_regex, $cookie_key ) )
-            {
+            if ( preg_match( $login_cookie_regex, $cookie_key ) ) {
                 // clear the cookie and set ex
-                unset($_COOKIE[$cookie_key]);
-                setcookie( $cookie_key, '', time() - ( 15 * 60 ) );
+                unset( $_COOKIE[$cookie_key] );
+                setcookie( $cookie_key, '', time() - (15 * 60) );
             }
         }
     }
@@ -141,20 +140,21 @@ function clear_cart()
 /**
  * ADD custom WC count to "Cart" menu link
  */
-add_filter( 'wp_nav_menu_objects', 'add_cart_class', 9, 2 );
-function add_cart_class( $items, $args )
+add_filter( 'wp_nav_menu_objects', 'add_cart_number', 9, 2 );
+function add_cart_number( $items, $args )
 {
+    // iterate through all menu items
     foreach ( $items as $item ) {
 
-        // convert WP_Post into array
-        $item_array = $item->to_array();
-
+        // If menu link is "Cart"
         if ( $item->title == 'Cart' ) {
             // add "custom-wc-cart" class
-            array_push($item->classes, 'custom-wc-cart');
-            $item->title = 'Cart' . ' (<span id="count-cart-items">' .  WC()->cart->get_cart_contents_count() . '</span>)';
+            array_push( $item->classes, 'custom-wc-cart' );
+
+            $item->title = 'Cart' . ' (<span id="count-cart-items">' . WC()->cart->get_cart_contents_count() . '</span>)';
         }
     }
+
     return $items;
 }
 
@@ -163,15 +163,16 @@ function add_cart_class( $items, $args )
  * @see - https://stackoverflow.com/questions/53280425/ajax-update-product-count-on-cart-menu-in-woocommerce
  */
 add_filter( 'woocommerce_add_to_cart_fragments', 'wc_refresh_cart_fragments', 50, 1 );
-function wc_refresh_cart_fragments( $fragments ){
+function wc_refresh_cart_fragments( $fragments )
+{
     $cart_count = WC()->cart->get_cart_contents_count();
 
     // Normal version
-    $count_normal = '<span id="count-cart-items">' .  $cart_count . '</span>';
+    $count_normal = '<span id="count-cart-items">' . $cart_count . '</span>';
     $fragments['#count-cart-items'] = $count_normal;
 
     // Mobile version
-    $count_mobile = '<span id="count-cart-itemob">' .  $cart_count . '</span>';
+    $count_mobile = '<span id="count-cart-itemob">' . $cart_count . '</span>';
     $fragments['#count-cart-itemob'] = $count_mobile;
 
     return $fragments;
@@ -309,6 +310,11 @@ function business_card_display_text_cart( $item_data, $cart_item )
     return $item_data;
 }
 
+add_filter( 'is_vendor_can_see_order_billing_address', false );
+add_filter( 'is_vendor_can_see_order_shipping_address', '__return_false' );
+add_filter( 'show_cust_billing_address_field', '__return_true' );
+add_filter( 'show_cust_shipping_address_field', '__return_false' );
+
 
 /**
  * ADD business card PDF link to "Edit Order" admin page
@@ -345,7 +351,7 @@ function bc_entry_id_text_to_order_items( $item, $cart_item_key, $values, $order
     );
 
     // add quantity as meta data
-    $item->add_meta_data( __( 'Quantity', 'qty'), $quantity);
+    $item->add_meta_data( __( 'Quantity', 'qty' ), $quantity );
 
 }
 
@@ -452,4 +458,55 @@ function add_custom_order_statuses( $order_statuses )
     }
 
     return $new_order_statuses;
+}
+
+/** GRAVITY FORMS */
+
+/**
+ * SSP Date Validation (3 business days - Includes today)
+ */
+add_filter( 'gform_field_validation_1_29', 'date_validation', 10, 4 );
+function date_validation( $result, $value, $form, $field )
+{
+    // dates in UNIX
+    $user_date = strtotime( $value );
+    $today = strtotime( 'today' );
+
+    $error_message = 'Must be at least 3 business days.';
+
+    // today's day
+    $day = date( 'l', $today );
+
+    error_log( json_encode( $today ), JSON_PRETTY_PRINT );
+
+    // Wednesday, Thursday, Friday, & Saturday add 5 days
+    if ( $day === 'Wednesday' || $day === 'Thursday' || $day === 'Friday' || $day === 'Saturday' ) {
+
+        if ( $user_date < strtotime( '+4 days' ) ) {
+            $earliest_date = ' Earliest order date is ' . date( 'm/d/Y',  strtotime('+5 days'));
+            $result['is_valid'] = false;
+            $result['message'] = $error_message . $earliest_date;
+        }
+
+    // Add 4 days for Sunday
+    } elseif ( $day === 'Sunday' ) {
+
+        if ( $user_date < strtotime( '+3 days' ) ) {
+            $earliest_date = ' Earliest order date is ' . date( 'm/d/Y',  strtotime('+4 days'));
+            $result['is_valid'] = false;
+            $result['message'] = $error_message . $earliest_date;
+        }
+
+    // 3 days for the rest
+    } else {
+
+        if ( $user_date < strtotime( '+2 days' ) ) {
+            $earliest_date = ' Earliest order date is ' . date( 'm/d/Y',  strtotime('+3 days'));
+            $result['is_valid'] = false;
+            $result['message'] = $error_message . $earliest_date;
+        }
+
+    }
+
+    return $result;
 }
