@@ -5,10 +5,10 @@
  * @param $ - jQuery selector
  * @param page_num - page number to change to
  */
-const bc_select_tab = ($, page_num) => {
+const add_tab_select = ($, form_id, page_num) => {
 
-  $('#gform_target_page_number_4').val(page_num);
-  $('#gform_4').trigger('submit', [true]);
+  $(`#gform_target_page_number_${form_id}`).val(page_num);
+  $(`#gform_${form_id}`).trigger('submit', [true]);
 
 }
 
@@ -18,16 +18,17 @@ const bc_select_tab = ($, page_num) => {
  * creates event listeners for each tab click
  * @param $ - jQuery Selector
  */
-const bc_tabs = ($) => {
+const bind_tabs_event = ($, form_id) => {
 
-  // BC Tab 1: Your Information
-  $('#gf_step_4_1').live('click', () => bc_select_tab($, '1'));
+  // Loop through the 3 tabs and set up event listeners
+  for (let page_num = 1; page_num <= 3; page_num++) {
+    $(`#gf_step_${form_id}_${page_num}`)
+      .attr('role', 'button')
+      .attr('aria-pressed', 'false')
+      .attr('tabindex', page_num)
+      .live('click', () => add_tab_select($, form_id, page_num));
+  }
 
-  // BC Tab 2: Contact
-  $('#gf_step_4_2').live('click', () => bc_select_tab($, '2'));
-
-  // BC Tab 3: Request
-  $('#gf_step_4_3').live('click', () => bc_select_tab($, '3'));
 }
 
 // STANDARD-SIZE PRINTING FORM
@@ -38,88 +39,68 @@ const bc_tabs = ($) => {
  * runs functions to set up business card form
  * @param $
  */
-const bc_form_setup = ($) => {
+const bc_form_setup = ($, form_id) => {
 
   // add tab functionality to business cards
-  bc_tabs($);
+  bind_tabs_event($, form_id);
 
 }
 
 /**
- * Standard-Size Printing Form Addinng Classes
+ * Standard-Size Printing Form Adding Classes
  *
  * current workaround to add classes to WooCommerce product forms
  * (gf classes are removed when forms are integrated with WC)
  * @param $ - jQuery selector
+ * @param form_id
  */
-const ssp_form_class = ($) => {
+const ssp_form_class = ($, form_id) => {
 
-  // Add generic "cc-form" class to all forms
-  $('form.cart').addClass('cc-form');
+  //@TODO - id selector is not working, will need to resolve later on
 
-  // Add "standard-size-form" class
-  $('form.cart.cc-form').addClass('standard-size-form');
+  // Add "standard-size-form" & "cc-form" class
+  $(`form.cart`)
+    .addClass('standard-size-form')
+    .addClass('cc-form');
 
 }
 
 /**
- *  Standard-Size Printing Insert Container
- * @param $ - jQuery selector
- * @param pageNum - active page in form stepper
- * @param numContainers - number of containers to pass through
- */
-const ssp_insert_containers = ($, pageNum, numContainers) => {
-
-  const formWrapper = 'form.standard-size-form ul.gform_fields';
-
-  // create containers 1 thru 4 and add within formWrapper
-  for (let i = 1; i <= numContainers; i++) {
-
-    let childFields = `form.standard-size-form div.gform_body div#gform_page_1_${pageNum}.gform_page ul.gform_fields li.gfield.container-${i}-child`;
-
-    // new container element
-    let newChild = $(`
-      <li class="container-${i}">
-        <ul class="container-${i}-list">
-        
-        </ul>
-      </li>
-    `);
-
-    // detach from parent node & append to <ul> element inside of newChild
-
-    console.log($(childFields).children());
-
-    $(childFields).appendTo(newChild.children());
-
-    // add empty container-{#} to our form body wrapper
-    $(formWrapper).append(newChild);
-  }
-
-}
-
-
-/**
- * Move Hole Punch Option
+ * SSP Conditional Checkbox Choices
  *
- * moves the entire element from container 4 and inputs it
- * into stapling options container
+ * only allow for one type of staple to be chosen for stapling
  * @param $
+ * @param form_id
  */
-const move_holepunch_option = ($, form_id, current_page) => {
+const ssp_staple_conditional_checkbox = ($, form_id) => {
 
-  // check if it is SSP Form & page 1
-  if (form_id === 1 && current_page === 1) {
-    // parent container
-    const stapleOptionsElem = $('li.gfield.container-4-child.staple > div.ginput_container > ul.gfield_radio ');
+  if (form_id === 1) {
 
-    // child element
-    // @TODO - this element is iterated 3 times
-    const holePunchElem = $('li.gfield.container-4-child.hole-punch');
+    // array of child inputs
+    // const checkboxInputs = $(`li.gfield.staple.hole-punch div.ginput_container li input`);
 
-    // remove form current original parent element & insert into staple options container
-    // holePunchElem.detach();
-    holePunchElem.children().not('#field_1_61').eq(1).appendTo(stapleOptionsElem);
+    const one_staple = $('input#choice_1_66_1');
+    const two_staple = $('input#choice_1_66_2');
+    const four_staple = $('input#choice_1_66_3');
+
+    // if 1-staple is chosen, remove options 2- & 4-
+    one_staple.change(() => {
+      two_staple.attr('checked', false);
+      four_staple.attr('checked', false);
+    });
+
+    // if 2-staple is chosen, remove options 1- & 4-
+    two_staple.change(() => {
+      one_staple.attr('checked', false);
+      four_staple.attr('checked', false);
+    });
+
+    // if 4-staple is chosen, remove options 1- & 2-
+    four_staple.change(() => {
+      one_staple.attr('checked', false);
+      two_staple.attr('checked', false);
+    });
+
   }
 }
 
@@ -131,35 +112,31 @@ const move_holepunch_option = ($, form_id, current_page) => {
  */
 const ssp_form_setup = ($, form_id, current_page) => {
 
-  // adding additional classes to SSP form
-  ssp_form_class($);
+  if (form_id === 1) {
+    // adding additional classes to SSP form
+    ssp_form_class($, form_id);
 
-  const numContainersPerPage = {
-    1: 4,
-    2: 1,
-    3: 2,
+    // Conditional values for stapling options
+    ssp_staple_conditional_checkbox($, form_id);
+
+    // Add tab functionality to SSP
+    bind_tabs_event($, form_id);
+
   }
 
-  const numContainers = numContainersPerPage[current_page];
-
-  // insert new containers
-  ssp_insert_containers($, current_page, numContainers);
-
-  // move staple options to hole punch element
-  move_holepunch_option($, form_id, current_page);
 }
 
 /**
  * Load scripts when Gravity Forms Render
  */
-jQuery(document).on('gform_post_render',  (event, form_id, current_page) => {
+jQuery(document).on('gform_post_render', (event, form_id, current_page) => {
 
   // save global variable
   const $ = jQuery;
 
   // Set up business card form
-  bc_form_setup($);
+  bc_form_setup($, form_id);
 
   // Set up standard-size printing form
-  // ssp_form_setup($, form_id, current_page);
+  ssp_form_setup($, form_id, current_page);
 });
