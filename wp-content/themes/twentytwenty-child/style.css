@@ -702,6 +702,41 @@ form div.gform_wrapper div.instruction {
   display: none;
 }
 
+/**
+Custom Radio Button Styling
+ */
+input[type="radio"]:checked:before  {
+  content: "";
+  display: block;
+  position: relative;
+  top: -1px;
+  left: -1px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid #2c78ca;
+}
+input[type="radio"]:checked:before {
+  background: #2c79ca;
+  border: 1px solid #FFFFFF;
+}
+
+/**
+Checkbox Custom Styling
+ */
+input[type="checkbox"]:checked:before  {
+  content: "";
+  display: block;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  background: #2c78ca;
+  border: 1px solid #2c78ca;
+}
+
 /************************/
 /** BUSINESS CARD FORM **/
 /************************/
@@ -993,7 +1028,7 @@ li#field_1_29 {
   flex: 1 100%;
   padding:0 0 15px 0;
   margin-bottom: 11px;
-  border-bottom: 1px solid #2c79ca;
+  border-bottom: var(--normal-dark-blue);
 }
 li#field_1_29 > label {
   display: inline-flex;
@@ -1040,7 +1075,7 @@ li#field_1_5 {
   min-width: 280px;
   padding: 0 0 15px 0;
   margin-bottom: 11px;
-  border-bottom: 1px solid #2c79ca;
+  border-bottom: var(--normal-dark-blue);
 }
 li#field_1_5 > div > div.instruction {
   padding: 5px 0 5px 0;
@@ -1138,22 +1173,6 @@ li#field_1_63 > div > ul {
 li#field_1_63 > div > ul li {
   width: 88px;
 }
-input[name="input_63"]:before, input[name="input_8"]:before {
-  content: "";
-  display: block;
-  position: relative;
-  top: -3px;
-  left: 0px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #FFFFFF;
-  border: 1px solid #2c78ca;
-}
-input[name="input_63"]:checked:before, input[name="input_8"]:checked:before {
-  background: #2c79ca;
-  border: 1px solid #FFFFFF;
-}
 
 /**
 SSP 1: Levels Labels
@@ -1169,6 +1188,28 @@ SSP 1: Finishing Options Fields (after Levels)
  */
 form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.finishing-options {
   flex-basis: 30rem;
+}
+
+/** screensize < 1024 (tablet landscape) */
+@media (max-width: 1024px) {
+  /**
+  Levels Field
+  - expand to cover the entire form
+   */
+  form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.finishing-options {
+    flex-basis: 100%;
+  }
+}
+
+/** screensize < 768 (tablet portrait) */
+@media (max-width: 768px) {
+  /**
+  SSP 1: Top Three Fields
+  - expand to the entire screen size
+   */
+  form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.ssp-information {
+    flex-basis: 100% !important;
+  }
 }
 
 /** SSP Page 2 & 3 */
