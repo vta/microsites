@@ -248,8 +248,6 @@ function custom_override_checkout_fields( $fields )
 add_filter( 'woocommerce_account_menu_items', 'remove_customer_downloads_addresss' );
 function remove_customer_downloads_addresss ($items)
 {
-    error_log( json_encode($items), JSON_PRETTY_PRINT);
-
     unset( $items['downloads'] );
     unset( $items['edit-address'] );
 
@@ -511,8 +509,6 @@ function date_validation( $result, $value, $form, $field )
 
     // today's day
     $day = date( 'l', $today );
-
-    error_log( json_encode( $today ), JSON_PRETTY_PRINT );
 
     // Wednesday, Thursday, Friday, & Saturday add 5 days
     if ( $day === 'Wednesday' || $day === 'Thursday' || $day === 'Friday' || $day === 'Saturday' ) {

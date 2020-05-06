@@ -763,7 +763,7 @@ Form Fields Wrapper
 @TODO - may be GLOBAL in the future
 @TODO - might be a global FORM style in the future
  */
-form.form-cc div.gform_body ul.gform_fields {
+form.cc-form div.gform_body ul.gform_fields {
   display: flex;
   flex-wrap: wrap;
   align-items: start;
