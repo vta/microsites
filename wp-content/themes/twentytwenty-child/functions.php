@@ -439,10 +439,10 @@ function register_finishing_status()
 /**
  * REGISTER "Proof Ready" status
  */
-add_action( 'wp_loaded', 'register_proof_ready_status' );
-function register_proof_ready_status()
+add_action( 'wp_loaded', 'register_proof_status' );
+function register_proof_status()
 {
-    register_post_status( 'wc-proof-ready', array(
+    register_post_status( 'wc-proof', array(
         'label' => 'Proof Ready',
         'public' => true,
         'exclude_from_search' => false,
@@ -476,7 +476,7 @@ function add_custom_order_statuses( $order_statuses )
 
         // place "Proof Ready" for pick up after "On Hold"
         if ( 'wc-on-hold' === $key ) {
-            $new_order_statuses['wc-proof-ready'] = 'Proof Ready';
+            $new_order_statuses['wc-proof'] = 'Proof Ready';
         }
 
         // place "Finishing" for pick up after "On Hold"
