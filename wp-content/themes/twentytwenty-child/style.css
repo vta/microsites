@@ -1318,9 +1318,10 @@ div.woocommerce-product-gallery.woocommerce-product-gallery--without-images.imag
 WooCommerce Pages
 - Remove extra spacing inside woocommerce pages
  */
+.woocommerce-cart #site-content .woocommerce,
 .woocommerce-account #site-content .woocommerce {
   padding: 0;
-  margin: 0;
+  margin: auto;
 }
 
 /**
