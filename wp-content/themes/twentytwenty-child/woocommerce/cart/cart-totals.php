@@ -14,9 +14,18 @@
  * @package WooCommerce/Templates
  * @version 2.3.6
  *
- * TEMPLATE OVERRIDE - Remove cart totals (Deleted entire file)
+ * TEMPLATE OVERRIDE - Remove cart totals (Deleted entire file minus proceed to checkout)
  */
 
 defined( 'ABSPATH' ) || exit;
 
 ?>
+<div class="cart_totals <?php echo ( WC()->customer->has_calculated_shipping() ) ? 'calculated_shipping' : ''; ?>">
+
+    <div class="wc-proceed-to-checkout">
+        <?php do_action( 'woocommerce_proceed_to_checkout' ); ?>
+    </div>
+
+    <?php do_action( 'woocommerce_after_cart_totals' ); ?>
+
+</div>
