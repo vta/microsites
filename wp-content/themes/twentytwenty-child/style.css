@@ -1315,6 +1315,15 @@ div.woocommerce-product-gallery.woocommerce-product-gallery--without-images.imag
 }
 
 /**
+WooCommerce Pages
+- Remove extra spacing inside woocommerce pages
+ */
+.woocommerce-account #site-content .woocommerce {
+  padding: 0;
+  margin: 0;
+}
+
+/**
 WooCommerce Summary (Gravity Forms)
 - expand container to fit the entire page
  */
