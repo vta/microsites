@@ -442,7 +442,7 @@ function register_finishing_status()
 add_action( 'wp_loaded', 'register_proof_ready_status' );
 function register_proof_ready_status()
 {
-    register_post_status( 'wc-finishing', array(
+    register_post_status( 'wc-proof-ready', array(
         'label' => 'Proof Ready',
         'public' => true,
         'exclude_from_search' => false,
@@ -474,6 +474,11 @@ function add_custom_order_statuses( $order_statuses )
             $new_order_statuses['wc-special'] = 'Special';
         }
 
+        // place "Proof Ready" for pick up after "On Hold"
+        if ( 'wc-on-hold' === $key ) {
+            $new_order_statuses['wc-proof-ready'] = 'Proof Ready';
+        }
+
         // place "Finishing" for pick up after "On Hold"
         if ( 'wc-on-hold' === $key ) {
             $new_order_statuses['wc-finishing'] = 'Finishing';
@@ -482,11 +487,6 @@ function add_custom_order_statuses( $order_statuses )
         // place 'Ready for Pick up' for pick up after "On Hold"
         if ( 'wc-on-hold' === $key ) {
             $new_order_statuses['wc-ready'] = 'Ready for Pick Up';
-        }
-
-        // place "Proof Ready" for pick up after "On Hold"
-        if ( 'wc-on-hold' === $key ) {
-            $new_order_statuses['proof-ready'] = 'Proof Ready';
         }
     }
 
