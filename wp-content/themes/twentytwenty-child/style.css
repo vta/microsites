@@ -1379,10 +1379,11 @@ button.single_add_to_cart_button.button {
 }
 
 /**
-Quantity Box
+Quantity Box in Forms
 - position to the left of "Add to Cart" button
  */
-div.quantity {
+form.cc-form div.quantity {
   position: absolute;
   right: calc(115px + 6rem);
 }
+
