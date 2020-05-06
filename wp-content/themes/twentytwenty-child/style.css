@@ -1325,6 +1325,14 @@ WooCommerce Summary (Gravity Forms)
 }
 
 /**
+WooCommerce Cart Header
+- remove strange padding from this single page header
+ */
+.woocommerce-cart #site-content .entry-header {
+  padding: 0;
+}
+
+/**
 Categories
 - hide
  */
