@@ -34,7 +34,7 @@ function child_scripts()
 /**
  * REGISTER Custom Inner Footer Menu
  */
-add_action( 'wp_loaded', 'register_menus' );
+add_action( 'init', 'register_menus' );
 function register_menus()
 {
     $locations = array(
@@ -48,7 +48,7 @@ function register_menus()
  * Start user session for each individual user
  * REQUIRED for attaching meta data to business card product
  */
-add_action( "wp_loaded", "theme_start_session", 1 );
+add_action( "init", "theme_start_session", 1 );
 function theme_start_session()
 {
     if ( !session_id() )
@@ -390,7 +390,7 @@ function unset_specific_order_item_meta_data( $formatted_meta, $item )
 /**
  * REGISTER "Ready for Pick Up" status
  */
-add_action( 'wp_loaded', 'register_ready_for_pickup_order_status' );
+add_action( 'init', 'register_ready_for_pickup_order_status' );
 function register_ready_for_pickup_order_status()
 {
     register_post_status( 'wc-ready', array(
@@ -406,7 +406,7 @@ function register_ready_for_pickup_order_status()
 /**
  * REGISTER "Special" status
  */
-add_action( 'wp_loaded', 'register_special_status' );
+add_action( 'init', 'register_special_status' );
 function register_special_status()
 {
     register_post_status( 'wc-special', array(
@@ -423,7 +423,7 @@ function register_special_status()
 /**
  * REGISTER "Finishing" status
  */
-add_action( 'wp_loaded', 'register_finishing_status' );
+add_action( 'init', 'register_finishing_status' );
 function register_finishing_status()
 {
     register_post_status( 'wc-finishing', array(
@@ -439,7 +439,7 @@ function register_finishing_status()
 /**
  * REGISTER "Proof Ready" status
  */
-add_action( 'wp_loaded', 'register_proof_status' );
+add_action( 'init', 'register_proof_status' );
 function register_proof_status()
 {
     register_post_status( 'wc-proof', array(
