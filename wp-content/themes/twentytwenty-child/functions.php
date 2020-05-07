@@ -541,3 +541,9 @@ function date_validation( $result, $value, $form, $field )
 
     return $result;
 }
+
+
+apply_filters( 'woocommerce_order_shipping_to_display', 'admin_hide_shipping', 10, 2 );
+function admin_hide_shipping( $shipping, $tax_display ) {
+    error_log( json_encode( $shipping ), JSON_PRETTY_PRINT );
+}

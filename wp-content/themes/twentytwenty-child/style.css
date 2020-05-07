@@ -933,11 +933,11 @@ Business Card Preview Button Container
 - add spacing to the bottom
  */
 article#post-157.post-157 #confirm-bc > div.bc-preview-button-container {
-  display: flex;
-  flex-grow: 0;
-  flex-shrink: 0;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
+  position: absolute;
+}
+
+article#post-157.post-157 #confirm-bc > div.bc-preview-button-container button.bc-preview-cancel {
+  width: 13rem;
 }
 
 /**
