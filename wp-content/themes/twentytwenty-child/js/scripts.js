@@ -1,5 +1,7 @@
+// GLOBAL GF FORM FUNCTIONS // (APPLIES TO MORE THAN 1 FORM)
+
 /**
- * Business Card Tab Select (Helper Function)
+ * Tab Select (Helper Function)
  *
  * changes to page based off of chosen tab
  * @param $ - jQuery selector
@@ -13,7 +15,7 @@ const add_tab_select = ($, form_id, page_num) => {
 }
 
 /**
- * Business Card Tabs Function
+ * Tabs Function
  *
  * creates event listeners for each tab click
  * @param $ - jQuery Selector
@@ -28,21 +30,6 @@ const bind_tabs_event = ($, form_id) => {
       .attr('tabindex', page_num)
       .live('click', () => add_tab_select($, form_id, page_num));
   }
-
-}
-
-// STANDARD-SIZE PRINTING FORM
-
-/**
- * Business Card Form Setup
- *
- * runs functions to set up business card form
- * @param $
- */
-const bc_form_setup = ($, form_id) => {
-
-  // add tab functionality to business cards
-  bind_tabs_event($, form_id);
 
 }
 
@@ -66,6 +53,23 @@ const add_form_class = ($, form_id) => {
     .addClass('cc-form');
 
 }
+
+// BUSINESS CARD FORM //
+
+/**
+ * Business Card Form Setup
+ *
+ * runs functions to set up business card form
+ * @param $
+ */
+const bc_form_setup = ($, form_id) => {
+
+  // add tab functionality to business cards
+  bind_tabs_event($, form_id);
+
+}
+
+// STANDARD-SIZE PRINTING FORM //
 
 /**
  * SSP Conditional Checkbox Choices
@@ -130,6 +134,8 @@ const ssp_form_setup = ($, form_id, current_page) => {
 
 }
 
+// LARGE FORMAT PRINTING FORM //
+
 /**
  * Large Format Printing Form Setup
  *
@@ -141,18 +147,17 @@ const ssp_form_setup = ($, form_id, current_page) => {
 const lfp_form_setup = ($, form_id, current_page) => {
 
   if (form_id === 7) {
-    // adding additional classes to SSP form
+    // adding additional classes to LFP form
     add_form_class($, form_id);
 
-    // Conditional values for stapling options
-    ssp_staple_conditional_checkbox($, form_id);
-
-    // Add tab functionality to SSP
+    // Add tab functionality to LFP
     bind_tabs_event($, form_id);
 
   }
 
 }
+
+// MAIN //
 
 /**
  * Load scripts when Gravity Forms Render

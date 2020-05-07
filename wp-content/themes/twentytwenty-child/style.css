@@ -961,50 +961,61 @@ article#post-157.post-157 div.entry-content p.product.add_to_cart_bc {
   border: none;
 }
 
-/****************************/
-/** STANDARD-SIZE PRINTING **/
-/****************************/
+/****************************************************/
+/** STANDARD-SIZE PRINTING & LARGE FORMAT PRINTING **/
+/****************************************************/
 
-/* @NOTE - li.container can be found in ./js/scripts.js */
+/**
+ Both forms have similar styles. Styles for both forms
+ will be defined in this section with the appropriate acronyms
+ above each selector.
+
+ SSP - Standard-Size Printing
+ LFP - Large Format Printing
+*/
 
 /** override GF size */
 @media only screen and (min-width: 641px) {
   /**
   Form Labels
   */
-  form.standard-size-form label.gfield_label {
+  form.standard-size-form label.gfield_label,
+  form.large-format-form label.gfield_label {
     font-size: 1.6rem;
     float: unset;
   }
 }
 
 /*
-SSP Form Wrapper
+SSP & LFP Form Wrapper
 - Extend the form to the whole page
 @TODO - this may be a global form style. Will not override width + max-width without ID selector
 */
-div#gform_wrapper_1.gform_wrapper {
+div#gform_wrapper_1.gform_wrapper,
+div#gform_wrapper_7.gform_wrapper {
   margin: 0;
   width: 100%;
   max-width: unset;
 }
 
 /**
-Standard Size Form Fields
+SSP & LFP Form Fields
 - remove margin & min-height from cc-form styles
  */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield {
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield,
+form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield {
   margin: unset;
   min-height: unset;
   flex: 0 1 48rem;
 }
 
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print {
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print,
+form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print {
   flex: 0 1 100%;
 }
 
 /**
-Levels Options Field
+SSP: Levels Options Field
  */
 form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.levels-options {
   flex: 0 1 100%;
@@ -1015,19 +1026,19 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
 }
 
 /**
-Field Inputs
+SSP & LFP Field Inputs
 - remove vertical alignment for centering via flexbox
  */
 form.standard-size-form div.gform_wrapper li.gfield .gfield_checkbox li input, .gform_wrapper .gfield_checkbox li input[type=checkbox] {
   vertical-align: unset;
 }
 
-/** SSP Page 1 */
+/** SSP & LFP Page 1 */
 
 /**
-SSP 1: Due Date Field
+SSP & LFP 1: Due Date Field
  */
-li#field_1_29 {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.due-date {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
@@ -1036,22 +1047,22 @@ li#field_1_29 {
   margin-bottom: 11px;
   border-bottom: var(--normal-dark-blue);
 }
-li#field_1_29 > label {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.due-date > label {
   display: inline-flex;
   height: 20px;
   margin: auto 0 auto auto;
 }
-li#field_1_29 > div {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.due-date > div {
   margin-top: 0 !important;
   left: 21px;
   position: relative;
 }
-li#field_1_29 > div > input {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.due-date > div > input {
   margin: auto 0 auto auto;
   width: 150px;
   height: 35px;
 }
-li#field_1_29 > div > img {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.due-date > div > img {
   position: relative;
   right: 30px;
   top: 0;
