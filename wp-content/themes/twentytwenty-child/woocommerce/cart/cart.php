@@ -30,7 +30,7 @@ do_action( 'woocommerce_before_cart' ); ?>
             <th class="product-remove">&nbsp;</th>
             <th class="product-thumbnail">&nbsp;</th>
             <th class="product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-            <th class="product-price"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
+            <!--Remove Pricing-->
             <th class="product-quantity"><?php esc_html_e( 'Quantity', 'woocommerce' ); ?></th>
         </tr>
         </thead>
@@ -95,11 +95,7 @@ do_action( 'woocommerce_before_cart' ); ?>
                         ?>
                     </td>
 
-                    <td class="product-price" data-title="<?php esc_attr_e( 'Price', 'woocommerce' ); ?>">
-                        <?php
-                        echo apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item, $cart_item_key ); // PHPCS: XSS ok.
-                        ?>
-                    </td>
+                    <!--Remove Price-->
 
                     <td class="product-quantity" data-title="<?php esc_attr_e( 'Quantity', 'woocommerce' ); ?>">
                         <?php
