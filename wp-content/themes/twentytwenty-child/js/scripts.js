@@ -47,20 +47,22 @@ const bc_form_setup = ($, form_id) => {
 }
 
 /**
- * Standard-Size Printing Form Adding Classes
+ * Add Form classes Classes
  *
  * current workaround to add classes to WooCommerce product forms
  * (gf classes are removed when forms are integrated with WC)
  * @param $ - jQuery selector
  * @param form_id
  */
-const ssp_form_class = ($, form_id) => {
+const add_form_class = ($, form_id) => {
 
-  //@TODO - id selector is not working, will need to resolve later on
+  // assign the correct class depending on Form ID
+  // (may need to change in the future we add more forms)
+  let form_class = form_id === 1 ? 'standard-size-form' : 'large-format-form';
 
   // Add "standard-size-form" & "cc-form" class
-  $(`form.cart`)
-    .addClass('standard-size-form')
+  $('form.cart')
+    .addClass(form_class)
     .addClass('cc-form');
 
 }
@@ -107,14 +109,40 @@ const ssp_staple_conditional_checkbox = ($, form_id) => {
 /**
  * Standard-Size Printing Form Setup
  *
- * runs function to set up business card forms
+ * runs function to set up "Standard-Size Printing" form
  * @param $ - jQuery selector
+ * @param form_id
+ * @param current_page
  */
 const ssp_form_setup = ($, form_id, current_page) => {
 
   if (form_id === 1) {
     // adding additional classes to SSP form
-    ssp_form_class($, form_id);
+    add_form_class($, form_id);
+
+    // Conditional values for stapling options
+    ssp_staple_conditional_checkbox($, form_id);
+
+    // Add tab functionality to SSP
+    bind_tabs_event($, form_id);
+
+  }
+
+}
+
+/**
+ * Large Format Printing Form Setup
+ *
+ * runs function to set up "Large Format Printing" form
+ * @param $
+ * @param form_id
+ * @param current_page
+ */
+const lfp_form_setup = ($, form_id, current_page) => {
+
+  if (form_id === 7) {
+    // adding additional classes to SSP form
+    add_form_class($, form_id);
 
     // Conditional values for stapling options
     ssp_staple_conditional_checkbox($, form_id);
@@ -134,9 +162,13 @@ jQuery(document).on('gform_post_render', (event, form_id, current_page) => {
   // save global variable
   const $ = jQuery;
 
-  // Set up business card form
+  // Set up Business Card Printing form
   bc_form_setup($, form_id);
 
-  // Set up standard-size printing form
+  // Set up Standard-Size Printing form
   ssp_form_setup($, form_id, current_page);
+
+  // Set up Large Format Printing form
+  lfp_form_setup($, form_id, current_page);
+
 });
