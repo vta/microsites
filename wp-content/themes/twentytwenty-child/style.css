@@ -961,12 +961,12 @@ article#post-157.post-157 div.entry-content p.product.add_to_cart_bc {
   border: none;
 }
 
-/****************************************************/
-/** STANDARD-SIZE PRINTING & LARGE FORMAT PRINTING **/
-/****************************************************/
+/***********************************************************/
+/** STANDARD-SIZE PRINTING & LARGE FORMAT PRINTING PAGE 1 **/
+/***********************************************************/
 
 /**
- Both forms have similar styles. Styles for both forms
+ Both forms have similar styles on page 1. Styles for both forms
  will be defined in this section with the appropriate acronyms
  above each selector.
 
@@ -1069,63 +1069,62 @@ form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.d
 }
 
 /**
-SSP 1: Job Name Field
+SSP & LFP 1: Job Name Field
  */
-li#field_1_1 {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.job-name {
   flex: 0 50%;
   min-width:280px;
 }
 
 /**
-SSP 1: Department Field
+SSP & LFP 1: Department Field
  */
-li#field_1_27 {
-  flex: 0 50%;
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.department {
+  flex: 0 50% ;
   min-width: 280px;
 }
 
 /**
-SSP 1: Requested Number of Fields
+SSP & LFP 1: Requested Number of Fields
  */
-li#field_1_5 {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.num-copies {
   flex: 0 100%;
   min-width: 280px;
   padding: 0 0 15px 0;
   margin-bottom: 11px;
   border-bottom: var(--normal-dark-blue);
 }
-li#field_1_5 > div > div.instruction {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.num-copies > div > div.instruction {
   padding: 5px 0 5px 0;
 }
 
 /**
-SSP 1: File Upload Field
+SSP & LFP 1: File Upload Field
  */
-li#field_1_61 {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.file-upload {
   flex: 0 100%;
   min-width: 280px;
 }
 
 /**
-SSP 1: Proof Required Field
+SSP & LFP 1: Proof Required Field
  */
-li#field_1_62 {
-  flex: 0 50% !important;
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.proof-required {
+  flex: 0 100% !important;
   min-width: 280px;
-  margin-top: 25px;
+  flex-flow: column;
+  display: inline-flex;
+  height: 50px;
 }
-li#field_1_62 > div > ul li {
-  background: #2c79ca;
-  color: #FFFFFF;
-  min-width: 280px;
-  max-width: 420px;
-  font-size: 1.4vh;
-  text-align: center;
-  padding: 15px !important;
-  border-radius: 6px;
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.proof-required > div > ul li label {
+  width: 60px;
 }
-li#field_1_62 > div > ul li > input {
-  opacity: 0;
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.proof-required > div > ul {
+  display: inline-flex;
+  margin: 0;
+}
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.proof-required > div > ul li {
+  width: 88px;
 }
 
 /**
@@ -1171,24 +1170,25 @@ li#field_1_8 > div > ul li:last-of-type > label {
 }
 
 /**
-SSP 1: Levels Options Field
+SSP 1: Levels Option
  */
-li#field_1_63 {
-  flex: 0 100% !important;
+li#field_1_62 {
+  flex: 0 50% !important;
   min-width: 280px;
-  flex-flow: column;
-  display: inline-flex;
-  height: 50px;
+  margin-top: 25px;
 }
-li#field_1_63 > div > ul li label {
-  width: 60px;
+li#field_1_62 > div > ul li {
+  background: #2c79ca;
+  color: #FFFFFF;
+  min-width: 280px;
+  max-width: 420px;
+  font-size: 1.4vh;
+  text-align: center;
+  padding: 15px !important;
+  border-radius: 6px;
 }
-li#field_1_63 > div > ul {
-  display: inline-flex;
-  margin: 0;
-}
-li#field_1_63 > div > ul li {
-  width: 88px;
+li#field_1_62 > div > ul li > input {
+  opacity: 0;
 }
 
 /**
