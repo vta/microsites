@@ -17,6 +17,8 @@
  *
  * @edit - This page was edited at line 47 to add a 72 hour ETA when the order is placed. This page notifies
  * immediately after the order
+ *
+ * TEMPLATE OVERRIDE - removed total at line 75
  */
 
 if ( !defined( 'ABSPATH' ) ) {
@@ -70,10 +72,7 @@ if ( !defined( 'ABSPATH' ) ) {
               </li>
             <?php endif; ?>
 
-          <li class="woocommerce-order-overview__total total">
-              <?php _e( 'Total:', 'woocommerce' ); ?>
-            <strong><?php echo $order->get_formatted_order_total(); ?></strong>
-          </li>
+            <!-- Removed Order total -->
 
             <?php if ( $order->get_payment_method_title() ) : ?>
               <li class="woocommerce-order-overview__payment-method method">

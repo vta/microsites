@@ -34,7 +34,7 @@ function child_scripts()
 /**
  * REGISTER Custom Inner Footer Menu
  */
-add_action( 'wp_loaded', 'register_menus' );
+add_action( 'init', 'register_menus' );
 function register_menus()
 {
     $locations = array(
@@ -48,7 +48,7 @@ function register_menus()
  * Start user session for each individual user
  * REQUIRED for attaching meta data to business card product
  */
-add_action( "wp_loaded", "theme_start_session", 1 );
+add_action( "init", "theme_start_session", 1 );
 function theme_start_session()
 {
     if ( !session_id() )
@@ -242,6 +242,18 @@ function custom_override_checkout_fields( $fields )
     return $fields;
 }
 
+/**
+ * REMOVE Downloads & Address tab from "My Account"
+ */
+add_filter( 'woocommerce_account_menu_items', 'remove_customer_downloads_addresss' );
+function remove_customer_downloads_addresss ($items)
+{
+    unset( $items['downloads'] );
+    unset( $items['edit-address'] );
+
+    return $items;
+}
+
 /** BACK-END, METADATA, & WP ADMIN CHANGES  */
 
 /**
@@ -378,7 +390,7 @@ function unset_specific_order_item_meta_data( $formatted_meta, $item )
 /**
  * REGISTER "Ready for Pick Up" status
  */
-add_action( 'wp_loaded', 'register_ready_for_pickup_order_status' );
+add_action( 'init', 'register_ready_for_pickup_order_status' );
 function register_ready_for_pickup_order_status()
 {
     register_post_status( 'wc-ready', array(
@@ -394,7 +406,7 @@ function register_ready_for_pickup_order_status()
 /**
  * REGISTER "Special" status
  */
-add_action( 'wp_loaded', 'register_special_status' );
+add_action( 'init', 'register_special_status' );
 function register_special_status()
 {
     register_post_status( 'wc-special', array(
@@ -409,9 +421,9 @@ function register_special_status()
 
 
 /**
- * FINISHING "Finishing" status
+ * REGISTER "Finishing" status
  */
-add_action( 'wp_loaded', 'register_finishing_status' );
+add_action( 'init', 'register_finishing_status' );
 function register_finishing_status()
 {
     register_post_status( 'wc-finishing', array(
@@ -421,6 +433,22 @@ function register_finishing_status()
         'show_in_admin_all_list' => true,
         'show_in_admin_status_list' => true,
         'label_count' => 'Finishing'                                                                // Shows up under Order's tab / filter
+    ) );
+}
+
+/**
+ * REGISTER "Proof Ready" status
+ */
+add_action( 'init', 'register_proof_status' );
+function register_proof_status()
+{
+    register_post_status( 'wc-proof', array(
+        'label' => 'Proof Ready',
+        'public' => true,
+        'exclude_from_search' => false,
+        'show_in_admin_all_list' => true,
+        'show_in_admin_status_list' => true,
+        'label_count' => 'Proof Ready'                                                                // Shows up under Order's tab / filter
     ) );
 }
 
@@ -446,12 +474,17 @@ function add_custom_order_statuses( $order_statuses )
             $new_order_statuses['wc-special'] = 'Special';
         }
 
-        // place special for pick up after "Finishing"
+        // place "Proof Ready" for pick up after "On Hold"
+        if ( 'wc-on-hold' === $key ) {
+            $new_order_statuses['wc-proof'] = 'Proof Ready';
+        }
+
+        // place "Finishing" for pick up after "On Hold"
         if ( 'wc-on-hold' === $key ) {
             $new_order_statuses['wc-finishing'] = 'Finishing';
         }
 
-        // place ready for pick up after "On Hold"
+        // place 'Ready for Pick up' for pick up after "On Hold"
         if ( 'wc-on-hold' === $key ) {
             $new_order_statuses['wc-ready'] = 'Ready for Pick Up';
         }
@@ -476,8 +509,6 @@ function date_validation( $result, $value, $form, $field )
 
     // today's day
     $day = date( 'l', $today );
-
-    error_log( json_encode( $today ), JSON_PRETTY_PRINT );
 
     // Wednesday, Thursday, Friday, & Saturday add 5 days
     if ( $day === 'Wednesday' || $day === 'Thursday' || $day === 'Friday' || $day === 'Saturday' ) {
@@ -509,4 +540,10 @@ function date_validation( $result, $value, $form, $field )
     }
 
     return $result;
+}
+
+
+apply_filters( 'woocommerce_order_shipping_to_display', 'admin_hide_shipping', 10, 2 );
+function admin_hide_shipping( $shipping, $tax_display ) {
+    error_log( json_encode( $shipping ), JSON_PRETTY_PRINT );
 }

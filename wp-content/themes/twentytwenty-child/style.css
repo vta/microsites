@@ -657,7 +657,7 @@ GF form validation
 - position element above others
  */
 #gform_wrapper_1 > div.validation_error,
-.gform_wrapper form div.gf_page_steps+div.validation_error {
+form.cc-form .gform_wrapper form div.gf_page_steps+div.validation_error {
   background: var(--light-gray);
   margin-top: 0;
   margin-bottom: 0;
@@ -680,7 +680,7 @@ Form Body (Child of GF Form Element)
 - make it relative to position button container (absolute)
 - add inner spacing
  */
-form div.gform_body {
+form.cc-form div.gform_body {
   position: relative;
   background: var(--light-gray);
   padding: 2rem;
@@ -763,7 +763,7 @@ Form Fields Wrapper
 @TODO - may be GLOBAL in the future
 @TODO - might be a global FORM style in the future
  */
-form div.gform_body ul.gform_fields {
+form.cc-form div.gform_body ul.gform_fields {
   display: flex;
   flex-wrap: wrap;
   align-items: start;
@@ -933,11 +933,11 @@ Business Card Preview Button Container
 - add spacing to the bottom
  */
 article#post-157.post-157 #confirm-bc > div.bc-preview-button-container {
-  display: flex;
-  flex-grow: 0;
-  flex-shrink: 0;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
+  position: absolute;
+}
+
+article#post-157.post-157 #confirm-bc > div.bc-preview-button-container button.bc-preview-cancel {
+  width: 13rem;
 }
 
 /**
@@ -1297,6 +1297,25 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
   }
 }
 
+/********************************/
+/** GF: Confirmed Account PAGE **/
+/********************************/
+
+/**
+Main Container
+ */
+div#content.widecolumn {
+  text-align: center;
+  min-height: 60vh;
+  background: var(--lighter-gray);
+  padding: 3rem 0;
+}
+
+div#content.widecolumn p.lead-in {
+  max-width: 768px;
+  margin: auto;
+}
+
 /*******************************/
 /** WOOCOMMERCE GLOBAL STYLES **/
 /*******************************/
@@ -1315,6 +1334,16 @@ div.woocommerce-product-gallery.woocommerce-product-gallery--without-images.imag
 }
 
 /**
+WooCommerce Pages
+- Remove extra spacing inside woocommerce pages
+ */
+.woocommerce-cart #site-content .woocommerce,
+.woocommerce-account #site-content .woocommerce {
+  padding: 0;
+  margin: auto;
+}
+
+/**
 WooCommerce Summary (Gravity Forms)
 - expand container to fit the entire page
  */
@@ -1322,6 +1351,14 @@ WooCommerce Summary (Gravity Forms)
   float: unset;
   clear: unset;
   width: 100%;
+}
+
+/**
+WooCommerce Cart Header
+- remove strange padding from this single page header
+ */
+.woocommerce-cart #site-content .entry-header {
+  padding: 0;
 }
 
 /**
@@ -1342,10 +1379,11 @@ button.single_add_to_cart_button.button {
 }
 
 /**
-Quantity Box
+Quantity Box in Forms
 - position to the left of "Add to Cart" button
  */
-div.quantity {
+form.cc-form div.quantity {
   position: absolute;
   right: calc(115px + 6rem);
 }
+
