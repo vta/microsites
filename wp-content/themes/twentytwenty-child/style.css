@@ -720,10 +720,6 @@ input[type="radio"]:checked:before  {
   background: #FFFFFF;
   border: 1px solid #2c78ca;
 }
-input[type="radio"]:checked:before {
-  background: #2c79ca;
-  border: 1px solid #FFFFFF;
-}
 
 /**
 Checkbox Custom Styling
@@ -738,6 +734,9 @@ input[type="checkbox"]:checked:before  {
   height: 16px;
   background: #2c78ca;
   border: 1px solid #2c78ca;
+}
+input[type="checkbox"]:checked:focus {
+  outline: none;
 }
 
 /************************/
@@ -1130,7 +1129,7 @@ form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print
 /**
 SSP 1: Print Type Field
  */
-li#field_1_8 {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type {
   margin-top: 16px;
   flex: 0 100% !important;
   min-width: 280px;
@@ -1138,34 +1137,36 @@ li#field_1_8 {
   flex-flow: column;
   display: inline-flex;
 }
-li#field_1_8 > div > ul {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > div > ul {
   margin: 0 !important;
   height: 45px;
   display: inline-flex;
   vertical-align: middle;
 }
-li#field_1_8 > div > ul li {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > div > ul li {
   margin: auto 0 auto 15px !important;
   height: 30px;
 }
-li#field_1_8 > div > ul li:first-of-type > label {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > div > ul li:first-of-type > label {
   width: 50px;
 }
-li#field_1_8 > div > ul li:first-of-type {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > div > ul li:first-of-type {
   width: 88px;
   margin-left: 0 !important;
 }
-li#field_1_8 > div, li#field_1_63 > div {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > div,
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.proof-required> div {
   margin: 0 !important;
 }
-li#field_1_8 > label, li#field_1_63 > label {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > label,
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.proof-required > label {
   display: inline-flex;
   align-items: center;
   padding-right: 10px;
   margin: 0 !important;
   font-size: 1.5vh;
 }
-li#field_1_8 > div > ul li:last-of-type > label {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > div > ul li:last-of-type > label {
   width: 230px;
 }
 
@@ -1396,5 +1397,13 @@ Quantity Box in Forms
 form.cc-form div.quantity {
   position: absolute;
   right: calc(115px + 6rem);
+}
+
+/**
+WooCommerce Product Totals
+- hide the totals + subtotal on Service page
+ */
+form.cc-form div.product_totals {
+  display: none;
 }
 
