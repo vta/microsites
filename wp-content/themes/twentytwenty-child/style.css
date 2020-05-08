@@ -1024,6 +1024,10 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
   flex: 0 1 100%;
 }
 
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.levels-options > div > ul > li > label {
+  font-size: 1.5rem;
+}
+
 form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.levels-label {
   flex: 0 1 60rem;
 }
@@ -1031,6 +1035,7 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
 /**
 SSP & LFP Field Inputs
 - remove vertical alignment for centering via flexbox
+- increase label size
  */
 form.standard-size-form div.gform_wrapper li.gfield .gfield_checkbox li input, .gform_wrapper .gfield_checkbox li input[type=checkbox] {
   vertical-align: unset;
@@ -1054,6 +1059,10 @@ form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.d
   display: inline-flex;
   height: 20px;
   margin: auto 0 auto auto;
+}
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.due-date > div.gfield_description {
+  text-align: right;
+  padding-right: 2rem;
 }
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.due-date > div {
   margin-top: 0 !important;
@@ -1118,6 +1127,7 @@ form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print
   flex-flow: column;
   display: inline-flex;
   height: 50px;
+  margin-top: 2rem;
 }
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.proof-required > div > ul li label {
   width: 60px;
@@ -1172,6 +1182,26 @@ form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print
 }
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > div > ul li:last-of-type > label {
   width: 230px;
+}
+
+/** Screensize less than 680px for both "Proof Required" & "Print Type" fields*/
+@media (max-width: 680px) {
+
+  form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.proof-required,
+  form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type {
+    height: unset;
+  }
+
+  form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.proof-required > div > ul,
+  form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > div > ul {
+    flex-direction: column;
+    align-items: flex-start;
+    height: unset;
+    display: unset;
+  }
+  form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > div > ul > li {
+    margin: unset !important;
+  }
 }
 
 /**
@@ -1446,6 +1476,14 @@ div#content.widecolumn p.lead-in {
 /** WooCommerce **/
 .woocommerce {
   max-width: 1200px !important; /*Temporarily expand width of WooCommerce pages*/
+}
+
+/** screen sizes smaller than 680px */
+@media (max-width: 680px) {
+  div.woocommerce {
+    margin: 0;
+    width: 100% !important;
+  }
 }
 
 /**
