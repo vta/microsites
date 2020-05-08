@@ -246,7 +246,7 @@ function custom_override_checkout_fields( $fields )
  * REMOVE Downloads & Address tab from "My Account"
  */
 add_filter( 'woocommerce_account_menu_items', 'remove_customer_downloads_addresss' );
-function remove_customer_downloads_addresss ($items)
+function remove_customer_downloads_addresss( $items )
 {
     unset( $items['downloads'] );
     unset( $items['edit-address'] );
@@ -499,6 +499,7 @@ function add_custom_order_statuses( $order_statuses )
  * SSP Date Validation (3 business days - Includes today)
  */
 add_filter( 'gform_field_validation_1_29', 'date_validation', 10, 4 );
+add_filter( 'gform_field_validation_7_28', 'date_validation', 10, 4 );
 function date_validation( $result, $value, $form, $field )
 {
     // dates in UNIX
@@ -507,43 +508,80 @@ function date_validation( $result, $value, $form, $field )
 
     $error_message = 'Must be at least 3 business days.';
 
-    // today's day
-    $day = date( 'l', $today );
+    // minimum date in UNIX
+    $min_date = calc_3_business_days();
 
-    // Wednesday, Thursday, Friday, & Saturday add 5 days
-    if ( $day === 'Wednesday' || $day === 'Thursday' || $day === 'Friday' || $day === 'Saturday' ) {
+    // Check if User input is less than 3 business day
+    if ( $user_date < strtotime( '-1 day', $min_date ) ) {
 
-        if ( $user_date < strtotime( '+4 days' ) ) {
-            $earliest_date = ' Earliest order date is ' . date( 'm/d/Y',  strtotime('+5 days'));
-            $result['is_valid'] = false;
-            $result['message'] = $error_message . $earliest_date;
-        }
-
-    // Add 4 days for Sunday
-    } elseif ( $day === 'Sunday' ) {
-
-        if ( $user_date < strtotime( '+3 days' ) ) {
-            $earliest_date = ' Earliest order date is ' . date( 'm/d/Y',  strtotime('+4 days'));
-            $result['is_valid'] = false;
-            $result['message'] = $error_message . $earliest_date;
-        }
-
-    // 3 days for the rest
-    } else {
-
-        if ( $user_date < strtotime( '+2 days' ) ) {
-            $earliest_date = ' Earliest order date is ' . date( 'm/d/Y',  strtotime('+3 days'));
-            $result['is_valid'] = false;
-            $result['message'] = $error_message . $earliest_date;
-        }
+        $earliest_date = ' Earliest order date is ' . date( 'm/d/Y', $min_date );
+        $result['is_valid'] = false;
+        $result['message'] = $error_message . $earliest_date;
 
     }
 
     return $result;
 }
 
+/**
+ * PRE-POPULATE Date with 3 business days
+ */
+add_filter( 'gform_pre_render', 'pre_populate_dates' );
+//Note: when changing choice values, we also need to use the gform_pre_validation so that the new values are available when validating the field.
+add_filter( 'gform_pre_validation', 'pre_populate_dates' );
+//Note: when changing choice values, we also need to use the gform_admin_pre_render so that the right values are displayed when editing the entry.
+add_filter( 'gform_admin_pre_render', 'pre_populate_dates' );
+//Note: this will allow for the labels to be used during the submission process in case values are enabled
+add_filter( 'gform_pre_submission_filter', 'pre_populate_dates' );
+function pre_populate_dates( $form )
+{
 
-apply_filters( 'woocommerce_order_shipping_to_display', 'admin_hide_shipping', 10, 2 );
-function admin_hide_shipping( $shipping, $tax_display ) {
-    error_log( json_encode( $shipping ), JSON_PRETTY_PRINT );
+    foreach ( $form['fields'] as &$field ) {
+
+        // Find the Due Date field
+        if ( $field->label == 'Due Date' ) {
+
+            // calc 3 business days from today
+            $min_date = calc_3_business_days();
+
+            // automatically set it 3 business days
+            $field->defaultValue = date( 'm/d/Y', $min_date );
+
+            error_log($field->defaultValue);
+        }
+
+    }
+
+    return $form;
+}
+
+/**
+ * 3 Business Day Helper Function
+ *
+ * @return false|int - UNIX time for 3 business days in the future
+ */
+function calc_3_business_days()
+{
+
+    $result = null;
+
+    // today's date in UNIX
+    $today = strtotime( 'today' );
+
+    // day of the week
+    $day = date( 'l', $today );
+
+    // Wednesday, Thursday, Friday, & Saturday add 5 days
+    if ( $day === 'Wednesday' || $day === 'Thursday' || $day === 'Friday' || $day === 'Saturday' ) {
+        $result = strtotime( '+5 days' );
+    // Add 4 days for Sunday
+    } elseif ( $day === 'Sunday' ) {
+
+        $result = strtotime( '+4 days' );
+    // 3 days for the rest
+    } else {
+        $result = strtotime( '+3 days' );
+    }
+
+    return $result;
 }
