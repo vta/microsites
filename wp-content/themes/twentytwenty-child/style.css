@@ -657,7 +657,7 @@ GF form validation
 - position element above others
  */
 #gform_wrapper_1 > div.validation_error,
-form.cc-form .gform_wrapper form div.gf_page_steps+div.validation_error {
+form.cc-form .gform_wrapper div.gf_page_steps+div.validation_error {
   background: var(--light-gray);
   margin-top: 0;
   margin-bottom: 0;
@@ -719,6 +719,10 @@ input[type="radio"]:checked:before  {
   border-radius: 50%;
   background: #FFFFFF;
   border: 1px solid #2c78ca;
+}
+input[type="radio"]:checked:before {
+  background: #2c79ca;
+  border: 1px solid #FFFFFF;
 }
 
 /**
@@ -1225,7 +1229,8 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
   SSP 1: Top Three Fields
   - expand to the entire screen size
    */
-  form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-information {
+  form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info,
+  form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info {
     flex-basis: 100% !important;
   }
 }
@@ -1307,6 +1312,112 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
   form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-3 div.ginput_container ul {
     display: block;
   }
+}
+
+/** LFP Page 2 & 3 */
+
+/** screens at least 1200px */
+@media (min-width: 1200px) {
+  /**
+  LFP 2 & 3: Fields
+  - expand rows across the entire page
+   */
+  form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2,
+  form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-3 {
+    flex-basis: 100%;
+  }
+
+  /**
+  LFP 2: Field Input Containers
+  - remove each margin
+   */
+  form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 div.ginput_container {
+    margin: 0;
+  }
+
+  /**
+  LFP 2 & 3: Format Field Container
+  - flex container
+   */
+  form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 ul.gfield_radio,
+  form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-3 ul.gfield_radio{
+    display: flex;
+    align-items: center;
+  }
+
+  /**
+  LFP 2: Field Input choices
+  - Remove margin between input choices
+   */
+  form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 div.ginput_container ul li {
+    margin: 0 2rem;
+  }
+
+  /**
+  LFP 3:
+  - space between the inputs
+   */
+  form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-3.large-format-binding div.ginput_container ul li {
+    margin: 0 1rem;
+  }
+
+  /**
+  LFP 2: Format First Choice
+  - increase flex width
+   */
+  form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2.format ul li:first-of-type {
+    flex-basis: 30%;
+  }
+
+  /**
+  LFP 2: Format Second Choice
+  - reduce size of container
+   */
+  form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2.format ul li:nth-child(2) {
+    flex-shrink: 2;
+  }
+
+  /**
+  LFP 2: Custom Paper Size
+  - max containers at half
+   */
+  form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2.custom-paper-size {
+    flex-basis: 50%;
+  }
+
+}
+/**
+  LFP 2: Format Second Choice
+- remove input
+- change label color to indicate it is not a choice
+   */
+form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2.format ul li:nth-child(2) input {
+  display: none;
+}
+form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2.format ul li:nth-child(2) label {
+  color: #000;
+  font-weight: 700;
+}
+
+/** screen smaller than 1200px */
+@media (max-width: 1200px) {
+  /**
+  LFP: Field Container
+  - center items horizontally
+   */
+  form.large-format-form div.gform_body div.gform_page ul.gform_fields {
+    justify-content: center;
+  }
+}
+
+/**
+Custom Footer Size for LFP
+ */
+form.large-format-form .gform_wrapper div.gform_page_footer {
+  position: relative;
+  padding: 2rem 0;
+  width: 100%;
+  max-width: unset;
 }
 
 /********************************/

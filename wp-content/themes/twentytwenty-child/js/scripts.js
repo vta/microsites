@@ -137,6 +137,22 @@ const ssp_form_setup = ($, form_id, current_page) => {
 // LARGE FORMAT PRINTING FORM //
 
 /**
+ * LFP Disbable Format 2nd Choice
+ *
+ * the second choice acts as a label. Disable the input
+ */
+const disable_format_label = ($, form_id, current_page) => {
+
+  const input_elem = `form.large-format-form ul.gform_fields li.gfield.page-${current_page}.format ul.gfield_radio li:nth-child(2) input`;
+
+  // Make sure we are on LFP page 2
+  if (form_id === 7 && current_page === 2) {
+    $(input_elem).prop('disabled', true);
+  }
+
+}
+
+/**
  * Large Format Printing Form Setup
  *
  * runs function to set up "Large Format Printing" form
@@ -153,6 +169,8 @@ const lfp_form_setup = ($, form_id, current_page) => {
     // Add tab functionality to LFP
     bind_tabs_event($, form_id);
 
+    // disable page 2 Format 2nd input
+    disable_format_label($, form_id, current_page);
   }
 
 }
