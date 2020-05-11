@@ -110,6 +110,36 @@ const ssp_staple_conditional_checkbox = ($, form_id) => {
   }
 }
 
+const check_num_paper_size = ($) => {
+  const num_checked = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.paper-size.page-2 div ul li input:checked`).length;
+  const mult_paper_size_input = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.multiple-paper-size.page-2`);
+
+  num_checked > 1
+    ? mult_paper_size_input.removeClass('gfield_visibility_hidden')
+    : mult_paper_size_input.addClass('gfield_visibility_hidden');
+}
+
+const show_mult_paper_size = ($, form_id, current_page) => {
+
+  // Make sure we are on Standard-Size Printing form page 2
+  if (form_id === 1 && current_page === 2) {
+
+    const paper_size_inputs = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.paper-size.page-${current_page} div ul li input`);
+
+    // check num selection & render description input on page load
+    check_num_paper_size($);
+
+    // detect changes from all checkboxes
+    paper_size_inputs.change(() => {
+      // check num selection & render description input on input change
+      check_num_paper_size($);
+
+    });
+
+  }
+
+}
+
 /**
  * Standard-Size Printing Form Setup
  *
@@ -130,6 +160,9 @@ const ssp_form_setup = ($, form_id, current_page) => {
     // Add tab functionality to SSP
     bind_tabs_event($, form_id);
 
+    // Multiple paper size input
+    show_mult_paper_size($, form_id, current_page);
+
   }
 
 }
@@ -137,7 +170,7 @@ const ssp_form_setup = ($, form_id, current_page) => {
 // LARGE FORMAT PRINTING FORM //
 
 /**
- * LFP Disbable Format 2nd Choice
+ * LFP Disable Format 2nd Choice
  *
  * the second choice acts as a label. Disable the input
  */
@@ -171,6 +204,7 @@ const lfp_form_setup = ($, form_id, current_page) => {
 
     // disable page 2 Format 2nd input
     disable_format_label($, form_id, current_page);
+
   }
 
 }
