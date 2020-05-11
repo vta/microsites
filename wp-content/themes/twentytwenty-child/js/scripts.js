@@ -113,10 +113,22 @@ const ssp_staple_conditional_checkbox = ($, form_id) => {
 const check_num_paper_size = ($) => {
   const num_checked = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.paper-size.page-2 div ul li input:checked`).length;
   const mult_paper_size_input = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.multiple-paper-size.page-2`);
+  const textarea_elem = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.multiple-paper-size.page-2 textarea`);
+
+  mult_paper_size_input.addClass('gfield_contains_required');
 
   num_checked > 1
     ? mult_paper_size_input.removeClass('gfield_visibility_hidden')
     : mult_paper_size_input.addClass('gfield_visibility_hidden');
+
+  // manually have to trigger form validation with jQuery (not working with GF flow)
+  $(`input[type="button"][value="Next"]`).on('click', () => {
+    // check if user input anything
+    if (textarea_elem.val().trim().length === 0) {
+      alert('ERROR NO INPUT');
+    }
+  });
+
 }
 
 const show_mult_paper_size = ($, form_id, current_page) => {

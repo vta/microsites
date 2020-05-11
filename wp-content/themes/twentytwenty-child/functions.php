@@ -573,14 +573,28 @@ function calc_3_business_days()
     // Wednesday, Thursday, Friday, & Saturday add 5 days
     if ( $day === 'Wednesday' || $day === 'Thursday' || $day === 'Friday' || $day === 'Saturday' ) {
         $result = strtotime( '+5 days' );
-    // Add 4 days for Sunday
+        // Add 4 days for Sunday
     } elseif ( $day === 'Sunday' ) {
 
         $result = strtotime( '+4 days' );
-    // 3 days for the rest
+        // 3 days for the rest
     } else {
         $result = strtotime( '+3 days' );
     }
 
     return $result;
+}
+
+/**
+ * MANUAL VALIDATION for multiple paper size options
+ */
+add_filter( 'gform_field_validation_1_29', 'multiple_paper_size_validation', 10, 4 );
+function multiple_paper_size_validation( $result, $value, $form, $field )
+{
+    error_log( strlen ( trim( $value ) ) );
+
+    // check for input
+    if ( strlen ( trim( $value ) ) === 0 ) {
+        $result['is_valid'] = false;
+    }
 }
