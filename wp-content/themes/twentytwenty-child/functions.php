@@ -547,7 +547,6 @@ function pre_populate_dates( $form )
             // automatically set it 3 business days
             $field->defaultValue = date( 'm/d/Y', $min_date );
 
-            error_log($field->defaultValue);
         }
 
     }

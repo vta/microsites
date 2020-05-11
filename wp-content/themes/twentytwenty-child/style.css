@@ -1481,7 +1481,7 @@ div#content.widecolumn p.lead-in {
 /** screen sizes smaller than 680px */
 @media (max-width: 680px) {
   div.woocommerce {
-    margin: 0;
+    margin: auto;
     width: 100% !important;
   }
 }
