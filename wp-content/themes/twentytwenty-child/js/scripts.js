@@ -116,7 +116,7 @@ const ssp_staple_conditional_checkbox = ($, form_id, current_page) => {
  */
 const update_num_paper_size = ($) => {
   const num_checked = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.paper-size.page-2 div ul li input:checked`).length;
-  const mult_paper_size_input = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.multiple-paper-size.page-2`);
+  const mult_paper_size_input = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.multiple-paper-sizes.page-2`);
 
   // update hidden field to correctly satisfy GF conditional feld
   $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.page-2.num-selected-paper-sizes div input`).val(num_checked);
