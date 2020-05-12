@@ -656,20 +656,14 @@ Form Button Container
 - fix spacing
  */
 .gform_wrapper div.gform_page_footer {
-  position: absolute;
+  position: relative;
   bottom: 0;
   right: 0;
   text-align: right;
   border-top: none;
   padding: 3rem 0;
   margin: 0;
-  max-width: 60rem;
-}
-
-@media (max-width: 1200px) {
-  .gform_wrapper div.gform_page_footer {
-    max-width: unset;
-  }
+  max-width: 100%;
 }
 
 /**
@@ -765,6 +759,15 @@ input[type="checkbox"]:checked:before {
 
 input[type="checkbox"]:checked:focus {
   outline: none;
+}
+
+/**
+All Forms: Special Instructions
+- expand to the entire width of the form
+ */
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.special-instructions {
+  flex-basis: 100%;
+  margin-top: 2rem;
 }
 
 /************************/

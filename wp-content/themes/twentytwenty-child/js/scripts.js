@@ -107,7 +107,14 @@ const ssp_staple_conditional_checkbox = ($, form_id, current_page) => {
   }
 }
 
-const check_num_paper_size = ($) => {
+/**
+ * Standard-Size Printing: Update Number of Paper Size Selections
+ *
+ * calculates number of checked inputs and displays multiple paper size field if more than 1.
+ * Note: we also update a hidden field to properly render field validation for Multiple Paper Size Description
+ * @param $
+ */
+const update_num_paper_size = ($) => {
   const num_checked = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.paper-size.page-2 div ul li input:checked`).length;
   const mult_paper_size_input = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.multiple-paper-size.page-2`);
 
@@ -119,6 +126,15 @@ const check_num_paper_size = ($) => {
     : mult_paper_size_input.css('display', 'none');
 }
 
+/**
+ * Standard-Size Printing: Show Multiple Paper Size Field
+ *
+ * creates a listener based on input changes for paper-size. Uses helper function
+ * update_num_paper_size to figure out number of checked boxes
+ * @param $
+ * @param form_id
+ * @param current_page
+ */
 const show_mult_paper_size = ($, form_id, current_page) => {
 
   // Make sure we are on Standard-Size Printing form page 2
@@ -127,12 +143,12 @@ const show_mult_paper_size = ($, form_id, current_page) => {
     const paper_size_inputs = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.paper-size.page-${current_page} div ul li input`);
 
     // check num selection & render description input on page load
-    check_num_paper_size($);
+    update_num_paper_size($);
 
     // detect changes from all checkboxes
     paper_size_inputs.change(() => {
       // check num selection & render description input on input change
-      check_num_paper_size($);
+      update_num_paper_size($);
     });
 
   }
