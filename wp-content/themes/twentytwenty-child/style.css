@@ -1317,6 +1317,14 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
 }
 
 /**
+SSP 2:
+- change to block display
+ */
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2.multiple-paper-size {
+  display: block;
+}
+
+/**
 SSP 3: Fields Label
 - remove margin from label
  */

@@ -584,17 +584,3 @@ function calc_3_business_days()
 
     return $result;
 }
-
-/**
- * MANUAL VALIDATION for multiple paper size options
- */
-add_filter( 'gform_field_validation_1_29', 'multiple_paper_size_validation', 10, 4 );
-function multiple_paper_size_validation( $result, $value, $form, $field )
-{
-    error_log( strlen ( trim( $value ) ) );
-
-    // check for input
-    if ( strlen ( trim( $value ) ) === 0 ) {
-        $result['is_valid'] = false;
-    }
-}

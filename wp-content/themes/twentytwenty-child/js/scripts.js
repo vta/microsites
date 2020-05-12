@@ -78,16 +78,16 @@ const bc_form_setup = ($, form_id) => {
  * @param $
  * @param form_id
  */
-const ssp_staple_conditional_checkbox = ($, form_id) => {
+const ssp_staple_conditional_checkbox = ($, form_id, current_page) => {
 
-  if (form_id === 1) {
+  if (form_id === 1 && current_page === 3) {
 
     // array of child inputs
     // const checkboxInputs = $(`li.gfield.staple.hole-punch div.ginput_container li input`);
 
-    const one_staple = $('input#choice_1_66_1');
-    const two_staple = $('input#choice_1_66_2');
-    const four_staple = $('input#choice_1_66_3');
+    const one_staple = $('li.gfield.staple.hole-punch ul li:nth-of-type(1) input');
+    const two_staple = $('li.gfield.staple.hole-punch ul li:nth-of-type(2) input');
+    const four_staple = $('li.gfield.staple.hole-punch ul li:nth-of-type(3) input');
 
     // if 1-staple is chosen, remove options 2- & 4-
     one_staple.change(() => {
@@ -167,7 +167,7 @@ const ssp_form_setup = ($, form_id, current_page) => {
     add_form_class($, form_id);
 
     // Conditional values for stapling options
-    ssp_staple_conditional_checkbox($, form_id);
+    ssp_staple_conditional_checkbox($, form_id, current_page);
 
     // Add tab functionality to SSP
     bind_tabs_event($, form_id);
