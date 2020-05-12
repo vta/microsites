@@ -12,27 +12,27 @@ Version: 1.0
 /***************/
 :root {
   /* Colors */
-  --darker-blue:  #0a5387;
-  --dark-blue:    #29588C;
-  --light-blue:   #4CB4E7;
+  --darker-blue: #0a5387;
+  --dark-blue: #29588C;
+  --light-blue: #4CB4E7;
 
   --lighter-gray: #F4F4F4;
-  --light-gray:   #EEEEEE;
-  --medium-gray:  #CCCCCC;
+  --light-gray: #EEEEEE;
+  --medium-gray: #CCCCCC;
 
-  --dark-red : #c62828;
+  --dark-red: #c62828;
 
   /* Gradients */
   --header-gradient: linear-gradient(
           90deg,
-          rgba(10,83,135,1) 0%,
-          rgba(25,95,145,1) 47%,
-          rgba(80,119,161,1) 79%,
-          rgba(138,164,192,1) 100%
+          rgba(10, 83, 135, 1) 0%,
+          rgba(25, 95, 145, 1) 47%,
+          rgba(80, 119, 161, 1) 79%,
+          rgba(138, 164, 192, 1) 100%
   );
 
   /* Borders */
-  --thin-light-gray:  1px solid var(--light-gray);
+  --thin-light-gray: 1px solid var(--light-gray);
   --thin-medium-gray: 1px solid var(--medium-gray);
   --normal-dark-blue: 2px solid var(--dark-blue);
 
@@ -42,22 +42,44 @@ Version: 1.0
   /* @TODO - we can store SCSS variables for @media queries in the future*/
 
   /* Button Shapes */
-  --next-button-shape:      polygon(0% 0%, 75% 0%, 95% 50%, 75% 100%, 0% 100%);
-  --next-button-padding:    1.5rem 4rem 1.5rem 2rem;
+  --next-button-shape: polygon(0% 0%, 75% 0%, 95% 50%, 75% 100%, 0% 100%);
+  --next-button-padding: 1.5rem 4rem 1.5rem 2rem;
 
-  --back-button-shape:      polygon(20% 0%, 100% 0%, 100% 100%, 20% 100%, 0% 50%);
-  --back-button-padding:    1.5rem 2rem 1.5rem 4rem;
+  --back-button-shape: polygon(20% 0%, 100% 0%, 100% 100%, 20% 100%, 0% 50%);
+  --back-button-padding: 1.5rem 2rem 1.5rem 4rem;
 
-  --preview-button-shape:   polygon(0% 0%, 75% 0%, 90% 50%, 75% 100%, 0% 100%);
+  --preview-button-shape: polygon(0% 0%, 75% 0%, 90% 50%, 75% 100%, 0% 100%);
   --preview-button-padding: 1.5rem 5rem 1.5rem 2rem;
 
   /* Box shadows */
   /* @credit - https://codepen.io/sdthornton/pen/wBZdXq */
-  --lightest-box-shadow:        0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  --light-box-shadow:           0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  --medium-box-shadow:          0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  --heavy-box-shadow:           0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  --heaviest-box-shadow:        0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  --lightest-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --light-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  --medium-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  --heavy-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  --heaviest-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+/** Animations **/
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+
 }
 
 /************/
@@ -69,7 +91,7 @@ html {
 }
 
 .hidden {
-  display: hidden;
+  display: none;
 }
 
 /******************/
@@ -278,10 +300,10 @@ article#post-8 div.post-inner div.entry-content {
   border: var(--thin-medium-gray);
 }
 
-  /**
-  Service Page Paragraphs
-  - add font style
-   */
+/**
+Service Page Paragraphs
+- add font style
+ */
 article#post-8 div.post-inner div.entry-content > p.intro-text {
   font-size: 2.2rem;
   font-weight: 600;
@@ -437,7 +459,7 @@ a.to-the-top {
 
 /* change verbiage early to avoid text collision */
 @media (max-width: 835px) {
-    
+
   .to-the-top-long {
     display: none;
   }
@@ -500,6 +522,7 @@ form.cc-form div.gf_page_steps div.gf_step {
   height: unset;
   text-align: center;
 }
+
 form.cc-form div.gf_page_steps div.gf_step:hover {
   cursor: pointer;
 }
@@ -553,8 +576,7 @@ Non-active Steps
 form.cc-form div.gf_page_steps div.gf_step,
 form.cc-form div.gf_page_steps div.gf_step.gf_step_pending,
 form.cc-form div.gf_page_steps div.gf_step.gf_step_previous,
-form.cc-form div.gf_page_steps div.gf_step.gf_step_next
-{
+form.cc-form div.gf_page_steps div.gf_step.gf_step_next {
   background: var(--medium-gray);
   opacity: 1;
 }
@@ -598,8 +620,7 @@ form.cc-form div.gf_page_steps div.gf_step.gf_step_next
    */
   .gform_wrapper .gform_page_footer input.button.gform_previous_button,
   .gform_wrapper .gform_page_footer input.button.gform_next_button,
-  input[type='submit']#gform_submit_button_4
-  {
+  input[type='submit']#gform_submit_button_4 {
     width: unset;
   }
 
@@ -644,6 +665,7 @@ Form Button Container
   margin: 0;
   max-width: 60rem;
 }
+
 @media (max-width: 1200px) {
   .gform_wrapper div.gform_page_footer {
     max-width: unset;
@@ -657,7 +679,7 @@ GF form validation
 - position element above others
  */
 #gform_wrapper_1 > div.validation_error,
-form.cc-form .gform_wrapper div.gf_page_steps+div.validation_error {
+form.cc-form .gform_wrapper div.gf_page_steps + div.validation_error {
   background: var(--light-gray);
   margin-top: 0;
   margin-bottom: 0;
@@ -708,7 +730,7 @@ form div.gform_wrapper div.instruction {
 /**
 Custom Radio Button Styling
  */
-input[type="radio"]:checked:before  {
+input[type="radio"]:checked:before {
   content: "";
   display: block;
   position: relative;
@@ -720,6 +742,7 @@ input[type="radio"]:checked:before  {
   background: #FFFFFF;
   border: 1px solid #2c78ca;
 }
+
 input[type="radio"]:checked:before {
   background: #2c79ca;
   border: 1px solid #FFFFFF;
@@ -728,7 +751,7 @@ input[type="radio"]:checked:before {
 /**
 Checkbox Custom Styling
  */
-input[type="checkbox"]:checked:before  {
+input[type="checkbox"]:checked:before {
   content: "";
   display: block;
   position: relative;
@@ -739,6 +762,7 @@ input[type="checkbox"]:checked:before  {
   background: #2c78ca;
   border: 1px solid #2c78ca;
 }
+
 input[type="checkbox"]:checked:focus {
   outline: none;
 }
@@ -784,6 +808,7 @@ form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield {
   z-index: 2;
   min-height: 120px;
 }
+
 /**
 Job Title Form Field
 - give it its own row with flex-basis
@@ -812,7 +837,6 @@ input[type='submit']#gform_submit_button_4 {
   clip-path: var(--preview-button-shape);
   padding: var(--preview-button-padding);
 }
-
 
 
 /* screensize < 1200px (Large Desktop) */
@@ -907,8 +931,7 @@ input[type='submit']#gform_submit_button_4 {
    */
   .gform_wrapper .gform_page_footer input.button.gform_previous_button,
   .gform_wrapper .gform_page_footer input.button.gform_next_button,
-  input[type='submit']#gform_submit_button_4
-  {
+  input[type='submit']#gform_submit_button_4 {
     margin-bottom: 0;
   }
 }
@@ -1051,29 +1074,34 @@ form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.d
   flex-wrap: wrap;
   justify-content: flex-end;
   flex: 1 100%;
-  padding:0 0 15px 0;
+  padding: 0 0 15px 0;
   margin-bottom: 11px;
   border-bottom: var(--normal-dark-blue);
 }
+
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.due-date > label {
   display: inline-flex;
   height: 20px;
   margin: auto 0 auto auto;
 }
+
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.due-date > div.gfield_description {
   text-align: right;
   padding-right: 2rem;
 }
+
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.due-date > div {
   margin-top: 0 !important;
   left: 21px;
   position: relative;
 }
+
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.due-date > div > input {
   margin: auto 0 auto auto;
   width: 150px;
   height: 35px;
 }
+
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.due-date > div > img {
   position: relative;
   right: 30px;
@@ -1085,14 +1113,14 @@ SSP & LFP 1: Job Name Field
  */
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.job-name {
   flex: 0 50%;
-  min-width:280px;
+  min-width: 280px;
 }
 
 /**
 SSP & LFP 1: Department Field
  */
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.department {
-  flex: 0 50% ;
+  flex: 0 50%;
   min-width: 280px;
 }
 
@@ -1106,6 +1134,7 @@ form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.n
   margin-bottom: 11px;
   border-bottom: var(--normal-dark-blue);
 }
+
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.num-copies > div > div.instruction {
   padding: 5px 0 5px 0;
 }
@@ -1129,13 +1158,16 @@ form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print
   height: 50px;
   margin-top: 2rem;
 }
+
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.proof-required > div > ul li label {
   width: 60px;
 }
+
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.proof-required > div > ul {
   display: inline-flex;
   margin: 0;
 }
+
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.proof-required > div > ul li {
   width: 88px;
 }
@@ -1151,27 +1183,33 @@ form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print
   flex-flow: column;
   display: inline-flex;
 }
+
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > div > ul {
   margin: 0 !important;
   height: 45px;
   display: inline-flex;
   vertical-align: middle;
 }
+
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > div > ul li {
   margin: auto 0 auto 15px !important;
   height: 30px;
 }
+
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > div > ul li:first-of-type > label {
   width: 50px;
 }
+
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > div > ul li:first-of-type {
   width: 88px;
   margin-left: 0 !important;
 }
+
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > div,
-form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.proof-required> div {
+form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.proof-required > div {
   margin: 0 !important;
 }
+
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > label,
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.proof-required > label {
   display: inline-flex;
@@ -1180,6 +1218,7 @@ form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print
   margin: 0 !important;
   font-size: 1.5vh;
 }
+
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > div > ul li:last-of-type > label {
   width: 230px;
 }
@@ -1199,6 +1238,7 @@ form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print
     height: unset;
     display: unset;
   }
+
   form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.proof-print.print-type > div > ul > li {
     margin: unset !important;
   }
@@ -1212,6 +1252,7 @@ li#field_1_62 {
   min-width: 280px;
   margin-top: 25px;
 }
+
 li#field_1_62 > div > ul li {
   background: #2c79ca;
   color: #FFFFFF;
@@ -1222,6 +1263,7 @@ li#field_1_62 > div > ul li {
   padding: 15px !important;
   border-radius: 6px;
 }
+
 li#field_1_62 > div > ul li > input {
   opacity: 0;
 }
@@ -1303,7 +1345,7 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
 SSP 2: Fields Label
 - remove margin from label
  */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 label{
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 label {
   margin: 0;
 }
 
@@ -1321,14 +1363,14 @@ SSP 2:
 - change to block display
  */
 form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2.multiple-paper-size {
-  display: block;
+
 }
 
 /**
 SSP 3: Fields Label
 - remove margin from label
  */
-form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-3 label{
+form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-3 label {
   margin: 0;
   width: 17rem;
 }
@@ -1378,7 +1420,7 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
   - flex container
    */
   form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2 ul.gfield_radio,
-  form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-3 ul.gfield_radio{
+  form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-3 ul.gfield_radio {
     display: flex;
     align-items: center;
   }
@@ -1424,6 +1466,7 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
   }
 
 }
+
 /**
   LFP 2: Format Second Choice
 - remove input
@@ -1432,6 +1475,7 @@ form.standard-size-form div.gform_body div.gform_page ul.gform_fields li.gfield.
 form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2.format ul li:nth-child(2) input {
   display: none;
 }
+
 form.large-format-form div.gform_body div.gform_page ul.gform_fields li.gfield.page-2.format ul li:nth-child(2) label {
   color: #000;
   font-weight: 700;

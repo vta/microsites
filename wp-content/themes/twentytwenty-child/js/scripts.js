@@ -82,9 +82,6 @@ const ssp_staple_conditional_checkbox = ($, form_id, current_page) => {
 
   if (form_id === 1 && current_page === 3) {
 
-    // array of child inputs
-    // const checkboxInputs = $(`li.gfield.staple.hole-punch div.ginput_container li input`);
-
     const one_staple = $('li.gfield.staple.hole-punch ul li:nth-of-type(1) input');
     const two_staple = $('li.gfield.staple.hole-punch ul li:nth-of-type(2) input');
     const four_staple = $('li.gfield.staple.hole-punch ul li:nth-of-type(3) input');
@@ -113,22 +110,13 @@ const ssp_staple_conditional_checkbox = ($, form_id, current_page) => {
 const check_num_paper_size = ($) => {
   const num_checked = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.paper-size.page-2 div ul li input:checked`).length;
   const mult_paper_size_input = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.multiple-paper-size.page-2`);
-  const textarea_elem = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.multiple-paper-size.page-2 textarea`);
 
-  mult_paper_size_input.addClass('gfield_contains_required');
+  // update hidden field to correctly satisfy GF conditional feld
+  $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.page-2.num-selected-paper-sizes div input`).val(num_checked);
 
   num_checked > 1
-    ? mult_paper_size_input.removeClass('gfield_visibility_hidden')
-    : mult_paper_size_input.addClass('gfield_visibility_hidden');
-
-  // manually have to trigger form validation with jQuery (not working with GF flow)
-  $(`input[type="button"][value="Next"]`).on('click', () => {
-    // check if user input anything
-    if (textarea_elem.val().trim().length === 0) {
-      alert('ERROR NO INPUT');
-    }
-  });
-
+    ? mult_paper_size_input.css('display', 'block') && mult_paper_size_input.css('animation', '0.5s fadeIn')
+    : mult_paper_size_input.css('display', 'none');
 }
 
 const show_mult_paper_size = ($, form_id, current_page) => {
@@ -145,7 +133,6 @@ const show_mult_paper_size = ($, form_id, current_page) => {
     paper_size_inputs.change(() => {
       // check num selection & render description input on input change
       check_num_paper_size($);
-
     });
 
   }
