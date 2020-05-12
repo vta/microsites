@@ -155,140 +155,107 @@ const show_mult_paper_size = ($, form_id, current_page) => {
 
 }
 
-const disable_levels_inputs = ($, form_id, current_page) => {
+/**
+ * SSP Disable Other Levels Columns
+ *
+ * checks for any active columns (columns w/ checked inputs) and disables
+ * the remaining columns. If there are no active columns, all columns are enabled.
+ * @param $
+ * @param columns
+ */
+const disable_other_levels = ($, columns) => {
 
-  // Note: only select visible fields
+  // active column
+  let active_col = null;
 
-  // Entire Field Columns
-  const column_1 = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.gfield_visibility_visible.finishing-options.staple.hole-punch`);
-  const column_2 = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.gfield_visibility_visible.finishing-options.folding`);
-  const column_3 = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.gfield_visibility_visible.finishing-options.tape-bind`);
+  // non-active columns to disable
+  const non_active_cols = columns.filter(column => {
 
-  // Inputs
-  const column_1_inputs = column_1.find(`div ul li input`);
-  const column_2_inputs = column_2.find(`div ul li input`);
-  const column_3_inputs = column_3.find(`div ul li input`);
+    // marked if current column is active/checked
+    let isActive = false;
+
+    // find inputs & look for "checked" property
+    const column_inputs = column.find(`div ul li input`);
+    column_inputs.each(function () {
+      // if checked, mark as active to remove from array and save in a variable for later use
+      if ($(this).prop('checked')) {
+        isActive = true;
+        active_col = column;
+      }
+    });
+
+    return !isActive;
+  })
+
+  // If active column is found, disable the remaining columns
+  if (active_col) {
+
+    // iterate through non-active columns and disable inputs
+    for (column of non_active_cols) {
+      // column inputs
+      let column_inputs = column.find(`div ul li input`);
+      // disable inputs manually
+      for (input of column_inputs) {
+        input.disabled = true;
+      }
+      // grey out non active fields
+      column.css('opacity', '0.5');
+    }
+
+    // if active column is not found, activate all inputs from all columns
+  } else {
+
+    for (column of columns) {
+      // column inputs
+      let column_inputs = column.find(`div ul li input`);
+      // enable all inputs manually
+      for (input of column_inputs) {
+        input.disabled = false;
+      }
+      // change opacity to full for all columns
+      column.css('opacity', '1')
+    }
+
+  }
+
+}
+
+/**
+ * SSP Levels Dynamic Disable
+ *
+ * creates event listeners to dynamically disable other columns when
+ * inputs of a column is selected. It also checks to see if fields
+ * are pre-loaded and disables other columns accordingly
+ * @param $
+ * @param form_id
+ * @param current_page
+ */
+const dynamic_disable_levels_inputs = ($, form_id, current_page) => {
 
   if (form_id === 1 && current_page === 3) {
 
-    column_1_inputs.length && column_1_inputs.change(() => {
+    // Note: only select visible fields
 
-      // get number of checked inputs from column 1
-      let column_1_checked = 0;
-      column_1_inputs.each(function() {
-         if ($(this).prop('checked'))
-           column_1_checked++;
-      });
+    // Entire Field Columns
+    const column_1 = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.gfield_visibility_visible.finishing-options.staple.hole-punch`);
+    const column_2 = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.gfield_visibility_visible.finishing-options.folding`);
+    const column_3 = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.gfield_visibility_visible.finishing-options.tape-bind`);
 
-      // if options from Column 1 are checked
-      if (column_1_checked) {
+    // initial rendering (page reload with pre-filled inputs)
+    const columns = [column_1, column_2, column_3];
+    disable_other_levels($, columns);
 
-        for (let input of column_2_inputs) {
-          input.disabled = true;
-        }
+    column_1.change(() => {
+      disable_other_levels($, columns);
+    });
 
-        for (let input of column_3_inputs) {
-          input.disabled = true;
-        }
-
-        column_2.css('opacity', '0.5');
-        column_3.css('opacity', '0.5');
-
-      // Re-enabled inputs if nothing is selected from column 1
-      } else {
-
-        for (let input of column_2_inputs) {
-          input.disabled = false;
-        }
-
-        for (let input of column_3_inputs) {
-          input.disabled = false;
-        }
-
-        column_2.css('opacity', '1');
-        column_3.css('opacity', '1');
-
-      }
-
-    })
-
-    column_2.length && column_2.change(() => {
-      // get number of checked inputs from column 1
-      let column_2_checked = 0;
-      column_2_inputs.each(function() {
-        if ($(this).prop('checked'))
-          column_2_checked++;
-      });
-
-      // if options from Column 1 are checked
-      if (column_2_checked) {
-
-        for (let input of column_1_inputs) {
-          input.disabled = true;
-        }
-
-        for (let input of column_3_inputs) {
-          input.disabled = true;
-        }
-
-        column_1.css('opacity', '0.5');
-        column_3.css('opacity', '0.5');
-
-        // Re-enabled inputs if nothing is selected from column 1
-      } else {
-
-        for (let input of column_1_inputs) {
-          input.disabled = false;
-        }
-
-        for (let input of column_3_inputs) {
-          input.disabled = false;
-        }
-
-        column_1.css('opacity', '1');
-        column_3.css('opacity', '1');
-
-      }
-    })
+    column_2.change(() => {
+      disable_other_levels($, columns);
+    });
 
     column_3.length && column_3.change(() => {
-      // get number of checked inputs from column 1
-      let column_3_checked = 0;
-      column_3_inputs.each(function() {
-        if ($(this).prop('checked'))
-          column_3_checked++;
-      });
-
-      // if options from Column 1 are checked
-      if (column_3_checked) {
-
-        for (let input of column_1_inputs) {
-          input.disabled = true;
-        }
-
-        for (let input of column_2_inputs) {
-          input.disabled = true;
-        }
-
-        column_1.css('opacity', '0.5');
-        column_2.css('opacity', '0.5');
-
-        // Re-enabled inputs if nothing is selected from column 1
-      } else {
-
-        for (let input of column_1_inputs) {
-          input.disabled = false;
-        }
-
-        for (let input of column_2_inputs) {
-          input.disabled = false;
-        }
-
-        column_1.css('opacity', '1');
-        column_2.css('opacity', '1');
-
-      }
-    })
+      disable_other_levels($, columns);
+    });
   }
 
 }
@@ -317,7 +284,7 @@ const ssp_form_setup = ($, form_id, current_page) => {
     show_mult_paper_size($, form_id, current_page);
 
     // Conditional Levels disabling
-    disable_levels_inputs($, form_id, current_page);
+    dynamic_disable_levels_inputs($, form_id, current_page);
 
   }
 
@@ -375,8 +342,8 @@ jQuery(document).on('gform_post_render', (event, form_id, current_page) => {
   // save global variable
   const $ = jQuery;
 
-  switch(form_id) {
-      // Set up Business Card Printing form
+  switch (form_id) {
+    // Set up Business Card Printing form
     case 4:
       bc_form_setup($, form_id);
       break;
