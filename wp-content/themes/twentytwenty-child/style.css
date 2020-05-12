@@ -1551,7 +1551,7 @@ ul.woocommerce-thankyou-order-details {
 ul.woocommerce-thankyou-order-details > li {
     margin: 0 auto 0 0;
     width: 50%;
-    min-width: 180px;
+    min-width: 220px;
 }
 section.woocommerce-order-details {
     margin: 0 auto;
