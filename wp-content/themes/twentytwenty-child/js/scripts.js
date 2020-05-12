@@ -155,6 +155,144 @@ const show_mult_paper_size = ($, form_id, current_page) => {
 
 }
 
+const disable_levels_inputs = ($, form_id, current_page) => {
+
+  // Note: only select visible fields
+
+  // Entire Field Columns
+  const column_1 = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.gfield_visibility_visible.finishing-options.staple.hole-punch`);
+  const column_2 = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.gfield_visibility_visible.finishing-options.folding`);
+  const column_3 = $(`form.standard-size-form div.gform_wrapper div.gform_page ul.gform_fields li.gfield_visibility_visible.finishing-options.tape-bind`);
+
+  // Inputs
+  const column_1_inputs = column_1.find(`div ul li input`);
+  const column_2_inputs = column_2.find(`div ul li input`);
+  const column_3_inputs = column_3.find(`div ul li input`);
+
+  if (form_id === 1 && current_page === 3) {
+
+    column_1_inputs.length && column_1_inputs.change(() => {
+
+      // get number of checked inputs from column 1
+      let column_1_checked = 0;
+      column_1_inputs.each(function() {
+         if ($(this).prop('checked'))
+           column_1_checked++;
+      });
+
+      // if options from Column 1 are checked
+      if (column_1_checked) {
+
+        for (let input of column_2_inputs) {
+          input.disabled = true;
+        }
+
+        for (let input of column_3_inputs) {
+          input.disabled = true;
+        }
+
+        column_2.css('opacity', '0.5');
+        column_3.css('opacity', '0.5');
+
+      // Re-enabled inputs if nothing is selected from column 1
+      } else {
+
+        for (let input of column_2_inputs) {
+          input.disabled = false;
+        }
+
+        for (let input of column_3_inputs) {
+          input.disabled = false;
+        }
+
+        column_2.css('opacity', '1');
+        column_3.css('opacity', '1');
+
+      }
+
+    })
+
+    column_2.length && column_2.change(() => {
+      // get number of checked inputs from column 1
+      let column_2_checked = 0;
+      column_2_inputs.each(function() {
+        if ($(this).prop('checked'))
+          column_2_checked++;
+      });
+
+      // if options from Column 1 are checked
+      if (column_2_checked) {
+
+        for (let input of column_1_inputs) {
+          input.disabled = true;
+        }
+
+        for (let input of column_3_inputs) {
+          input.disabled = true;
+        }
+
+        column_1.css('opacity', '0.5');
+        column_3.css('opacity', '0.5');
+
+        // Re-enabled inputs if nothing is selected from column 1
+      } else {
+
+        for (let input of column_1_inputs) {
+          input.disabled = false;
+        }
+
+        for (let input of column_3_inputs) {
+          input.disabled = false;
+        }
+
+        column_1.css('opacity', '1');
+        column_3.css('opacity', '1');
+
+      }
+    })
+
+    column_3.length && column_3.change(() => {
+      // get number of checked inputs from column 1
+      let column_3_checked = 0;
+      column_3_inputs.each(function() {
+        if ($(this).prop('checked'))
+          column_3_checked++;
+      });
+
+      // if options from Column 1 are checked
+      if (column_3_checked) {
+
+        for (let input of column_1_inputs) {
+          input.disabled = true;
+        }
+
+        for (let input of column_2_inputs) {
+          input.disabled = true;
+        }
+
+        column_1.css('opacity', '0.5');
+        column_2.css('opacity', '0.5');
+
+        // Re-enabled inputs if nothing is selected from column 1
+      } else {
+
+        for (let input of column_1_inputs) {
+          input.disabled = false;
+        }
+
+        for (let input of column_2_inputs) {
+          input.disabled = false;
+        }
+
+        column_1.css('opacity', '1');
+        column_2.css('opacity', '1');
+
+      }
+    })
+  }
+
+}
+
 /**
  * Standard-Size Printing Form Setup
  *
@@ -177,6 +315,9 @@ const ssp_form_setup = ($, form_id, current_page) => {
 
     // Multiple paper size input
     show_mult_paper_size($, form_id, current_page);
+
+    // Conditional Levels disabling
+    disable_levels_inputs($, form_id, current_page);
 
   }
 
@@ -234,13 +375,17 @@ jQuery(document).on('gform_post_render', (event, form_id, current_page) => {
   // save global variable
   const $ = jQuery;
 
-  // Set up Business Card Printing form
-  bc_form_setup($, form_id);
-
-  // Set up Standard-Size Printing form
-  ssp_form_setup($, form_id, current_page);
-
-  // Set up Large Format Printing form
-  lfp_form_setup($, form_id, current_page);
-
+  switch(form_id) {
+      // Set up Business Card Printing form
+    case 4:
+      bc_form_setup($, form_id);
+      break;
+    case 1:
+      // Set up Standard-Size Printing form
+      ssp_form_setup($, form_id, current_page);
+      break;
+    case 7:
+      // Set up Large Format Printing form
+      lfp_form_setup($, form_id, current_page);
+  }
 });
