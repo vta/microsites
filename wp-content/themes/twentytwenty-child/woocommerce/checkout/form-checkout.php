@@ -43,7 +43,7 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 			<h2>Cost Center Number / Project Number</h2>
 
       <div class="ui fluid selection search dropdown">
-        <input type="hidden" name="country">
+        <input type="hidden" name="cost_center_number">
         <i class="dropdown icon"></i>
         <div class="default text">Cost Center Number</div>
         <div class="menu cost-center-list">
