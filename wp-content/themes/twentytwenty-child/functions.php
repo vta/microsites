@@ -45,9 +45,9 @@ function child_scripts()
         wp_enqueue_script(
             'semantic-ui-js',
             get_stylesheet_directory_uri() . '/semantic-ui/semantic.min.js',
-            array(),
+            array('jquery'),
             '2.4',
-            true
+            false
         );
 
     }

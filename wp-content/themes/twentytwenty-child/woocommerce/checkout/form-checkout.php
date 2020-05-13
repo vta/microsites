@@ -13,6 +13,8 @@
  * @see https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce/Templates
  * @version 3.5.0
+ *
+ * TEMPLATE OVERRIDE - removing the additional column & adding Cost Center Dropdown
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -29,32 +31,40 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 ?>
 
-<link href="../semantic-ui/semantic.min.css">
-
 <form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
+  <h1 style="text-align: center;">Place Your Order</h1>
 
 	<?php if ( $checkout->get_checkout_fields() ) : ?>
 
 		<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
 
 		<div class="col2-set" id="customer_details">
-			<div class="col-1">
-				<?php do_action( 'woocommerce_checkout_billing' ); ?>
-			</div>
 
-			<div class="col-2">
-				<?php do_action( 'woocommerce_checkout_shipping' ); ?>
-			</div>
-		</div>
+			<h2>Cost Center Number / Project Number</h2>
+
+      <div class="ui fluid selection search dropdown simple">
+        <input type="hidden" name="country">
+        <i class="dropdown icon"></i>
+        <div class="default text">Select Country</div>
+        <div class="menu">
+          <div class="item" data-value="af">Afghanistan</div>
+          <div class="item" data-value="ax">Aland Islands</div>
+          <div class="item" data-value="al">Albania</div>
+          <div class="item" data-value="dz">Algeria</div>
+          <div class="item" data-value="as">American Samoa</div>
+        </div>
+      </div>
+
+    </div>
 
 		<?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
 
 	<?php endif; ?>
-	
+
 	<?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
-	
+
 	<h3 id="order_review_heading"><?php esc_html_e( 'Your order', 'woocommerce' ); ?></h3>
-	
+
 	<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
 
 	<div id="order_review" class="woocommerce-checkout-review-order">
@@ -67,6 +77,16 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 <?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>
 
+<script>
+  const $ = jQuery;
+  $('.ui.search.dropdown').dropdown({
+    onChange: function (value, text, $selectedItem) {
+      console.log(value);
+    },
+    forceSelection: false,
+    selectOnKeydown: false,
+    showOnFocus: false,
+    on: "hover"
+  });
 
-
-<script src="../semantic-ui/semantic.min.js"></script>
+</script>
