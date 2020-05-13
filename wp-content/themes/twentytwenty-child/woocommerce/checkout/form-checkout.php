@@ -42,16 +42,11 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 			<h2>Cost Center Number / Project Number</h2>
 
-      <div class="ui fluid selection search dropdown simple">
+      <div class="ui fluid selection search dropdown">
         <input type="hidden" name="country">
         <i class="dropdown icon"></i>
         <div class="default text">Select Country</div>
-        <div class="menu">
-          <div class="item" data-value="af">Afghanistan</div>
-          <div class="item" data-value="ax">Aland Islands</div>
-          <div class="item" data-value="al">Albania</div>
-          <div class="item" data-value="dz">Algeria</div>
-          <div class="item" data-value="as">American Samoa</div>
+        <div class="menu cost-center-list">
         </div>
       </div>
 
@@ -85,8 +80,29 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
     },
     forceSelection: false,
     selectOnKeydown: false,
-    showOnFocus: false,
+    showOnFocus: true,
+    clearable: true,
     on: "hover"
   });
+
+  function addMenuItems(data) {
+
+    for (let cost_center_obj of data) {
+      // grab variables from object
+      const {cost_center, cost_center_name} = cost_center_obj;
+      // Create list item as cost center drop down selection
+      $('div.cost-center-list.menu')
+        .append(`<div class="item" data-value="${cost_center}">${cost_center} -  ${cost_center_name}</div>`);
+    }
+
+  }
+
+  fetch("<?php echo get_stylesheet_directory_uri() . '/woocommerce/checkout/cost_center.json'?>")
+    .then(async res => {
+
+      const { data } = await res.json();
+      addMenuItems(data);
+
+    });
 
 </script>
