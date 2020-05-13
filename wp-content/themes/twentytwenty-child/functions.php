@@ -612,8 +612,17 @@ function calc_3_business_days()
 add_action('woocommerce_checkout_create_order', 'before_checkout_create_order', 20, 2);
 function before_checkout_create_order( $order, $data ) {
 
+    if ( isset( $_POST['cost_center_number'] ) ) {
 
-    error_log( json_encode($_POST), JSON_PRETTY_PRINT);
+        $cost_center_number = $_POST['cost_center_number'];
+        $order->update_meta_data( 'cost_center_number', $cost_center_number );
 
-    $order->update_meta_data( '_custom_meta_key', 'value' );
+    }
+
+    if ( isset( $_POST['project_number'] ) ) {
+
+        $cost_center_number = $_POST['project_number'];
+        $order->update_meta_data( 'project_number', $cost_center_number );
+
+    }
 }
