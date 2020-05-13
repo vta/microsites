@@ -45,11 +45,10 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
       <div class="ui fluid selection search dropdown">
         <input type="hidden" name="country">
         <i class="dropdown icon"></i>
-        <div class="default text">Select Country</div>
+        <div class="default text">Cost Center Number</div>
         <div class="menu cost-center-list">
         </div>
       </div>
-
     </div>
 
 		<?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
