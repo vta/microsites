@@ -29,6 +29,28 @@ function child_scripts()
         '1.0.0',
         true
     );
+
+    // Register Semantic UI only for checkout page
+    // NOTE: May be changed later on if we incorporate it site wide
+    error_log( json_encode( get_the_ID() ), JSON_PRETTY_PRINT );
+    if ( wc_get_page_id( 'checkout' ) === get_the_ID() ) {
+
+        wp_enqueue_style(
+            'semantic-ui-css',
+            get_stylesheet_directory_uri() . '/semantic-ui/semantic.min.css',
+            array(),
+            '2.4'
+        );
+
+        wp_enqueue_script(
+            'semantic-ui-js',
+            get_stylesheet_directory_uri() . '/semantic-ui/semantic.min.js',
+            array(),
+            '2.4',
+            true
+        );
+
+    }
 }
 
 /**
