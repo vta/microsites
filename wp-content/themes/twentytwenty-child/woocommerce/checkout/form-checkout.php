@@ -43,12 +43,12 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 			<h2>Cost Center Number / Project Number</h2>
 
       <div class="ui fluid selection search dropdown">
-        <input type="hidden" name="cost_center_number">
+        <input type="hidden" name="cost_center_number" required>
         <i class="dropdown icon"></i>
         <div class="default text">Cost Center Number</div>
         <div class="menu cost-center-list">
         </div>
-      </div>
+      </div><!-- Cost Center Dropdown -->
     </div>
 
 		<?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
@@ -75,7 +75,7 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
   const $ = jQuery;
   $('.ui.search.dropdown').dropdown({
     onChange: function (value, text, $selectedItem) {
-      console.log(value);
+
     },
     forceSelection: false,
     selectOnKeydown: false,
@@ -84,6 +84,10 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
     on: "hover"
   });
 
+  /**
+   * Dynamically add cost center choices to dropdown
+   * @param data - cost center information
+   */
   function addMenuItems(data) {
 
     for (let cost_center_obj of data) {
@@ -96,6 +100,7 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
   }
 
+  // Fetch JSON data and populate select options
   fetch("<?php echo get_stylesheet_directory_uri() . '/woocommerce/checkout/cost_center.json'?>")
     .then(async res => {
 
@@ -103,5 +108,8 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
       addMenuItems(data);
 
     });
+
+  const cost_center_input = $('input[name="cost_center_number"][type="hidden"]');
+  const place_order_button = $('div.place-order button[type="submit"]');
 
 </script>
