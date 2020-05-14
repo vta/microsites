@@ -34,8 +34,14 @@ if ( !$checkout->is_registration_enabled() && $checkout->is_registration_require
 <form name="checkout" method="post" class="checkout woocommerce-checkout"
       action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
   <h1 class="checkout-form-header">Place Your Order</h1>
+
+  <h2 class="header">
+    Review your order and confirm that all of the details are correct. Also include a Cost Center Number and/or
+    Project Number before hitting "Place Order".
+  </h2>
+
   <div style="visibility: hidden; text-align: center;" id="failure-message" class="ui negative message">
-    <div class="header text-center">
+    <div class="header">
       Please select a "Cost Center Number" <strong>AND/OR</strong> or enter a "Project Number" in order to place your
       Order (at least one).
     </div>
