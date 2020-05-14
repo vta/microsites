@@ -35,7 +35,7 @@ Version: 1.0
   --thin-light-gray: 1px solid var(--light-gray);
   --thin-medium-gray: 1px solid var(--medium-gray);
   --thin-dark-blue: 1px solid var(--dark-blue);
-  --normal-darl-blue: 2px solid var(--dark-blue);
+  --normal-dark-blue: 2px solid var(--dark-blue);
 
   /* Dimensions */
   --footer-height: 166px;
@@ -229,14 +229,13 @@ div.entry-content {
   font-family: unset;
   max-width: 1200px;
   padding: 2rem 2rem 6rem 2rem;
-  animation: fadeIn linear 0.5s;
 }
 
 @media (min-width: 2200px) {
   div.entry-content {
     margin: auto;
   }
-
+}
 
 /**
 Child elements in entry-content
