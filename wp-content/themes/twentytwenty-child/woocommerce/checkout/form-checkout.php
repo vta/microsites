@@ -33,7 +33,7 @@ if ( !$checkout->is_registration_enabled() && $checkout->is_registration_require
 
 <form name="checkout" method="post" class="checkout woocommerce-checkout"
       action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data">
-  <h1 style="text-align: center;">Place Your Order</h1>
+  <h1 class="checkout-form-header">Place Your Order</h1>
   <div style="visibility: hidden; text-align: center;" id="failure-message" class="ui negative message">
     <div class="header text-center">
       Please select a "Cost Center Number" <strong>AND/OR</strong> or enter a "Project Number" in order to place your
@@ -45,7 +45,7 @@ if ( !$checkout->is_registration_enabled() && $checkout->is_registration_require
 
         <?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
 
-      <div class="col2-set" id="customer_details">
+      <div class="col2-set cost-center-project-number" id="customer_details">
 
         <p class="cost-center-instruction project-number-instruction">
           Please select the Cost Center Number or provide a Project Number for the order. Completing both is
@@ -70,9 +70,7 @@ if ( !$checkout->is_registration_enabled() && $checkout->is_registration_require
           </div>
         </div>
 
-      </div>
-
-
+      </div><!-- Cost Center Number & Project Number Container -->
 
         <?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
 
@@ -80,7 +78,7 @@ if ( !$checkout->is_registration_enabled() && $checkout->is_registration_require
 
     <?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
 
-  <h3 id="order_review_heading"><?php esc_html_e( 'Your order', 'woocommerce' ); ?></h3>
+  <h3 id="order_review_heading"><?php esc_html_e( 'Order Details', 'woocommerce' ); ?></h3>
 
     <?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
 
@@ -160,5 +158,10 @@ if ( !$checkout->is_registration_enabled() && $checkout->is_registration_require
         $('#failure-message').css('visibility', 'visible');
       }
     });
+
+  // clone submit button and place at the top of the Order Review
+  const clone_place_order_button = place_order_button.clone();
+  $('div#order_review').prepend(clone_place_order_button);
+
 
 </script>

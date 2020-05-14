@@ -34,7 +34,7 @@ Version: 1.0
   /* Borders */
   --thin-light-gray: 1px solid var(--light-gray);
   --thin-medium-gray: 1px solid var(--medium-gray);
-  --normal-dark-blue: 2px solid var(--dark-blue);
+  --thin-dark-blue: 1px solid var(--dark-blue);
 
   /* Dimensions */
   --footer-height: 166px;
@@ -92,6 +92,10 @@ html {
 
 .hidden {
   display: none;
+}
+
+body {
+  font-family: "Inter var", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
 }
 
 /******************/
@@ -1685,5 +1689,60 @@ form.cc-form div.product_totals {
 /*******************/
 
 /**
-
+Form Checkout
+- increase font-size
  */
+form.checkout.woocommerce-checkout {
+  font-size: 1.4rem;
+}
+
+/**
+Form Checkout Header
+- increase font size
+- add underline
+- center the text
+ */
+form.checkout.woocommerce-checkout h1.checkout-form-header {
+  text-align: center;
+  font-size: 4rem;
+  margin: 0 auto;
+  text-decoration: underline;
+}
+
+/**
+"Your Order Details" Header
+- increase font size
+ */
+form.checkout.woocommerce-checkout h3#order_review_heading {
+  font-size: 2rem;
+  color: var(--dark-blue);
+  text-decoration: underline;
+  margin: 2rem 0;
+}
+
+/**
+Order Review Container
+- add blue border
+ */
+form.checkout.woocommerce-checkout div#order_review {
+  border: var(--thin-dark-blue);
+  border-radius: 5px;
+  padding: 2rem;
+}
+
+/**
+Order Review Cells
+- add blue border top and bottom
+ */
+form.checkout.woocommerce-checkout div#order_review td.product-name {
+  border-top: var(--thin-dark-blue);
+  border-bottom: var(--thin-dark-blue);
+}
+
+/**
+WooCommerce Form Error
+- increase font size
+ */
+div.woocommerce-NoticeGroup.woocommerce-NoticeGroup-checkout {
+  font-size: 2rem;
+}
