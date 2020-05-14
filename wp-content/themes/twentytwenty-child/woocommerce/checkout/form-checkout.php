@@ -36,7 +36,8 @@ if ( !$checkout->is_registration_enabled() && $checkout->is_registration_require
   <h1 style="text-align: center;">Place Your Order</h1>
   <div style="visibility: hidden; text-align: center;" id="failure-message" class="ui negative message">
     <div class="header text-center">
-      Please enter a Cost Center Number in order to place your Order.
+      Please select a "Cost Center Number" <strong>AND/OR</strong> or enter a "Project Number" in order to place your
+      Order (at least one).
     </div>
   </div>
 
@@ -46,8 +47,13 @@ if ( !$checkout->is_registration_enabled() && $checkout->is_registration_require
 
       <div class="col2-set" id="customer_details">
 
-        <h2>Cost Center Number / Project Number <span class="ui red header">*</span></h2>
-        <div class="field">
+        <p class="cost-center-instruction project-number-instruction">
+          Please select the Cost Center Number or provide a Project Number for the order. Completing both is
+          also acceptable.
+        </p>
+
+        <div class="field cost-center-wrapper">
+          <h2>Cost Center Number <span class="ui red header">*</span></h2>
           <div class="ui fluid selection search dropdown">
             <input type="hidden" name="cost_center_number">
             <i class="dropdown icon"></i>
@@ -56,7 +62,17 @@ if ( !$checkout->is_registration_enabled() && $checkout->is_registration_require
             </div>
           </div><!-- Cost Center Dropdown -->
         </div>
+
+        <div class="field project-number-wrapper">
+          <h2>Project Number <span class="ui red header">*</span></h2>
+          <div class="ui input">
+            <input name="project_number" type="text" placeholder="Project Number">
+          </div>
+        </div>
+
       </div>
+
+
 
         <?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
 
@@ -81,18 +97,12 @@ if ( !$checkout->is_registration_enabled() && $checkout->is_registration_require
 <script>
   const $ = jQuery;
 
-  // initialize dropdown w/ rules
+  // initialize Cost Center searchable dropdown w/ Semantic UI settings
   $('.ui.search.dropdown').dropdown({
-    onChange: function (value, text, $choice) {
-      if (value.length)
-        console.log(value);
-      else
-        console.log('empty');
-    },
     forceSelection: false,
-    selectOnKeydown: false,
-    showOnFocus: true,
-    clearable: true,
+    selectOnKeydown: false,   // forces user to left-click or hit enter to select option
+    showOnFocus: true,        // when input is focused, options appear
+    clearable: true,          // allows user to clear input w/ "x" icon
     ignoreCase: true,         // case insensitive when searching
     fullTextSearch: true,     // allow to search parts of strings
     on: "hover"
@@ -117,21 +127,18 @@ if ( !$checkout->is_registration_enabled() && $checkout->is_registration_require
   // Fetch JSON data and populate select options
   fetch("<?php echo get_stylesheet_directory_uri() . '/woocommerce/checkout/cost_center.json'?>")
     .then(async res => {
-
-      const {data} = await res.json();
+      const { data } = await res.json();
       addMenuItems(data);
-
     });
 
-  const cost_center_input = $('input[name="cost_center_number"][type="hidden"]');
   const checkout_form = $('form.checkout.woocommerce-checkout');
   const place_order_button = $('button#place_order');
 
-  // add classes to Form button
+  // add Semantic UI classes to form button (form validation behaviors)
   checkout_form.addClass('ui form');
   place_order_button.addClass('submit');
 
-  // add form validation
+  // add front-end form validation
   checkout_form
     .form({
       on: 'blur',
@@ -140,7 +147,12 @@ if ( !$checkout->is_registration_enabled() && $checkout->is_registration_require
           identifier: 'cost_center_number',
           rules: [{
             type: 'empty',
-            prompt: 'Please enter a value'
+          }]
+        },
+        project_number: {
+          identifier: 'project_number',
+          rules: [{
+            type: 'empty',
           }]
         }
       },

@@ -672,7 +672,7 @@ GF form validation
 - remove margin
 - position element above others
  */
-#gform_wrapper_1 > div.validation_error,
+#gform_wrapper_4 div.validation_error, /* Business Cards */
 form.cc-form .gform_wrapper div.gf_page_steps + div.validation_error {
   background: var(--light-gray);
   margin-top: 0;
@@ -1525,6 +1525,10 @@ div#content.widecolumn p.lead-in {
 }
 
 /*******************************/
+/** WOOCOMMERCE CUSTOMIZATION **/
+/*******************************/
+
+/*******************************/
 /** WOOCOMMERCE GLOBAL STYLES **/
 /*******************************/
 
@@ -1576,6 +1580,10 @@ WooCommerce Cart Header
 .woocommerce-cart #site-content .entry-header {
   padding: 0;
 }
+
+/*****************************/
+/** ORDER CONFIRMATION PAGE **/
+/*****************************/
 
 div.woocommerce-order {
   max-width: 860px !important;
@@ -1670,3 +1678,12 @@ WooCommerce Product Totals
 form.cc-form div.product_totals {
   display: none;
 }
+
+
+/*******************/
+/** CHECKOUT PAGE **/
+/*******************/
+
+/**
+
+ */

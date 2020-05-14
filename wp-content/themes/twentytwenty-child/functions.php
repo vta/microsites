@@ -44,7 +44,7 @@ function child_scripts()
         wp_enqueue_script(
             'semantic-ui-js',
             get_stylesheet_directory_uri() . '/semantic-ui/semantic.min.js',
-            array('jquery'),
+            array( 'jquery' ),
             '2.4',
             false
         );
@@ -607,13 +607,28 @@ function calc_3_business_days()
 }
 
 /**
- * VALIDATE Cost Center Number is selected
+ * VALIDATE if Cost Center Number OR Project Number is selected
  */
-add_action('woocommerce_after_checkout_validation', 'confirm_cost_center_number');
-function confirm_cost_center_number( $posted ) {
+add_action( 'woocommerce_after_checkout_validation', 'confirm_cost_center_number' );
+function confirm_cost_center_number( $posted )
+{
+    $valid = false;
 
-    if ( isset($_POST['cost_center_number'] ) && $_POST['cost_center_number'] == '' ) {
-        wc_add_notice( __( "Cost Center Number is not selected.", 'woocommerce' ), 'error' );
+    // check if Cost Center Number or Project Number is filled out
+    if ( isset( $_POST['cost_center_number'] ) && ! ( $_POST['cost_center_number'] == '' ) ) {
+
+        $valid = true;
+
+    } elseif ( isset( $_POST['project_number'] ) && ! ( trim( $_POST['project_number'] ) == '' ) ) {
+
+        $valid = true;
+
+    }
+
+
+    // Send error if Cost Center Number OR Project Number is not specified
+    if ( ! $valid ) {
+        wc_add_notice( __( "Cost Center Number / Project Number is not specified.", 'woocommerce' ), 'error' );
     }
 
 }
@@ -621,8 +636,9 @@ function confirm_cost_center_number( $posted ) {
 /**
  * ADDING Cost Center Number or Project Number as meta data to Order
  */
-add_action('woocommerce_checkout_create_order', 'before_checkout_create_order', 20, 2);
-function before_checkout_create_order( $order, $data ) {
+add_action( 'woocommerce_checkout_create_order', 'before_checkout_create_order', 20, 2 );
+function before_checkout_create_order( $order, $data )
+{
 
     if ( isset( $_POST['cost_center_number'] ) ) {
 
@@ -633,8 +649,8 @@ function before_checkout_create_order( $order, $data ) {
 
     if ( isset( $_POST['project_number'] ) ) {
 
-        $cost_center_number = $_POST['project_number'];
-        $order->update_meta_data( 'project_number', $cost_center_number );
+        $project_number = $_POST['project_number'];
+        $order->update_meta_data( 'project_number', $project_number );
 
     }
 }
