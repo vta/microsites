@@ -607,6 +607,18 @@ function calc_3_business_days()
 }
 
 /**
+ * VALIDATE Cost Center Number is selected
+ */
+add_action('woocommerce_after_checkout_validation', 'confirm_cost_center_number');
+function confirm_cost_center_number( $posted ) {
+
+    if ( isset($_POST['cost_center_number'] ) && $_POST['cost_center_number'] == '' ) {
+        wc_add_notice( __( "Cost Center Number is not selected.", 'woocommerce' ), 'error' );
+    }
+
+}
+
+/**
  * ADDING Cost Center Number or Project Number as meta data to Order
  */
 add_action('woocommerce_checkout_create_order', 'before_checkout_create_order', 20, 2);
