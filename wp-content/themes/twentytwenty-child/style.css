@@ -232,8 +232,12 @@ div.entry-content {
 }
 
 @media (min-width: 2200px) {
+  div.post-inner {
+    margin:auto;
+  }
+
   div.entry-content {
-    margin: auto;
+    margin: 2rem auto;
   }
 }
 
