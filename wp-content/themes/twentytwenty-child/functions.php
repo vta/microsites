@@ -374,13 +374,15 @@ function bc_entry_id_text_to_order_items( $item, $cart_item_key, $values, $order
     $lastname = $entry['2.6'];
     $quantity = $entry['10'];
 
+    $filename = 'bizcard_' .  $firstname . '_' . $lastname . '_entry_'  . $entry_id;
+
     // add business card download link as meta data
     $item->add_meta_data( __( 'Business Card PDF', 'bc_entry_id' ),
-        "
-            <a href='" . esc_url( $uploads['baseurl'] . '/business_cards/business_card_' . $entry_id . '.pdf' ) . "'>
-             " . "$firstname" . " " . "$lastname" . "
+        '
+            <a href="' . esc_url( $uploads['baseurl'] . "/business_cards/" . $filename . ".pdf" ) . '">
+               ' . $firstname . ' ' . $lastname . ' PDF
             </a>
-        "
+        '
     );
 
     // add quantity as meta data
