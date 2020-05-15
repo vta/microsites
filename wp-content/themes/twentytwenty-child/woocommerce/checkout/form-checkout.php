@@ -37,7 +37,7 @@ if ( !$checkout->is_registration_enabled() && $checkout->is_registration_require
 
   <h2 class="header">
     Review your order and confirm that all of the details are correct. Please select a Cost Center Number before
-    placing your order (required). If you have a Project, include it underneath the Cost Center Number.
+    placing your order (required). If you have a Project, include it underneath the Cost Center Number (optional).
   </h2>
 
   <div style="visibility: hidden; text-align: center;" id="failure-message" class="ui negative message">
