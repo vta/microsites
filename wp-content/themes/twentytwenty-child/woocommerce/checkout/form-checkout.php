@@ -53,8 +53,7 @@ if ( !$checkout->is_registration_enabled() && $checkout->is_registration_require
       <div class="col2-set cost-center-project-number" id="customer_details">
 
         <p class="cost-center-instruction project-number-instruction">
-          Please select the Cost Center Number or provide a Project Number for the order. Completing both is
-          also acceptable.
+          Please select the Cost Center Number. If you have a Project Number, please include this to the order as well.
         </p>
 
         <div class="field cost-center-wrapper">
