@@ -233,7 +233,8 @@ div.entry-content {
 
 @media (min-width: 2200px) {
   div.post-inner {
-    margin:auto;
+    margin: auto;
+    padding: 0;
   }
 
   div.entry-content {
