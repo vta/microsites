@@ -1118,7 +1118,7 @@ form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.d
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.due-date > div > input {
   margin: auto 0 auto auto;
   width: 150px;
-  height: 35px;
+  height: 40px;
 }
 
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.due-date > div > img {
