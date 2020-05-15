@@ -29,6 +29,27 @@ function child_scripts()
         '1.0.0',
         true
     );
+
+    // Register Semantic UI only for checkout page
+    // NOTE: May be changed later on if we incorporate it site wide
+    if ( wc_get_page_id( 'checkout' ) === get_the_ID() ) {
+
+        wp_enqueue_style(
+            'semantic-ui-css',
+            get_stylesheet_directory_uri() . '/semantic-ui/semantic.min.css',
+            array(),
+            '2.4'
+        );
+
+        wp_enqueue_script(
+            'semantic-ui-js',
+            get_stylesheet_directory_uri() . '/semantic-ui/semantic.min.js',
+            array( 'jquery' ),
+            '2.4',
+            false
+        );
+
+    }
 }
 
 /**
@@ -121,8 +142,34 @@ function wc_login_redirect()
     return get_permalink( wc_get_page_id( 'myaccount' ) );
 }
 
+
+/**
+ * WIP: RESTRICT Business Card PDFs and Uploads to members only
+ */
+add_action('template_redirect', 'restrict_media_access');
+function restrict_media_access()
+{
+    global $wp;
+
+//    error_log( json_encode(), JSON_PRETTY_PRINT );
+
+    // get user ID
+    $is_logged_in = is_user_logged_in();
+
+    // get page url
+    $current_url = $_SERVER['REQUEST_URI'];
+
+    error_log( $current_url , JSON_PRETTY_PRINT );
+
+    // if user is not logged in and user is not admin, send error
+
+}
+
+/** WooCommerce Hooks */
+
 /**
  * EMPTY cart upon logout
+ * @TODO - may want to remove to this in the future. Need to test first...
  */
 add_action( 'wp_logout', 'clear_cart' );
 function clear_cart()
@@ -132,8 +179,6 @@ function clear_cart()
         WC()->cart->empty_cart();
     }
 }
-
-/** WooCommerce Hooks */
 
 /** USER FRONT-END CHANGES */
 
@@ -353,13 +398,15 @@ function bc_entry_id_text_to_order_items( $item, $cart_item_key, $values, $order
     $lastname = $entry['2.6'];
     $quantity = $entry['10'];
 
+    $filename = 'bizcard_' .  $firstname . '_' . $lastname . '_entry_'  . $entry_id;
+
     // add business card download link as meta data
     $item->add_meta_data( __( 'Business Card PDF', 'bc_entry_id' ),
-        "
-            <a href='" . esc_url( $uploads['baseurl'] . '/business_cards/business_card_' . $entry_id . '.pdf' ) . "'>
-             " . "$firstname" . " " . "$lastname" . "
+        '
+            <a href="' . esc_url( $uploads['baseurl'] . "/business_cards/" . $filename . ".pdf" ) . '">
+               ' . $firstname . ' ' . $lastname . ' PDF
             </a>
-        "
+        '
     );
 
     // add quantity as meta data
@@ -583,4 +630,52 @@ function calc_3_business_days()
     }
 
     return $result;
+}
+
+/**
+ * VALIDATE if Cost Center Number OR Project Number is valid
+ */
+add_action( 'woocommerce_after_checkout_validation', 'confirm_cost_center_number' );
+function confirm_cost_center_number( $posted )
+{
+
+    // Check if Cost Center is selected
+    if ( isset( $_POST['cost_center_number'] ) && ! ( $_POST['cost_center_number'] == '' ) ) {
+
+        if ( isset( $_POST['project_number'] ) ) {
+
+            $project_number = trim( $_POST['project_number'] );
+
+            // if the user includes a Project number and if it does not match the format (ex. P123)
+            if ( $project_number != '' && ! ( preg_match( '/^[Pp][0-9]{3,}$/', $project_number ) ) ) {
+                wc_add_notice( __( "Please enter a valid Project Number.", 'woocommerce' ), 'error' );
+            }
+        }
+    } else {
+
+        wc_add_notice( __( "Cost Center Number is not specified", 'woocommerce' ), 'error' );
+    }
+
+}
+
+/**
+ * ADDING Cost Center Number or Project Number as meta data to Order
+ */
+add_action( 'woocommerce_checkout_create_order', 'before_checkout_create_order', 20, 2 );
+function before_checkout_create_order( $order, $data )
+{
+
+    if ( isset( $_POST['cost_center_number'] ) ) {
+
+        $cost_center_number = $_POST['cost_center_number'];
+        $order->update_meta_data( 'cost_center_number', $cost_center_number );
+
+    }
+
+    if ( isset( $_POST['project_number'] ) ) {
+
+        $project_number = $_POST['project_number'];
+        $order->update_meta_data( 'project_number', $project_number );
+
+    }
 }

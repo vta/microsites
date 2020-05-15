@@ -34,6 +34,7 @@ Version: 1.0
   /* Borders */
   --thin-light-gray: 1px solid var(--light-gray);
   --thin-medium-gray: 1px solid var(--medium-gray);
+  --thin-dark-blue: 1px solid var(--dark-blue);
   --normal-dark-blue: 2px solid var(--dark-blue);
 
   /* Dimensions */
@@ -92,6 +93,10 @@ html {
 
 .hidden {
   display: none;
+}
+
+body {
+  font-family: "Inter var", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
 }
 
 /******************/
@@ -224,6 +229,17 @@ div.entry-content {
   font-family: unset;
   max-width: 1200px;
   padding: 2rem 2rem 6rem 2rem;
+}
+
+@media (min-width: 2200px) {
+  div.post-inner {
+    margin: auto;
+    padding: 0;
+  }
+
+  div.entry-content {
+    margin: 2rem auto;
+  }
 }
 
 /**
@@ -672,7 +688,7 @@ GF form validation
 - remove margin
 - position element above others
  */
-#gform_wrapper_1 > div.validation_error,
+#gform_wrapper_4 div.validation_error, /* Business Cards */
 form.cc-form .gform_wrapper div.gf_page_steps + div.validation_error {
   background: var(--light-gray);
   margin-top: 0;
@@ -1102,7 +1118,7 @@ form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.d
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.due-date > div > input {
   margin: auto 0 auto auto;
   width: 150px;
-  height: 35px;
+  height: 40px;
 }
 
 form.cc-form div.gform_body div.gform_page ul.gform_fields li.gfield.your-info.due-date > div > img {
@@ -1525,6 +1541,10 @@ div#content.widecolumn p.lead-in {
 }
 
 /*******************************/
+/** WOOCOMMERCE CUSTOMIZATION **/
+/*******************************/
+
+/*******************************/
 /** WOOCOMMERCE GLOBAL STYLES **/
 /*******************************/
 
@@ -1577,16 +1597,20 @@ WooCommerce Cart Header
   padding: 0;
 }
 
+/*****************************/
+/** ORDER CONFIRMATION PAGE **/
+/*****************************/
+
 div.woocommerce-order {
   max-width: 860px !important;
-  border-left: 1px solid #29588c;
-  border-right: 1px solid #29588c;
-  border-bottom: 1px solid #29588c;
+  border-left: 1px solid var(--dark-blue);
+  border-right: 1px solid var(--dark-blue);
+  border-bottom: 1px solid var(--dark-blue);
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
 }
 div.woocommerce-order p.woocommerce-thankyou-order-received {
-    background: #29588c;
+    background: var(--dark-blue);
     color: #FFFFFF;
     padding: 25px;
     border-top-left-radius: 12px;
@@ -1596,12 +1620,12 @@ div.woocommerce-order p.woocommerce-thankyou-order-received {
 }
 ul.woocommerce-thankyou-order-details {
     list-style-type: none;
-    color: #29588c;
+    color: var(--dark-blue);
     margin: 0 auto;
     max-width: 92%;
     padding-top: 15px;
     padding-bottom: 15px;
-    border-bottom: 2px solid #29588c;
+    border-bottom: 2px solid var(--dark-blue);
 }
 ul.woocommerce-thankyou-order-details > li {
     margin: 0 auto 0 0;
@@ -1614,7 +1638,7 @@ section.woocommerce-order-details {
     max-width: 92%;
 }
 section.woocommerce-order-details h2 {
-    color: #29588c;
+    color: var(--dark-blue);
     font-size: 26px;
     position: relative;
     margin: 0;
@@ -1625,12 +1649,12 @@ table.woocommerce-table--order-details {
    padding: 0;
 }
 table.woocommerce-table--order-details thead {
-   color: #29588c;
+   color: var(--dark-blue);
 }
 
 
 p.woocommerce-customer-details--email {
-   color: #29588c;
+   color: var(--dark-blue);
    margin-left: auto;
    margin-bottom: 0;
    max-width: 250px;
@@ -1671,3 +1695,66 @@ form.cc-form div.product_totals {
   display: none;
 }
 
+
+/*******************/
+/** CHECKOUT PAGE **/
+/*******************/
+
+/**
+Form Checkout
+- increase font-size
+ */
+form.checkout.woocommerce-checkout {
+  font-size: 1.4rem;
+}
+
+/**
+Form Checkout Header
+- increase font size
+- add underline
+- center the text
+ */
+form.checkout.woocommerce-checkout h1.checkout-form-header {
+  text-align: center;
+  font-size: 4rem;
+  margin: 0 auto;
+  text-decoration: underline;
+}
+
+/**
+"Your Order Details" Header
+- increase font size
+ */
+form.checkout.woocommerce-checkout h3#order_review_heading {
+  font-size: 2rem;
+  color: var(--dark-blue);
+  text-decoration: underline;
+  margin: 2rem 0;
+}
+
+/**
+Order Review Container
+- add blue border
+ */
+form.checkout.woocommerce-checkout div#order_review {
+  border: var(--thin-dark-blue);
+  border-radius: 5px;
+  padding: 2rem;
+}
+
+/**
+Order Review Cells
+- add blue border top and bottom
+ */
+form.checkout.woocommerce-checkout div#order_review td.product-name {
+  border-top: var(--thin-dark-blue);
+  border-bottom: var(--thin-dark-blue);
+}
+
+/**
+WooCommerce Form Error
+- increase font size
+ */
+div.woocommerce-NoticeGroup.woocommerce-NoticeGroup-checkout {
+  font-size: 2rem;
+}
