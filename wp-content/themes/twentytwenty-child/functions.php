@@ -142,8 +142,34 @@ function wc_login_redirect()
     return get_permalink( wc_get_page_id( 'myaccount' ) );
 }
 
+
+/**
+ * WIP: RESTRICT Business Card PDFs and Uploads to members only
+ */
+add_action('template_redirect', 'restrict_media_access');
+function restrict_media_access()
+{
+    global $wp;
+
+//    error_log( json_encode(), JSON_PRETTY_PRINT );
+
+    // get user ID
+    $is_logged_in = is_user_logged_in();
+
+    // get page url
+    $current_url = $_SERVER['REQUEST_URI'];
+
+    error_log( $current_url , JSON_PRETTY_PRINT );
+
+    // if user is not logged in and user is not admin, send error
+
+}
+
+/** WooCommerce Hooks */
+
 /**
  * EMPTY cart upon logout
+ * @TODO - may want to remove to this in the future. Need to test first...
  */
 add_action( 'wp_logout', 'clear_cart' );
 function clear_cart()
@@ -153,8 +179,6 @@ function clear_cart()
         WC()->cart->empty_cart();
     }
 }
-
-/** WooCommerce Hooks */
 
 /** USER FRONT-END CHANGES */
 
@@ -609,28 +633,27 @@ function calc_3_business_days()
 }
 
 /**
- * VALIDATE if Cost Center Number OR Project Number is selected
+ * VALIDATE if Cost Center Number OR Project Number is valid
  */
 add_action( 'woocommerce_after_checkout_validation', 'confirm_cost_center_number' );
 function confirm_cost_center_number( $posted )
 {
-    $valid = false;
 
-    // check if Cost Center Number or Project Number is filled out
+    // Check if Cost Center is selected
     if ( isset( $_POST['cost_center_number'] ) && ! ( $_POST['cost_center_number'] == '' ) ) {
 
-        $valid = true;
+        if ( isset( $_POST['project_number'] ) ) {
 
-    } elseif ( isset( $_POST['project_number'] ) && ! ( trim( $_POST['project_number'] ) == '' ) ) {
+            $project_number = trim( $_POST['project_number'] );
 
-        $valid = true;
+            // if the user includes a Project number and if it does not match the format (ex. P123)
+            if ( $project_number != '' && ! ( preg_match( '/^[Pp][0-9]{3,}$/', $project_number ) ) ) {
+                wc_add_notice( __( "Please enter a valid Project Number.", 'woocommerce' ), 'error' );
+            }
+        }
+    } else {
 
-    }
-
-
-    // Send error if Cost Center Number OR Project Number is not specified
-    if ( ! $valid ) {
-        wc_add_notice( __( "Cost Center Number / Project Number is not specified.", 'woocommerce' ), 'error' );
+        wc_add_notice( __( "Cost Center Number is not specified", 'woocommerce' ), 'error' );
     }
 
 }

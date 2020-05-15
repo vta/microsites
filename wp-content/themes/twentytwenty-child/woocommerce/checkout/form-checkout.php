@@ -36,14 +36,13 @@ if ( !$checkout->is_registration_enabled() && $checkout->is_registration_require
   <h1 class="checkout-form-header">Place Your Order</h1>
 
   <h2 class="header">
-    Review your order and confirm that all of the details are correct. Also include a Cost Center Number and/or
-    Project Number before hitting "Place Order".
+    Review your order and confirm that all of the details are correct. Please select a Cost Center Number before
+    placing your order (required). If you have a Project, include it underneath the Cost Center Number.
   </h2>
 
   <div style="visibility: hidden; text-align: center;" id="failure-message" class="ui negative message">
-    <div class="header">
-      Please select a "Cost Center Number" <strong>AND/OR</strong> or enter a "Project Number" in order to place your
-      Order (at least one).
+    <div class="header" id="failure-message-text">
+
     </div>
   </div>
 
@@ -70,10 +69,13 @@ if ( !$checkout->is_registration_enabled() && $checkout->is_registration_require
         </div>
 
         <div class="field project-number-wrapper">
-          <h2>Project Number <span class="ui red header">*</span></h2>
+          <h2>Project Number</h2>
           <div class="ui input">
             <input name="project_number" type="text" placeholder="Project Number">
           </div>
+          <p>Project number should start with the letter <strong>P</strong> followed by at <strong>least 3 digits</strong>.
+            Example:
+            <em>P123</em></p>
         </div>
 
       </div><!-- Cost Center Number & Project Number Container -->
@@ -151,17 +153,30 @@ if ( !$checkout->is_registration_enabled() && $checkout->is_registration_require
           identifier: 'cost_center_number',
           rules: [{
             type: 'empty',
+            prompt: 'You must select a Cost Center Number.'
           }]
         },
         project_number: {
           identifier: 'project_number',
           rules: [{
-            type: 'empty',
+            type: 'regExp',
+            prompt: 'The project number that you have entered has an invalid format.',
+            value: /^[\s]*[Pp][0-9]{3,}[\s]*|[\s]*$/    // Input validation: starts with P and a minimum of 3
+            // digits
           }]
         }
       },
-      onFailure: function () {
+      onFailure: function (formErrors, fields) {
+        // show failure-message container
         $('#failure-message').css('visibility', 'visible');
+
+        // grab only the first error
+        const error_message = formErrors[0];
+
+        console.log(error_message);
+
+        // clear any previous error messages and fill new error message
+        $('#failure-message-text').empty().text(error_message);
       }
     });
 
