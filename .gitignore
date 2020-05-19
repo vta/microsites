@@ -1,0 +1,38 @@
+# Exclude evertyhing by default
+/*
+/*/
+
+!.gitignore
+!README.md
+
+# Store config in private repo only
+wp-config.php
+
+# Site specific settings
+!.user.ini
+!.htaccess
+
+# Logs
+**.log
+
+# Contents directory
+!/wp-content/
+
+**/index.php
+
+# Themes
+!/wp-content/themes
+/wp-content/themes/**/
+!/wp-content/themes/customizr-pro-**
+!/wp-content/themes/twentytwenty-child
+!/wp-content/themes/twentytwenty-child/**
+
+
+# Plugins
+/wp-content/plugins
+
+# Uploads
+/wp-content/uploads
+
+# Backups
+/wp-content/updraft

@@ -1,0 +1,191 @@
+/*
+Theme Name: SCVTA News Wheel
+Theme URI: http://presscustomizr.com/extension/customizr-pro/
+Template: customizr-pro
+Author: Gordon Hackett
+Author URI: http://linuxwebexpert.com
+Description: The pro version of the popular Customizr WordPress theme.
+Tags: one-column,two-columns,three-columns,left-sidebar,right-sidebar,custom-menu,custom-colors,featured-images,full-width-template,theme-options,threaded-comments,translation-ready,sticky-post,post-formats,rtl-language-support,editor-style
+Version: 2.0.10.1508718012
+Updated: 2017-10-23 00:20:12
+
+*/
+section a:link, a:visited {
+    font-weight: bold;
+    color: #111199;
+}
+section a:hover, a:focus {
+    font-weight: bolder;
+    color: #1111FF;
+}
+.tc-header {
+    background-color: #ffffff;
+}
+.navbar-wrapper {
+    max-width: 51px !important;
+    float: right !important;
+    vertical-align: middle;
+}
+.sticky-enabled .tc-header {
+    background: rgba(255,255,255,.8);
+}
+.sticky-disabled .navbar-wrapper {
+    clear: none !important;
+}
+.master-slider {
+    background: #FFFFFF !important;
+}
+/*
+.ms-nav-next, .ms-nav-prev {
+    background: transparent !important;
+    max-width: 48px;
+    max-height: 48px;
+}
+*/
+
+/**
+ * Fix for thumbnail proportial scaling
+ */
+img.attachment-tc-thumb.tc-thumb-type-thumb.wp-post-image.wp-post-image.h-centered {
+    height: unset !important;
+    left: unset !important;
+}
+.thumb-wrapper .round-div {
+    width: 270px;
+    height: 180px;
+}
+.tc-rectangular-thumb img {
+   /* height: unset !important;
+    width: unset !important;*/
+    object-fit: scale-down;	
+    top: 0px !important;
+}
+
+@media (max-width: 479px) {
+    .ms-slide-info {
+        position: relative !important;
+        clear: both !important;
+        text-align: left !important;
+    }
+}
+@media (min-width: 480px) {
+   .site-logo img {
+        max-width: 360px;
+    }
+    .tc-header .brand {
+        max-width: 360px;
+    }
+}
+@media (min-width: 370px) and (max-width: 479px) {
+    .site-logo img {
+        max-width: 250px;
+    }
+    .tc-header .brand {
+        max-width: 250px;
+    }
+}
+@media (max-width: 369px) {
+    .site-logo img {
+        max-width: 150px !important;
+    }
+    .tc-header .brand {
+        max-width: 150px !important;
+    }
+}
+.site-logo img {
+    transform: scale(0.7);
+}
+.tc-header .brand {
+    text-align: left;
+    vertical-align: middle;
+}
+.navbar .navbar-inner {
+    margin: 0 !important;
+}
+.posts_catlist {
+    margin: 10px auto;
+    width: 100%;
+}
+.lcp_item {
+    display: block;
+    margin: 25px 0px;
+}
+.lcp_modified {
+    display: inline-block;
+    width: 100%;
+}
+.lcp_thumb {
+    display: inline-block;
+    width: 30%;
+    margin: 0px 10px;
+    vertical-align: top;
+}
+.lcp_excerpt {
+    display: inline-block;
+    width: 60%;
+    margin: 5px 15px;
+}
+.lcp_post {
+    width: 100%;
+    display: block;
+    clear: both;
+    font-size: 14pt;
+    font-weight: bold;
+}
+.lcp_morelink {
+    display: block;
+    clear: top;
+    margin-top: 0px;
+    margin-left: 33%;
+    margin-bottom: 15px;
+}
+.newswheel_main {
+    text-align: center;
+}
+.newswheel_front_page {
+    text-align: center;
+    clear: none;
+    flex-flow: column;
+    display: inline-flex;
+    position: relative;
+    bottom: 14px;
+}
+.newswheel_logo {
+    display: inline-flex;
+    text-align: center;
+    vertical-align: middle;
+    margin: 20px;
+    max-height: 100px;
+    max-width: 100px;
+}
+.newswheel_front_page h1, .newswheel_front_page h3, .newswheel_front_pagep, .newswheel_front_page a {
+    line-height: 18pt;
+}
+.newswheel_front_page h1 {
+    font-size: 75px;
+    border-bottom: 3px solid #29588C;
+    font-weight: 900;
+    color: #29588C;
+    padding: 0 8px 10px 3px;
+    line-height: 70px;
+    font-family: 'Playfair Display', serif;
+
+}
+.newswheel_front_page h3 {
+    font-size: 31px;
+    font-weight: 700;
+    font-style: italic;
+    color: #4CB4E7;
+    margin: 0px 0 10px 0px;
+    font-family: 'Playfair Display', serif;
+}
+.newswheel_front_page p {
+    color: #666
+}
+.newswheel_front_page a {
+    color: #29588C
+}
+.recent-post-slider .recentpost-categories ul.post-categories li:nth-child(4n+1) a
+{
+    background: #004a98;
+}
