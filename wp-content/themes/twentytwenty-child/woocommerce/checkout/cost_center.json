@@ -1,0 +1,392 @@
+{
+  "data": [
+    {
+      "cost_center": 11000,
+      "cost_center_name": "General Manager's Office"
+    },
+    {
+      "cost_center": 11001,
+      "cost_center_name": "Decommission"
+    },
+    {
+      "cost_center": 11002,
+      "cost_center_name": "Government Affairs"
+    },
+    {
+      "cost_center": 11005,
+      "cost_center_name": "Board Secretary"
+    },
+    {
+      "cost_center": 11500,
+      "cost_center_name": "Auditor General"
+    },
+    {
+      "cost_center": 12000,
+      "cost_center_name": "General Counsel's Office"
+    },
+    {
+      "cost_center": 13000,
+      "cost_center_name": "Business Services Administration"
+    },
+    {
+      "cost_center": 13005,
+      "cost_center_name": "Disadvantaged Business Enterprise"
+    },
+    {
+      "cost_center": 13015,
+      "cost_center_name": "Labor Relations"
+    },
+    {
+      "cost_center": 13017,
+      "cost_center_name": "Selection & Classification"
+    },
+    {
+      "cost_center": 13035,
+      "cost_center_name": "Organizational Development & Training"
+    },
+    {
+      "cost_center": 13040,
+      "cost_center_name": "Office of Civil Rights"
+    },
+    {
+      "cost_center": 13050,
+      "cost_center_name": "Decommission"
+    },
+    {
+      "cost_center": 13055,
+      "cost_center_name": "Materials Management"
+    },
+    {
+      "cost_center": 13060,
+      "cost_center_name": "Retirement Services"
+    },
+    {
+      "cost_center": 13065,
+      "cost_center_name": "Benefits"
+    },
+    {
+      "cost_center": 13075,
+      "cost_center_name": "Substance Abuse"
+    },
+    {
+      "cost_center": 14000,
+      "cost_center_name": "Finance & Admin Adm"
+    },
+    {
+      "cost_center": 14001,
+      "cost_center_name": "Finance"
+    },
+    {
+      "cost_center": 14002,
+      "cost_center_name": "Procurement & Contracts Admin."
+    },
+    {
+      "cost_center": 14004,
+      "cost_center_name": "Construction Contracts"
+    },
+    {
+      "cost_center": 14005,
+      "cost_center_name": "Professional Services Contracts"
+    },
+    {
+      "cost_center": 14010,
+      "cost_center_name": "Warehouse & Mail Service"
+    },
+    {
+      "cost_center": 14015,
+      "cost_center_name": "Purchasing"
+    },
+    {
+      "cost_center": 14020,
+      "cost_center_name": "BART O&M Program Management"
+    },
+    {
+      "cost_center": 14025,
+      "cost_center_name": "Investment Services"
+    },
+    {
+      "cost_center": 14030,
+      "cost_center_name": "Fare Programs & Systems"
+    },
+    {
+      "cost_center": 14040,
+      "cost_center_name": "Budget"
+    },
+    {
+      "cost_center": 14045,
+      "cost_center_name": "Technology"
+    },
+    {
+      "cost_center": 14047,
+      "cost_center_name": "General Accounting"
+    },
+    {
+      "cost_center": 14070,
+      "cost_center_name": "Disbursements"
+    },
+    {
+      "cost_center": 14072,
+      "cost_center_name": "Enterprise Risk Management"
+    },
+    {
+      "cost_center": 14075,
+      "cost_center_name": "Environmental, Health & Safety"
+    },
+    {
+      "cost_center": 14076,
+      "cost_center_name": "Transit System Safety"
+    },
+    {
+      "cost_center": 14080,
+      "cost_center_name": "Claims Administration"
+    },
+    {
+      "cost_center": 14085,
+      "cost_center_name": "Capital & Revenue Accounting"
+    },
+    {
+      "cost_center": 15000,
+      "cost_center_name": "Communications"
+    },
+    {
+      "cost_center": 15025,
+      "cost_center_name": "Community Engagement"
+    },
+    {
+      "cost_center": 15040,
+      "cost_center_name": "Customer Service"
+    },
+    {
+      "cost_center": 15050,
+      "cost_center_name": "Marketing"
+    },
+    {
+      "cost_center": 15060,
+      "cost_center_name": "Creative Services"
+    },
+    {
+      "cost_center": 16000,
+      "cost_center_name": "Planning & Engineering Admin"
+    },
+    {
+      "cost_center": 16015,
+      "cost_center_name": "Environmental Planning"
+    },
+    {
+      "cost_center": 16020,
+      "cost_center_name": "CMP Programming-Fund 1000"
+    },
+    {
+      "cost_center": 16025,
+      "cost_center_name": "Copy Center"
+    },
+    {
+      "cost_center": 16035,
+      "cost_center_name": "Real Estate & Joint Development"
+    },
+    {
+      "cost_center": 16037,
+      "cost_center_name": "Parking Garages & Lots"
+    },
+    {
+      "cost_center": 16045,
+      "cost_center_name": "Programming & Grants"
+    },
+    {
+      "cost_center": 16055,
+      "cost_center_name": "Transportation Planning"
+    },
+    {
+      "cost_center": 16060,
+      "cost_center_name": "Planning & Program Dev. Engineering"
+    },
+    {
+      "cost_center": 17000,
+      "cost_center_name": "Eng & Transp Program Delivery"
+    },
+    {
+      "cost_center": 17100,
+      "cost_center_name": "ETID Programwide"
+    },
+    {
+      "cost_center": 18010,
+      "cost_center_name": "BART Program Delivery"
+    },
+    {
+      "cost_center": 50000,
+      "cost_center_name": "Operations Administration"
+    },
+    {
+      "cost_center": 50005,
+      "cost_center_name": "Protective Services"
+    },
+    {
+      "cost_center": 50310,
+      "cost_center_name": "Bus Admin Supports"
+    },
+    {
+      "cost_center": 50320,
+      "cost_center_name": "LR Admin Supports"
+    },
+    {
+      "cost_center": 51000,
+      "cost_center_name": "LR Ops Admin."
+    },
+    {
+      "cost_center": 51001,
+      "cost_center_name": "Transp & Maint Long-Term Leave"
+    },
+    {
+      "cost_center": 51100,
+      "cost_center_name": "Bus North Transportation"
+    },
+    {
+      "cost_center": 51105,
+      "cost_center_name": "Bus Chaboya Transportation"
+    },
+    {
+      "cost_center": 51110,
+      "cost_center_name": "Bus Cerone Transportation"
+    },
+    {
+      "cost_center": 51115,
+      "cost_center_name": "Operations Control Center"
+    },
+    {
+      "cost_center": 51120,
+      "cost_center_name": "Transportation Field Supervision"
+    },
+    {
+      "cost_center": 51200,
+      "cost_center_name": "Light Rail Transportation"
+    },
+    {
+      "cost_center": 51410,
+      "cost_center_name": "Bus Technical Training"
+    },
+    {
+      "cost_center": 51420,
+      "cost_center_name": "LR Technical Training"
+    },
+    {
+      "cost_center": 52000,
+      "cost_center_name": "Bus Operations Admin."
+    },
+    {
+      "cost_center": 52100,
+      "cost_center_name": "Bus Maint Admin"
+    },
+    {
+      "cost_center": 52102,
+      "cost_center_name": "Bus North Maintenance"
+    },
+    {
+      "cost_center": 52105,
+      "cost_center_name": "Bus Chaboya Maintenance"
+    },
+    {
+      "cost_center": 52110,
+      "cost_center_name": "Bus Cerone Maintenance"
+    },
+    {
+      "cost_center": 52112,
+      "cost_center_name": "Bus Overhaul & Repair"
+    },
+    {
+      "cost_center": 52200,
+      "cost_center_name": "LR Maint Admin"
+    },
+    {
+      "cost_center": 52210,
+      "cost_center_name": "Light Rail Vehicle Maintenance"
+    },
+    {
+      "cost_center": 52225,
+      "cost_center_name": "Way, Power & Signal Maintenance"
+    },
+    {
+      "cost_center": 52240,
+      "cost_center_name": "LR Station/P&R Mtn"
+    },
+    {
+      "cost_center": 52302,
+      "cost_center_name": "Facilities Maintenance"
+    },
+    {
+      "cost_center": 52305,
+      "cost_center_name": "Bus Stop Maintenance"
+    },
+    {
+      "cost_center": 52405,
+      "cost_center_name": "Non-Revenue Vehicle Maintenance"
+    },
+    {
+      "cost_center": 52410,
+      "cost_center_name": "Bus Maintenance Training"
+    },
+    {
+      "cost_center": 52415,
+      "cost_center_name": "Ops Analysis, Reporting and Systems"
+    },
+    {
+      "cost_center": 52420,
+      "cost_center_name": "LR Maintenance Training"
+    },
+    {
+      "cost_center": 52500,
+      "cost_center_name": "Bus Maintenance Engineering"
+    },
+    {
+      "cost_center": 52600,
+      "cost_center_name": "Parts Distribution"
+    },
+    {
+      "cost_center": 52700,
+      "cost_center_name": "LR Maint. Engineering"
+    },
+    {
+      "cost_center": 53000,
+      "cost_center_name": "Service & Operations Planning"
+    },
+    {
+      "cost_center": 53003,
+      "cost_center_name": "Monterey -San Jose Express Service"
+    },
+    {
+      "cost_center": 53005,
+      "cost_center_name": "Operations- Passenger Facilities"
+    },
+    {
+      "cost_center": 53006,
+      "cost_center_name": "Altamont Corridor Express Serv."
+    },
+    {
+      "cost_center": 53007,
+      "cost_center_name": "Caltrain"
+    },
+    {
+      "cost_center": 53009,
+      "cost_center_name": "Highway 17 Service"
+    },
+    {
+      "cost_center": 53010,
+      "cost_center_name": "Service Planning"
+    },
+    {
+      "cost_center": 53021,
+      "cost_center_name": "Paratransit Service"
+    },
+    {
+      "cost_center": 53100,
+      "cost_center_name": "Regional Transportation Services"
+    },
+    {
+      "cost_center": 59000,
+      "cost_center_name": "System Safety & Security Admin."
+    },
+    {
+      "cost_center": 81000,
+      "cost_center_name": "Non-Departmental Expense"
+    }
+  ]
+}
